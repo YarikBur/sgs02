@@ -17,6 +17,8 @@ sgs02/download                                    | Тут можно будет
 sgs02/core/assets/                                | Тут находятся все текстуры, исходники в .psd и шрифты
 sgs02/core/src/ru/sgstudio/sgs01/                 | Код игры можно найти по этому пути
 
+For other settings or usages go to: https://libgdx.badlogicgames.com/documentation/
+
 Участники
 ---
 _Разработка_
