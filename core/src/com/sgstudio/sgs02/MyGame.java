@@ -5,8 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.sgs02.utils.Settings;
 
 public class MyGame extends ApplicationAdapter {
+	
+	Settings cfg;
+	
 	SpriteBatch batch;
 	Texture img;
 	
@@ -14,8 +18,9 @@ public class MyGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+		cfg = new Settings();
 	}
-
+	
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -26,8 +31,16 @@ public class MyGame extends ApplicationAdapter {
 	}
 	
 	@Override
+	public void resize(int width, int height) {
+		cfg.updateProperty("width", width + "");
+		cfg.updateProperty("height", height + "");
+	}
+	
+	@Override
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+		
+		cfg.setProperty("test", "test");
 	}
 }

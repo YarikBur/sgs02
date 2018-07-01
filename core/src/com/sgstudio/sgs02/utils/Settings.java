@@ -22,8 +22,8 @@ public class Settings {
 	private static String path = null;
 	
 	//Стандартные настройки
-	private static final String key[] = {"width", "height", "audio"};
-	private static final String value[] = {"800", "600", "true"};
+	private static String key[] = {"width", "height", "audio"};
+	private static String value[] = {"800", "600", "true"};
 	
 	//Переменная используется, если изначально файла settings.cfg не существовало
 	private static boolean loaded = false;
@@ -62,7 +62,7 @@ public class Settings {
 	/**
 	 * Функция возращает значение нужного нам параметра
 	 * @param key - название параметра
-	 * @return String
+	 * @return String - значение параметра
 	 */
 	public String getProperty(String key) {
 		String value = cfg.getProperty(key);
@@ -70,11 +70,44 @@ public class Settings {
 	}
 	
 	/**
-	 * Функция создает новый парамерт со значением (функция не доделана)
-	 * @param key
-	 * @param value
+	 * Добавляет в настройки новые параметры, если они отсутствуют, иначе идет в метод для обновления параметров
+	 * @param key - название параметра
+	 * @param value - значение параметра
 	 */
-	public void setProperty(String key[], String value[]) {
+	public void setProperty(String key, String value) {
+		boolean equals = false;
+		for(int i=0; i<Settings.key.length; i++) {
+			if(Settings.key[i].equals(key)) {
+				equals = true;
+				break;
+			}
+		}
+		
+		if(!equals) {
+			String newKey[] = new String[Settings.key.length+1];
+			String newValue[] = new String[Settings.value.length+1];
+			for(int i=0; i<newKey.length; i++) {
+				if(i!=newKey.length-1) {
+					newKey[i] = Settings.key[i];
+					newValue[i] = getProperty(Settings.key[i]);
+				} else {
+					newKey[i] = key;
+					newValue[i] = value;
+				}
+			}
+			Settings.key = newKey;
+			Settings.value = newValue;
+			setProperty(Settings.key, Settings.value);
+		} else
+			updateProperty(key, value);
+	}
+	
+	/**
+	 * Функция заполняет файл settings.cfg настройками
+	 * @param key[] - массив с названиями параметров
+	 * @return String[] - массив со значениями параметров
+	 */
+	private void setProperty(String key[], String value[]) {
 		try {
 			for(int i=0; i<key.length; i++) {
 				cfg.setProperty(key[i], value[i]);
@@ -87,15 +120,15 @@ public class Settings {
 	
 	/**
 	 * Функция обновляет значение у параметра, если названия параметров совпадали
-	 * @param key
-	 * @param value
+	 * @param key - название параметра
+	 * @return String - значение параметра
 	 */
 	public void updateProperty(String key, String value) {
 		for(int i=0; i<Settings.key.length; i++) {
 			if(Settings.key[i].equals(key)) {
-				System.out.println("sus");
 				Settings.value[i] = value;
 				setProperty(Settings.key, Settings.value);
+				System.out.println("Changes saved - " + key + ": " + value);
 				break;
 			}
 		}
