@@ -22,8 +22,8 @@ public class Settings {
 	private static String path = null;
 	
 	//Стандартные настройки
-	private static String key[] = {"width", "height", "audio"};
-	private static String value[] = {"800", "600", "true"};
+	private static String key[] = {"console", "width", "height", "audio"};
+	private static String value[] = {"true", "800", "600", "true"};
 	
 	//Переменная используется, если изначально файла settings.cfg не существовало
 	private static boolean loaded = false;
@@ -35,20 +35,29 @@ public class Settings {
 		cfg = new Properties();
 		try {
 			path = new File(".").getCanonicalFile() + "\\settings.cfg";
-			
 			cfg.load(new FileInputStream(path));
 		} catch (IOException e) {
 			//Если файла с настройками не существовало - создаем новый и проверяем, удачно ли он создался, иначе выдаем ошибку
-			this.setProperty(key, value);
-			Load();
+			setProperty(key, value);
+			load();
 			if(!loaded)
 				e.printStackTrace();
+			if(stringToBoolean(getProperty("console")))
+				System.out.println("The setting.cfg file is created");
 		}
 	}
+	
+	public boolean stringToBoolean(String str) {
+		if(str.equals("true"))
+			return true;
+		else
+			return false;
+	}
+	
 	 /**
 	  * Функция создает новый файл с настройками
 	  */
-	private static void Load() {
+	private void load() {
 		if (!loaded) {
 			try {
 				cfg.load(new FileInputStream(path));
@@ -65,8 +74,7 @@ public class Settings {
 	 * @return String - значение параметра
 	 */
 	public String getProperty(String key) {
-		String value = cfg.getProperty(key);
-		return value;
+		return cfg.getProperty(key);
 	}
 	
 	/**
@@ -109,9 +117,8 @@ public class Settings {
 	 */
 	private void setProperty(String key[], String value[]) {
 		try {
-			for(int i=0; i<key.length; i++) {
+			for(int i=0; i<key.length; i++)
 				cfg.setProperty(key[i], value[i]);
-			}
 			cfg.store(new FileOutputStream(path), null);
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -128,7 +135,8 @@ public class Settings {
 			if(Settings.key[i].equals(key)) {
 				Settings.value[i] = value;
 				setProperty(Settings.key, Settings.value);
-				System.out.println("Changes saved - " + key + ": " + value);
+				if(stringToBoolean(getProperty("console")))
+					System.out.println("Changes saved: " + key + " = " + value);
 				break;
 			}
 		}
