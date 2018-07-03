@@ -130,15 +130,15 @@ public class Settings {
 	 * @param key - название параметра
 	 * @return String - значение параметра
 	 */
-	public void updateProperty(String key, String value) {
+	private void updateProperty(String key, String value) {
 		for(int i=0; i<Settings.key.length; i++) {
 			if(Settings.key[i].equals(key)) {
 				Settings.value[i] = value;
 				setProperty(Settings.key, Settings.value);
 				if(stringToBoolean(getProperty("console")))
 					System.out.println("Changes saved: " + key + " = " + value);
-				break;
-			}
+			} else
+				Settings.value[i] = getProperty(Settings.key[i]);
 		}
 	}
 }

@@ -32,15 +32,13 @@ public class MyGame extends ApplicationAdapter {
 	
 	@Override
 	public void resize(int width, int height) {
-		cfg.updateProperty("width", width + "");
-		cfg.updateProperty("height", height + "");
+		cfg.setProperty("width", width + "");
+		cfg.setProperty("height", height + "");
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
-		
-		cfg.setProperty("test", "test");
 	}
 }
