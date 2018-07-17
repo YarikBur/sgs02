@@ -22,8 +22,8 @@ public class Settings {
 	private static String path = null;
 	
 	//Стандартные настройки
-	private static String key[] = {"console", "width", "height", "audio"};
-	private static String value[] = {"true", "800", "600", "true"};
+	private static String key[] = {"console", "width", "height", "audio", "language"};
+	private static String value[] = {"true", "800", "600", "true", "en_UK"};
 	
 	//Переменная используется, если изначально файла settings.cfg не существовало
 	private static boolean loaded = false;
@@ -42,12 +42,12 @@ public class Settings {
 			load();
 			if(!loaded)
 				e.printStackTrace();
-			if(stringToBoolean(getProperty("console")))
-				System.out.println("The setting.cfg file is created");
+			if(out())
+				System.out.println(Language.getMessage(0));
 		}
 	}
 	
-	public boolean stringToBoolean(String str) {
+	public static boolean stringToBoolean(String str) {
 		if(str.equals("true"))
 			return true;
 		else
@@ -57,7 +57,7 @@ public class Settings {
 	 /**
 	  * Функция создает новый файл с настройками
 	  */
-	private void load() {
+	private static void load() {
 		if (!loaded) {
 			try {
 				cfg.load(new FileInputStream(path));
@@ -73,7 +73,7 @@ public class Settings {
 	 * @param key - название параметра
 	 * @return String - значение параметра
 	 */
-	public String getProperty(String key) {
+	public static String getProperty(String key) {
 		return cfg.getProperty(key);
 	}
 	
@@ -82,7 +82,7 @@ public class Settings {
 	 * @param key - название параметра
 	 * @param value - значение параметра
 	 */
-	public void setProperty(String key, String value) {
+	public static void setProperty(String key, String value) {
 		boolean equals = false;
 		for(int i=0; i<Settings.key.length; i++) {
 			if(Settings.key[i].equals(key)) {
@@ -115,7 +115,7 @@ public class Settings {
 	 * @param key[] - массив с названиями параметров
 	 * @return String[] - массив со значениями параметров
 	 */
-	private void setProperty(String key[], String value[]) {
+	private static void setProperty(String key[], String value[]) {
 		try {
 			for(int i=0; i<key.length; i++)
 				cfg.setProperty(key[i], value[i]);
@@ -130,15 +130,26 @@ public class Settings {
 	 * @param key - название параметра
 	 * @return String - значение параметра
 	 */
-	private void updateProperty(String key, String value) {
+	private static void updateProperty(String key, String value) {
 		for(int i=0; i<Settings.key.length; i++) {
 			if(Settings.key[i].equals(key)) {
 				Settings.value[i] = value;
 				setProperty(Settings.key, Settings.value);
-				if(stringToBoolean(getProperty("console")))
-					System.out.println("Changes saved: " + key + " = " + value);
+				if(out())
+					System.out.println(Language.getMessage(1) + key + " = " + value);
 			} else
 				Settings.value[i] = getProperty(Settings.key[i]);
 		}
+	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public static boolean out() {
+		if(stringToBoolean(getProperty("console")))
+			return true;
+		else
+			return false;
 	}
 }

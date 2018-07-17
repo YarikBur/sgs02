@@ -123,16 +123,13 @@ Thumbs.db
 !/ios-moe/xcode/*.xcodeproj/xcshareddata
 !/ios-moe/xcode/*.xcodeproj/project.pbxproj
 /ios-moe/xcode/native/
-<<<<<<< HEAD
-
-gradle/
 
 *.gradle
 
+*.bat
+
 gradlew
 
-gradlew\.bat
-
 *.properties
-=======
->>>>>>> master
+
+gradle/
