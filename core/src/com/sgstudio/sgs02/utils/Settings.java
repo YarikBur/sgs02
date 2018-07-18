@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Класс позволяет:
  *  сохранять настройки игры в файл settings.cfg
@@ -22,8 +24,8 @@ public class Settings {
 	private static String path = null;
 	
 	//Стандартные настройки
-	private static String key[] = {"console", "width", "height", "audio", "language"};
-	private static String value[] = {"true", "800", "600", "true", "en_UK"};
+	private static String key[] = {"console", "width", "height", "audio", "language", "volume"};
+	private static String value[] = {"true", "800", "600", "true", "en_UK", "100"};
 	
 	//Переменная используется, если изначально файла settings.cfg не существовало
 	private static boolean loaded = false;
@@ -34,7 +36,7 @@ public class Settings {
 	public Settings() {
 		cfg = new Properties();
 		try {
-			path = new File(".").getCanonicalFile() + "\\settings.cfg";
+			path = "settings.cfg";
 			cfg.load(new FileInputStream(path));
 		} catch (IOException e) {
 			//Если файла с настройками не существовало - создаем новый и проверяем, удачно ли он создался, иначе выдаем ошибку

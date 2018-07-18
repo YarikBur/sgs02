@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.sgs02.utils.Audio;
 import com.sgstudio.sgs02.utils.Language;
 import com.sgstudio.sgs02.utils.Settings;
 import com.sgstudio.sgs02.utils.Text;
@@ -25,6 +26,8 @@ public class MyGame extends ApplicationAdapter {
 		text = new Text();
 		
 		Language.getAllStrings();
+		
+		Audio.randomStart();
 	}
 
 	@Override
