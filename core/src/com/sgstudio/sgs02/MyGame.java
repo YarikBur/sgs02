@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.utils.Language;
 import com.sgstudio.sgs02.utils.Settings;
 import com.sgstudio.sgs02.utils.Text;
+import com.sgstudio.sgs02.utils.Variables;
 import com.sgstudio.sgs02.utils.controller.KeyManager; 
 
 public class MyGame extends ApplicationAdapter {
@@ -31,11 +32,12 @@ public class MyGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(img, 5, 5);
 		
-		text.writeUpperleft(batch, Language.getMessage(8) + ": " + Settings.getProperty("width"), 
+		text.writeLowerRight(batch, 
+				Language.getMessage(8) + ": " + Settings.getProperty("width"), 
 				Language.getMessage(9) + ": " + Settings.getProperty("height"), 
-				Language.getMessage(10) + ": " + (Settings.stringToBoolean(Settings.getProperty("console")) ? 1 : 0));
+				Language.getMessage(10) + ": " + Variables.booleanToInt(Variables.stringToBoolean(Settings.getProperty("console"))));
 		
 		if(key.getJustPressedE()) { 
 			boolean console = !Settings.stringToBoolean(Settings.getProperty("console")); 

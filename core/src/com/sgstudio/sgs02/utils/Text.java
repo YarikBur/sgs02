@@ -1,6 +1,7 @@
 package com.sgstudio.sgs02.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -18,12 +19,13 @@ public class Text {
 	
 	private static boolean created = false;
 	
-	private static final String FONT_NAME = "fonts/Imperial.ttf";
+	private static final String FONT_NAME = "fonts/DejaVuSansMono.ttf";
 	private static final String RUSSIAN_CHARACTERS = 
 			"АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
             "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" +
             "1234567890.,:;_¡!¿?\"'+-*/()[]={}";
 
+	private static final int indentation = 20;
 	
 	public Text() {
 		if(!created) {
@@ -56,8 +58,10 @@ public class Text {
 	private BitmapFont generateFont(String fontName, String characters) {
 	    FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 	    parameter.characters = characters;
-	    parameter.size = 24;
-	 
+	    parameter.size = 18;
+	    parameter.borderColor = Color.BLACK;
+	    parameter.borderWidth = 2;
+	    
 	    FreeTypeFontGenerator generator = new FreeTypeFontGenerator( Gdx.files.internal(fontName) );
 	    BitmapFont font = generator.generateFont(parameter);
 	    generator.dispose();
@@ -71,7 +75,6 @@ public class Text {
 	 * @param strings
 	 */
 	public void writeUpperleft(SpriteBatch batch, String... strings) {
-		int indentation = 20;
 		int i = indentation;
 		for(String str : strings) {
 			font.draw(batch, str, indentation, Integer.parseInt(Settings.getProperty("height")) - i);
@@ -85,10 +88,40 @@ public class Text {
 	 * @param strings
 	 */
 	public void writeLowerleft(SpriteBatch batch, String... strings) {
-		int indentation = 20;
 		int i = indentation;
 		for(String str : strings) {
 			font.draw(batch, str, indentation, i);
+			i += indentation;
+		}
+	}
+	
+	/**
+	 * Выводит текст справа вверху
+	 * @param batch
+	 * @param strings
+	 */
+	public void writeUpperRight(SpriteBatch batch, String... strings) {
+		int i = indentation;
+		int x = 0, y = 0;
+		for(String str : strings){
+			x = Integer.parseInt(Settings.getProperty("width"))-(str.length()*14);
+			y = Integer.parseInt(Settings.getProperty("height")) - i;
+			font.draw(batch, str, x, y);
+			i += indentation;
+		}
+	}
+	
+	/**
+	 * Выводит текст справа внизу
+	 * @param batch
+	 * @param strings
+	 */
+	public void writeLowerRight(SpriteBatch batch, String... strings) {
+		int i = indentation;
+		int x = 0;
+		for(String str : strings) {
+			x = Integer.parseInt(Settings.getProperty("width"))-(str.length()*14);
+			font.draw(batch, str, x, i);
 			i += indentation;
 		}
 	}
