@@ -9,7 +9,6 @@ import com.sgstudio.sgs02.utils.locale.ru_RU;
  * @version 0.2
  */
 public class Language {
-	private static String language;
 	private static int quantity;
 	private static boolean created = false;
 	
@@ -19,26 +18,10 @@ public class Language {
 	 */
 	public Language(String language) {
 		if(!created) {
-			Language.language = language;
 			quantity = ru_RU.getQuantityStrings();
 			
 			created = true;
 		}
-	}
-	
-	/**
-	 * Выдает язык программы
-	 * @return String
-	 */
-	public static String getLanguage() {
-		return language;
-	}
-	
-	/**
-	 * Сохраняет язык в настройках
-	 */
-	public static void saveLanguage() {
-		Settings.setProperty("language", language);
 	}
 	
 	/**
@@ -47,7 +30,7 @@ public class Language {
 	 * @return
 	 */
 	public static String getMessage(int key) {
-		if(language.equals("ru_RU"))
+		if(Settings.getProperty("language").equals("ru_RU"))
 			return getMessageRU(key);
 		else
 			return getMessageEN(key);

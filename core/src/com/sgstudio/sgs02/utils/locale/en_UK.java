@@ -12,7 +12,8 @@ public class en_UK {
 			"The dictionary is over",
 			"Width",
 			"Height",
-			"Console"};
+			"Console",
+			"Music number"};
 	
 	/**
 	 * Выдает размер словаря

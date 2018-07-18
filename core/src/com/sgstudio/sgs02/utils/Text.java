@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 public class Text {
 	private static BitmapFont fontEN;
 	private static BitmapFont fontRU;
-	private static BitmapFont font;
 	
 	private static boolean created = false;
 	
@@ -32,8 +31,6 @@ public class Text {
 			fontEN = generateFont(FONT_NAME, FreeTypeFontGenerator.DEFAULT_CHARS);
 			fontRU = generateFont(FONT_NAME, RUSSIAN_CHARACTERS);
 			
-			font = getFont();
-			
 			created = true;
 		}
 	}
@@ -43,7 +40,7 @@ public class Text {
 	 * @return BitmapFont
 	 */
 	private BitmapFont getFont() {
-	    if(Language.getLanguage().equals("ru_RU"))
+	    if(Settings.getProperty("language").equals("ru_RU"))
 	    	return fontRU;
 	    else 
 	    	return fontEN;
@@ -77,7 +74,7 @@ public class Text {
 	public void writeUpperleft(SpriteBatch batch, String... strings) {
 		int i = indentation;
 		for(String str : strings) {
-			font.draw(batch, str, indentation, Integer.parseInt(Settings.getProperty("height")) - i);
+			getFont().draw(batch, str, indentation, Integer.parseInt(Settings.getProperty("height")) - i);
 			i += indentation;
 		}
 	}
@@ -90,7 +87,7 @@ public class Text {
 	public void writeLowerleft(SpriteBatch batch, String... strings) {
 		int i = indentation;
 		for(String str : strings) {
-			font.draw(batch, str, indentation, i);
+			getFont().draw(batch, str, indentation, i);
 			i += indentation;
 		}
 	}
@@ -106,7 +103,7 @@ public class Text {
 		for(String str : strings){
 			x = Integer.parseInt(Settings.getProperty("width"))-(str.length()*14);
 			y = Integer.parseInt(Settings.getProperty("height")) - i;
-			font.draw(batch, str, x, y);
+			getFont().draw(batch, str, x, y);
 			i += indentation;
 		}
 	}
@@ -121,7 +118,7 @@ public class Text {
 		int x = 0;
 		for(String str : strings) {
 			x = Integer.parseInt(Settings.getProperty("width"))-(str.length()*14);
-			font.draw(batch, str, x, i);
+			getFont().draw(batch, str, x, i);
 			i += indentation;
 		}
 	}

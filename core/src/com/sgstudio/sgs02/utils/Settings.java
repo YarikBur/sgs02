@@ -1,12 +1,9 @@
 package com.sgstudio.sgs02.utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import com.badlogic.gdx.Gdx;
 
 /**
  * Класс позволяет:
@@ -24,8 +21,8 @@ public class Settings {
 	private static String path = null;
 	
 	//Стандартные настройки
-	private static String key[] = {"console", "width", "height", "audio", "language", "volume"};
-	private static String value[] = {"true", "800", "600", "true", "en_UK", "100"};
+	private static String key[] = {"console", "width", "height", "language", "volume"};
+	private static String value[] = {"true", "800", "600", "en_UK", "100"};
 	
 	//Переменная используется, если изначально файла settings.cfg не существовало
 	private static boolean loaded = false;

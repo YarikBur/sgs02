@@ -61,4 +61,39 @@ public class KeyManager {
 		else
 			return false;
 	}
+	
+	public boolean getJustPressedUp() {
+		if(Gdx.input.isKeyJustPressed(Keys.UP))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean getJustPressedDown() {
+		if(Gdx.input.isKeyJustPressed(Keys.DOWN))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean getJustPressedLeft() {
+		if(Gdx.input.isKeyJustPressed(Keys.LEFT))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean getJustPressedRight() {
+		if(Gdx.input.isKeyJustPressed(Keys.RIGHT))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean getJustPressedT() {
+		if(Gdx.input.isKeyJustPressed(Keys.T))
+			return true;
+		else
+			return false;
+	}
 }
