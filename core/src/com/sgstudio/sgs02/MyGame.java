@@ -40,17 +40,28 @@ public class MyGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(img, 5, 5);
 		
-		text.writeLowerRight(batch, 
+		
+		
+		//Напечатать текст
+		text.writeUpperleft(batch, 
 				Language.getMessage(8) + ": " + Settings.getProperty("width"), 
 				Language.getMessage(9) + ": " + Settings.getProperty("height"), 
 				Language.getMessage(10) + ": " + Variables.booleanToInt(Variables.stringToBoolean(Settings.getProperty("console"))));
+		
+		text.writeUpperRight(batch, 
+				Language.getMessage(12) + ": " + Audio.getPlayed(), 
+				Language.getMessage(13) + ": " + Settings.getProperty("volume"));
+		
+		
 		
 		//Включить/Выключить вывод в консоль
 		if(key.getJustPressedE()) { 
 			boolean console = !Settings.stringToBoolean(Settings.getProperty("console")); 
 			Settings.setProperty("console", console + "");
 		}
-			
+		
+		
+		
 		//Управление музыкой
 		if(key.getJustPressedUp()) {
 			int vol = Variables.stringToInt(Settings.getProperty("volume"));
@@ -67,14 +78,16 @@ public class MyGame extends ApplicationAdapter {
 		if(key.getJustPressedLeft()) {
 			int vol = Audio.getPlayed();
 			vol-=1;
-			Audio.startNewMusic(vol);
+			Audio.smoothAttenuation(vol);
 		}
 		
 		if(key.getJustPressedRight()) {
 			int vol = Audio.getPlayed();
 			vol+=1;
-			Audio.startNewMusic(vol);
+			Audio.smoothAttenuation(vol);
 		}
+		
+		
 		
 		//Поменять язык
 		if(key.getJustPressedT()) {

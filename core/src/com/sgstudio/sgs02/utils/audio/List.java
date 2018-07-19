@@ -56,6 +56,29 @@ public class List {
 			return music01;
 		}
 	}
+
+	public static boolean playedMusic() {
+		if(music01.isPlaying())
+			return true;
+		else if(music02.isPlaying())
+			return true;
+		else if(music03.isPlaying())
+			return true;
+		else if(music04.isPlaying())
+			return true;
+		else if(music05.isPlaying())
+			return true;
+		else if(music06.isPlaying())
+			return true;
+		else if(music07.isPlaying())
+			return true;
+		else if(music08.isPlaying())
+			return true;
+		else if(music09.isPlaying())
+			return true;
+		else 
+			return false;
+	}
 	
 	public static Music getPlayedMusic() {
 		if(music02.isPlaying())

@@ -13,7 +13,10 @@ public class en_UK {
 			"Width",
 			"Height",
 			"Console",
-			"Music number"};
+			"Music number",
+			"Number track",
+			"Volume",
+			"Played"};
 	
 	/**
 	 * Выдает размер словаря
