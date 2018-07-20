@@ -14,6 +14,7 @@ public class Audio {
 	
 	private static boolean created = false;
 	private static boolean played = false;
+	private static boolean smooth = false;
 	
 	public Audio() {
 		if(!created) {
@@ -28,7 +29,8 @@ public class Audio {
 	}
 	
 	public static void update() {
-		startNewMusic();
+		if(!smooth)
+			startNewMusic();
 	}
 	
 	private static void play() {
@@ -81,6 +83,7 @@ public class Audio {
 			
 			@Override
 			public void run() {
+				Audio.smooth = true;
 				if(Settings.out())
 					System.out.println(Language.getMessage(12) + ": " + number);
 				music = List.getMusic(play);
@@ -111,9 +114,12 @@ public class Audio {
 			else if(number > 9)
 				number = 9;
 			play = number;
-			if(!List.playedMusic())
+			if(!List.playedMusic()) {
 				List.getMusic(play).play();
+				List.getMusic(play).setVolume(volume());
+			}
 			play();
+			smooth = false;
 		}
 	}
 	
