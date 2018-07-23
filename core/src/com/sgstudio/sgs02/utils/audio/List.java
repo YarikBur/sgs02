@@ -16,6 +16,9 @@ public class List {
 	
 	private static boolean created = false;
 	
+	/**
+	 * Инициализация класса
+	 */
 	public List() {
 		if(!created) {
 			music01 = Gdx.audio.newMusic(Gdx.files.internal("audio/01.Porth_Wen.mp3"));
@@ -32,6 +35,11 @@ public class List {
 		}
 	}
 	
+	/**
+	 * Выдет трек
+	 * @param number - номер трека
+	 * @return Music
+	 */
 	public static Music getMusic(int number) {
 		switch(number) {
 		case 1:
@@ -56,7 +64,11 @@ public class List {
 			return music01;
 		}
 	}
-
+	
+	/**
+	 * Играет ли музыка
+	 * @return
+	 */
 	public static boolean playedMusic() {
 		if(music01.isPlaying())
 			return true;
@@ -80,6 +92,10 @@ public class List {
 			return false;
 	}
 	
+	/**
+	 * Выдет трек, который играет
+	 * @return
+	 */
 	public static Music getPlayedMusic() {
 		if(music02.isPlaying())
 			return music02;

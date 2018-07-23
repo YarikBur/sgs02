@@ -1,13 +1,19 @@
 package com.sgstudio.sgs02;
 
+import java.util.Map;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import com.sgstudio.sgs02.utils.Language;
+import com.sgstudio.sgs02.utils.Particle;
 import com.sgstudio.sgs02.utils.Settings;
 import com.sgstudio.sgs02.utils.Text;
+import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.Variables;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager; 
@@ -18,6 +24,10 @@ public class MyGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Audio audio;
+	Tiles tiles;
+	Particle effect;
+	
+	Map<String, TextureRegion> gui;
 	
 	@Override
 	public void create () {
@@ -26,6 +36,10 @@ public class MyGame extends ApplicationAdapter {
 		key = new KeyManager();
 		text = new Text();
 		audio = new Audio();
+		tiles = new Tiles();
+		tiles.createAtlas("GUI.png", 4, 4);
+		gui = tiles.getTextureRegion();
+		effect = new Particle("test.p");
 		
 		Language.getAllStrings();
 		
@@ -38,8 +52,14 @@ public class MyGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 5, 5);
+		//batch.draw(img, 5, 5);
 		
+		effect.draw(batch, Gdx.graphics.getDeltaTime());
+		effect.setPosition(Variables.stringToInt(Settings.getProperty("width")) / 2, Variables.stringToInt(Settings.getProperty("height")) / 2);
+		if(effect.getParticle().isComplete())
+			effect.draw(batch, Gdx.graphics.getDeltaTime());
+		
+		batch.draw(gui.get("tiles0_1"), 0, 0);
 		
 		
 		//Напечатать текст

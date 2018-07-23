@@ -6,6 +6,11 @@ import com.sgstudio.sgs02.utils.Random;
 import com.sgstudio.sgs02.utils.Settings;
 import com.sgstudio.sgs02.utils.Variables;
 
+/**
+ * Класс для управления музыкой
+ * @author Yarik
+ * @version 0.4
+ */
 public class Audio {
 	@SuppressWarnings("unused")
 	private static List audioList;
@@ -16,6 +21,9 @@ public class Audio {
 	private static boolean played = false;
 	private static boolean smooth = false;
 	
+	/**
+	 * Инициализация класса
+	 */
 	public Audio() {
 		if(!created) {
 			audioList = new List();
@@ -24,27 +32,47 @@ public class Audio {
 		}
 	}
 	
+	/**
+	 * Возвращает номер тека, который сейчас играет
+	 * @return int
+	 */
 	public static int getPlayed() {
 		return play;
 	}
 	
+	/**
+	 * Включает новый трек, если предыдущая закончилась
+	 */
 	public static void update() {
 		if(!smooth)
-			startNewMusic();
+			if(!List.playedMusic()) {
+				played = false;
+				startNewMusic();
+			}
 	}
 	
+	/**
+	 * Выводит номер трека, который сейчас включился
+	 */
 	private static void play() {
 		played = true;
 		if(Settings.out())
 			System.out.println(Language.getMessage(11) + ": " + play);
 	}
 	
+	/**
+	 * Включает рандомный трек
+	 */
 	public static void randomStart() {
 		play = Random.randomInt(1, 9);
 		List.getMusic(play).play();
 		play();
 	}
 	
+	/**
+	 * Плавно включает другой трек
+	 * @param number - номер трека, который надо будет включить
+	 */
 	public static void smoothAttenuation(final int number) {
 		Thread smooth = new Thread(new Runnable() {
 			private float volume = 1;
@@ -52,6 +80,9 @@ public class Audio {
 			
 			private Music music;
 			
+			/**
+			 * Плавно уменьшает громкость трека
+			 */
 			private void changeVolume() {
 				try {
 					while(true) {
@@ -97,16 +128,20 @@ public class Audio {
 		smooth.start();
 	}
 	
-	public static void startNewMusic() {
-		if(!played)
-			if(!List.playedMusic())
-				if(!List.getMusic(play).isPlaying()) {
-					played = true;
-					stopMusic();
-					randomStart();
-				}
+	/**
+	 * Включает рандомно трек
+	 */
+	private static void startNewMusic() {
+		if(!played) {
+			played = true;
+			randomStart();
+		}
 	}
 	
+	/**
+	 * Включает другой трек
+	 * @param number - номер трека, который надо будет включить
+	 */
 	private static void startNewMusic(int number) {
 		if(!played) {
 			if(number < 1)
@@ -123,6 +158,10 @@ public class Audio {
 		}
 	}
 	
+	/**
+	 * Изменить громкость
+	 * @param volume
+	 */
 	public static void setVolume(int volume) {
 		if(volume < 0)
 			volume = 0;
@@ -132,15 +171,14 @@ public class Audio {
 		List.getMusic(play).setVolume(volume());
 	}
 	
-	public static void stopMusic() {
-		if(List.getMusic(play).isPlaying())
-			List.getMusic(play).stop();
-	}
-	
+	/**
+	 * Меняет громкость из диапозона [0; 100] в [0; 1]
+	 * @return
+	 */
 	private static float volume() {
 		return Variables.stringToInt(Settings.getProperty("volume"))/100f;
 	}
-	
+
 	public static void dispose() {
 		List.dispose();
 	}
