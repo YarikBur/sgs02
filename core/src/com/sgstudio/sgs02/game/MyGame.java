@@ -81,7 +81,6 @@ public class MyGame implements Screen {
 		for (int i = 0; i < COUNTOFSHEEP; i++){
 			sheep[i].render(batch);
 		}
-
 		scarecrow.render(batch);
 		hero.render();
 
@@ -168,7 +167,10 @@ public class MyGame implements Screen {
 		gui = tiles.getTextureRegion();
 		effect = new Particle("test.p");
 
-		
+
+		bg = new Sprite(new Texture("atlas/bg.png"), 1600,900);
+
+
 		sheep = new Sheep[COUNTOFSHEEP];
 		for (int i = 0; i < COUNTOFSHEEP; i++){
 			sheep[i] = new Sheep();

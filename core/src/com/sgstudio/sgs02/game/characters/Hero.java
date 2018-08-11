@@ -15,6 +15,7 @@ public class Hero {
 	private int speed;
 	private int x;
 	private int y;
+
 	private Texture texture;
 	private Sprite sprite;
 
