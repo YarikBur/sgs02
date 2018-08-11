@@ -2,6 +2,7 @@ package com.sgstudio.sgs02.game.characters;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.sgs02.main.Main;
 
 public class Scarecrow {
 	private int range;
@@ -10,34 +11,35 @@ public class Scarecrow {
 	private final float width = 185/4;
 	private final float height = 146/4;
 	private Texture texture;
-	
-	public void create () {
+
+
+	public Scarecrow(Main main, SpriteBatch batch){
 		texture = new Texture("pugalo.png");
-		x = 100;
-		y = 150;
+		x = -100;
+		y = -100;
 	}
-	
+
 	public void render (SpriteBatch batch) {
 		batch.draw(texture, x, y, width, height);
 	}
 	
-	void SetX(int x){
+	public void SetX(int x){
 		this.x = x;
 		}
-	void SetY(int y){
+	public void SetY(int y){
 		this.y = y;
 		}
-	void SetRange(int range){
+	public void SetRange(int range){
 		this.range = range;
 		}
-	
-	int GetX(){
+
+	public int GetX(){
 		return x;
 		}
-	int GetY(){
+	public int GetY(){
 		return y;
 		}
-	int GetRange(){
+	public int GetRange(){
 		return range;
 		}
 }

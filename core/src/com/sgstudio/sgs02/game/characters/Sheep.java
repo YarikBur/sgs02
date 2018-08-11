@@ -2,6 +2,7 @@ package com.sgstudio.sgs02.game.characters;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.sgs02.main.Main;
 
 public class Sheep {
 	private int mass;
@@ -13,59 +14,65 @@ public class Sheep {
 	private Texture texture;
 	private int lostX = 300;
 	private int lostY = 300;
+
+	private SpriteBatch batch;
+	private Main main;
+
+	public Sheep(Main main, SpriteBatch batch){
+        texture = new Texture("Models/sheep_one.png");
+        x = 650*(float)Math.random();
+        y = 600*(float)Math.random();
+        this.batch = batch;
+        this.main = main;
+    }
 	
-	public void create () {
-		texture = new Texture("sheep.png");
-		x = 650*(float)Math.random();
-		y = 600*(float)Math.random();
-	}
-	
-	public void render (SpriteBatch batch) {
+	public void render () {
 		batch.draw(texture, x, y, width, height);
-		if ((x<lostX)&&(y<lostY)){
-			x++;
-			y++;
-			} else if ((x<lostX)&&(y>lostY)){
-				x++;
-				y--;
-			} else if ((x>lostX)&&(y<lostY)){
-				x--;
-				y++;
-			} else if ((x>lostX)&&(y>lostY)){
-				x--;
-				y--;
-			} 
-			else if (x<lostX){x++;}
-			else if (y<lostY){y++;} 
-			else if (x>lostX){x--;} 
-			else if (y>lostY){x--;} 
 	}
+
+	public void update(){
+        if ((x<lostX)&&(y<lostY)){
+            x++;
+            y++;
+        } else if ((x<lostX)&&(y>lostY)){
+            x++;
+            y--;
+        } else if ((x>lostX)&&(y<lostY)){
+            x--;
+            y++;
+        } else if ((x>lostX)&&(y>lostY)){
+            x--;
+            y--;
+        }
+        else if (x<lostX){x++;}
+        else if (y<lostY){y++;}
+        else if (x>lostX){x--;}
+        else if (y>lostY){x--;}
+    }
 	
-	void SetX(int x){
+	public void SetX(int x){
 		this.x = x;
 		}
-	void SetY(int y){
+	public void SetY(int y){
 		this.y = y;
 		}
-	void SetMass(int mass){
+	public void SetMass(int mass){
 		this.mass = mass;
 	}
-	void SetVelocity(int velocity){
+	public void SetVelocity(int velocity){
 		this.velocity = velocity;
 	}
 	
-	float GetX(){
+	public float GetX(){
 		return x;
 		}
-	float GetY(){
+	public float GetY(){
 		return y;
 		}
-	int GetMass(){
+	public int GetMass(){
 		return mass;
 	}
-	int GetVelocity(){
+	public int GetVelocity(){
 		return velocity;
 	}
-
-	
 }

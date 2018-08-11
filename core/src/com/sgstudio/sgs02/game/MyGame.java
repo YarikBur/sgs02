@@ -1,5 +1,7 @@
 package com.sgstudio.sgs02.game;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -29,6 +31,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class MyGame implements Screen {
 	private static SpriteBatch batch;
+
 	Text text;
 	KeyManager key;
 	Texture img;
@@ -78,9 +81,9 @@ public class MyGame implements Screen {
 		batch.draw(gui.get("tiles0_1"), 0, 0);
 
 		for (int i = 0; i < COUNTOFSHEEP; i++){
-			sheep[i].render(batch);
+			sheep[i].render();
 		}
-		scarecrow.render(batch);
+		//scarecrow.render(batch);
 		hero.render();
 
 		//Напечатать текст
@@ -171,13 +174,11 @@ public class MyGame implements Screen {
 
 
 		sheep = new Sheep[COUNTOFSHEEP];
-		for (int i = 0; i < COUNTOFSHEEP; i++){
-			sheep[i] = new Sheep();
-			sheep[i].create();
-		}
+		for (int i = 0; i < COUNTOFSHEEP; i++)
+			sheep[i] = new Sheep(main, batch);
 		
-		scarecrow = new Scarecrow();
-		scarecrow.create();
+		//scarecrow = new Scarecrow();
+		//scarecrow.create();
 
 		batch = MyGame.getBatch();
 		hero = new Hero(main,batch);

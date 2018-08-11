@@ -6,15 +6,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.sgstudio.sgs02.utils.*;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Tiles;
 
@@ -61,9 +56,7 @@ public class Menu implements Screen {
             public boolean keyTyped(char character) { return false; }
 
             @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                return false;
-            }
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) { return false; }
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {

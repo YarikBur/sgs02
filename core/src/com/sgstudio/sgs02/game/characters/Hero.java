@@ -42,47 +42,48 @@ public class Hero {
 
 	public void render () {
 		batch.draw(texture, x, y,50,50);
-		update();
 	}
 
 	public void update(){
-		if (Math.sqrt(Math.pow(x-width , 2) + Math.pow(y - height, 2)) > 520) {
-			x = 960;
-			y = 960;
-		}
-		if (keys.getPressedLeft()) {
 
-			if(Math.sqrt(Math.pow(x-speed*1.5-width , 2) + Math.pow(y - height, 2)) > 480)
-				x += speed * 2;
-			x-=speed;
-		}
-		if (keys.getPressedRight()) {
-			if(Math.sqrt(Math.pow(x+speed*1.5-width , 2) + Math.pow(y - height, 2)) > 450)
-				x-= speed * 2;
+		float coor_x = width - this.x;
+		float coor_y = height - this.y;
+
+        if(Math.sqrt(Math.pow(x - width , 2) + Math.pow(y - height, 2)) > 480)
+        {
+            this.x += coor_x * 0.05;
+            this.y += coor_y * 0.05;
+        }
+
+		if (keys.getPressedLeft())
+			x -= speed;
+
+		if (keys.getPressedRight())
 			x+=speed;
-		}
-		if (keys.getPressedUp()) {
-			if(Math.sqrt(Math.pow(x-width, 2) + Math.pow(y + speed*1.5 - height, 2)) > 450)
-				y-= speed * 2;
+
+		if (keys.getPressedUp())
 			y+=speed;
-		}
-		if (keys.getPressedDown()){
-			if(Math.sqrt(Math.pow(x-width , 2) + Math.pow(y - speed*1.5 - height, 2)) > 480)
-				y+= speed * 2;
+
+		if (keys.getPressedDown())
 			y-=speed;
-		}
+
 	}
+
+    private void putScareCrow(){
+
+    }
+
 	
-	void SetX(int x){
+	public void SetX(int x){
 		this.x = x;
 		}
-	void SetY(int y){
+	public void SetY(int y){
 		this.y = y;
 		}
-	void SetPotatoes(int potatoes){
+	public void SetPotatoes(int potatoes){
 		this.potatoes = potatoes;
 	}
-	void SetSpped(int speed){
+	public void SetSpeed(int speed){
 		this.speed = speed;
 	}
 

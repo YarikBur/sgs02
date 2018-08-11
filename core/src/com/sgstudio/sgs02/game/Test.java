@@ -1,8 +1,10 @@
 package com.sgstudio.sgs02.game;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,7 +12,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import com.badlogic.gdx.math.Rectangle;
+
+import com.sgstudio.sgs02.game.characters.Scarecrow;
+import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.utils.Language;
 import com.sgstudio.sgs02.utils.Particle;
 import com.sgstudio.sgs02.utils.Settings;
@@ -20,7 +24,6 @@ import com.sgstudio.sgs02.utils.Variables;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.sgstudio.sgs02.menu.Menu;
 import com.sgstudio.sgs02.main.Main;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.sgstudio.sgs02.game.characters.Hero;
@@ -35,8 +38,12 @@ public class Test implements Screen {
     Particle effect;
     Sprite bg;
 
-    private Hero hero;
+    //  Public Lists
+    public List<Sheep> list_sheep = new ArrayList<Sheep>();
+    public List<Scarecrow> list_scarecrow = new ArrayList<Scarecrow>();
 
+
+    private Hero hero;
     public OrthographicCamera staticCamera;
     public OrthographicCamera camera;
 
@@ -56,6 +63,7 @@ public class Test implements Screen {
 
     @Override
     public void render (float delta) {
+        this.update();
         Audio.update();
         staticCamera.update();
         camera.position.set(hero.GetX(), hero.GetY(), 0);
@@ -67,11 +75,9 @@ public class Test implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         bg.draw(batch);
-        text.writeUpperleft(batch,
-                Language.getMessage(8) + ": " + Settings.getProperty("width"),
-                Language.getMessage(9) + ": " + Settings.getProperty("height"),
-                Language.getMessage(10) + ": " + Variables.booleanToInt(Variables.stringToBoolean(Settings.getProperty("console"))));
         hero.render();
+        for(Sheep sheep: list_sheep)
+            sheep.render();
         batch.end();
     }
 
@@ -102,8 +108,17 @@ public class Test implements Screen {
         bg = new Sprite(new Texture("atlas/g4.png"));
         Language.getAllStrings();
         Audio.randomStart();
-
         hero = new Hero(main, batch);
+
+        // Create Sheep
+        for (int i = 0; i < 10; i++)
+            list_sheep.add(new Sheep(main, batch));
+    }
+
+    public void update(){
+        hero.update();
+        for(Sheep sheep: list_sheep)
+            sheep.update();
     }
 
     @Override
