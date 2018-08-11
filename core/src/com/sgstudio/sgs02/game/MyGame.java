@@ -76,9 +76,9 @@ public class MyGame implements Screen {
 
 		batch.draw(gui.get("tiles0_1"), 0, 0);
 
-		for (int i = 0; i < COUNTOFSHEEP; i++){
+		for (int i = 0; i < COUNTOFSHEEP; i++)
 			sheep[i].render();
-		}
+
 		//scarecrow.render(batch);
 		hero.render();
 
@@ -92,15 +92,11 @@ public class MyGame implements Screen {
 				Language.getMessage(12) + ": " + Audio.getPlayed(),
 				Language.getMessage(13) + ": " + Settings.getProperty("volume"));
 
-
-
 		//Включить/Выключить вывод в консоль
 		if(key.getJustPressedE()) {
 			boolean console = !Settings.stringToBoolean(Settings.getProperty("console"));
 			Settings.setProperty("console", console + "");
 		}
-
-
 
 		//Управление музыкой
 		if(key.getJustPressedUp()) {

@@ -16,10 +16,10 @@ public class Scarecrow {
 	private SpriteBatch batch;
 
 
-	public Scarecrow(Main main, SpriteBatch batch){
+	public Scarecrow(Main main, SpriteBatch batch, int x, int y){
 		texture = new Texture("pugalo.png");
-		x = -100;
-		y = -100;
+		this.x = x;
+		this.y = y;
 	}
 
 	public void render (SpriteBatch batch) {

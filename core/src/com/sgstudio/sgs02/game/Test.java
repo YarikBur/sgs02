@@ -119,6 +119,22 @@ public class Test implements Screen {
         hero.update();
         for(Sheep sheep: list_sheep)
             sheep.update();
+        colSheepHero();
+    }
+
+    private void colSheepHero(){
+        for (Sheep sheep: list_sheep)
+        {
+            float coor_x = hero.GetX() - sheep.GetX();
+            float coor_y = hero.GetY() - sheep.GetY();
+
+            if(Math.sqrt(Math.pow(sheep.GetX() - hero.GetX() , 2) + Math.pow(sheep.GetY() - hero.GetY(), 2)) < 50)
+            {
+                sheep.SetX((int)(sheep.GetX() - coor_x));
+                sheep.SetY((int)(sheep.GetY() - coor_y));
+            }
+        }
+
     }
 
     @Override

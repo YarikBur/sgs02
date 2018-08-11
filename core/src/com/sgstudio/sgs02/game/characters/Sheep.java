@@ -31,6 +31,8 @@ public class Sheep {
 	}
 
 	public void update(){
+
+	    // Sheep's moving to 'lost' point.
         if ((x<lostX)&&(y<lostY)){
             x++;
             y++;
@@ -43,11 +45,14 @@ public class Sheep {
         } else if ((x>lostX)&&(y>lostY)){
             x--;
             y--;
-        }
-        else if (x<lostX){x++;}
-        else if (y<lostY){y++;}
-        else if (x>lostX){x--;}
-        else if (y>lostY){x--;}
+        } else if (x<lostX)
+            x++;
+        else if (y<lostY)
+            y++;
+        else if (x>lostX)
+            x--;
+        else if (y>lostY)
+            x--;
     }
 	
 	public void SetX(int x){
@@ -64,7 +69,7 @@ public class Sheep {
 	}
 	
 	public float GetX(){
-		return x;
+		return this.x;
 		}
 	public float GetY(){
 		return y;
