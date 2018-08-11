@@ -1,4 +1,4 @@
-package com.sgstudio.sgs02.utils;
+package com.sgstudio.sgs02.game.characters;
 
 public class Scarecrow {
 	private int range;

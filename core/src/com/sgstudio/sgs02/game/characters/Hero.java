@@ -1,19 +1,19 @@
-package com.sgstudio.sgs02.utils;
+package com.sgstudio.sgs02.game.characters;
 
-public class Sheep {
-	private int mass;
+public class Hero {
+	private int potatoes;
 	private int velocity;
 	private int x;
 	private int y;
-	
+
 	void SetX(int x){
 		this.x = x;
 		}
 	void SetY(int y){
 		this.y = y;
 		}
-	void SetMass(int mass){
-		this.mass = mass;
+	void SetPotatoes(int potatoes){
+		this.potatoes = potatoes;
 	}
 	void SetVelocity(int velocity){
 		this.velocity = velocity;
@@ -25,12 +25,10 @@ public class Sheep {
 	int GetY(){
 		return y;
 		}
-	int GetMass(){
-		return mass;
+	int GetPotatoes(){
+		return potatoes;
 	}
 	int GetVelocity(){
 		return velocity;
 	}
-
-	
 }
