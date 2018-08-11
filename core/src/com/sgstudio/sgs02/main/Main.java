@@ -28,7 +28,7 @@ public class Main extends Game {
         aboutsgstudio = new AboutSGS(this);
 
 
-        setScreen(test);
+        setScreen(game);
     }
 
     @Override
