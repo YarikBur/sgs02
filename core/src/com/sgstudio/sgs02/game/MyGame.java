@@ -42,6 +42,8 @@ public class MyGame implements Screen {
 	OrthographicCamera camera;
 
 	Sheep sheep;
+	Sheep[] sheep;
+	final int COUNTOFSHEEP = 6;
 	Scarecrow scarecrow;
 	Hero hero;
 
@@ -75,7 +77,11 @@ public class MyGame implements Screen {
 			effect.draw(batch, Gdx.graphics.getDeltaTime());
 
 		batch.draw(gui.get("tiles0_1"), 0, 0);
-		sheep.render(batch);
+
+		for (int i = 0; i < COUNTOFSHEEP; i++){
+			sheep[i].render(batch);
+		}
+
 		scarecrow.render(batch);
 		hero.render();
 
@@ -163,8 +169,11 @@ public class MyGame implements Screen {
 		effect = new Particle("test.p");
 
 		
-		sheep = new Sheep();
-		sheep.create();
+		sheep = new Sheep[COUNTOFSHEEP];
+		for (int i = 0; i < COUNTOFSHEEP; i++){
+			sheep[i] = new Sheep();
+			sheep[i].create();
+		}
 		
 		scarecrow = new Scarecrow();
 		scarecrow.create();

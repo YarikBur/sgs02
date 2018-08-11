@@ -84,7 +84,7 @@ public class Hero {
 	void SetSpped(int speed){
 		this.speed = speed;
 	}
-	
+
 	public float GetX(){
 		return x;
 		}
