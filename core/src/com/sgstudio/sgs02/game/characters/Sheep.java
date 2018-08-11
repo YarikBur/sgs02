@@ -12,16 +12,16 @@ public class Sheep {
 	private final float width = 222/5;
 	private final float height = 152/5;
 	private Texture texture;
-	private int lostX = 300;
-	private int lostY = 300;
+	private int lostX = 960;
+	private int lostY = 960;
 
 	private SpriteBatch batch;
 	private Main main;
 
 	public Sheep(Main main, SpriteBatch batch){
         texture = new Texture("Models/sheep_one.png");
-        x = 650*(float)Math.random();
-        y = 600*(float)Math.random();
+        x = 960*(float)Math.random();
+        y = 960*(float)Math.random();
         this.batch = batch;
         this.main = main;
     }

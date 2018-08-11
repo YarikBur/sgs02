@@ -12,6 +12,9 @@ public class Scarecrow {
 	private final float height = 146/4;
 	private Texture texture;
 
+	private Main main;
+	private SpriteBatch batch;
+
 
 	public Scarecrow(Main main, SpriteBatch batch){
 		texture = new Texture("pugalo.png");
