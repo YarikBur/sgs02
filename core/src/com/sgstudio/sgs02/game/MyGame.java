@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import com.badlogic.gdx.math.Rectangle;
+import com.sgstudio.sgs02.game.characters.Hero;
+import com.sgstudio.sgs02.game.characters.Scarecrow;
+import com.sgstudio.sgs02.game.characters.Sheep;
+import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Language;
 import com.sgstudio.sgs02.utils.Particle;
 import com.sgstudio.sgs02.utils.Settings;
@@ -21,13 +24,6 @@ import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.Variables;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.sgstudio.sgs02.menu.Menu;
-import com.sgstudio.sgs02.game.characters.Hero;
-import com.sgstudio.sgs02.game.characters.Scarecrow;
-import com.sgstudio.sgs02.game.characters.Sheep;
-import com.sgstudio.sgs02.main.Main;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class MyGame implements Screen {
 	private static SpriteBatch batch;
@@ -70,7 +66,7 @@ public class MyGame implements Screen {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(bg,0,0,800,600);
+//		batch.draw(bg,0,0,800,600);
 		//batch.draw(img, 5, 5);
 
 		effect.draw(batch, Gdx.graphics.getDeltaTime());
