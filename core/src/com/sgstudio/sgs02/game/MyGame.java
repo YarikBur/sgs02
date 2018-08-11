@@ -20,6 +20,7 @@ import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.sgstudio.sgs02.menu.Menu;
+import com.sgstudio.sgs02.game.characters.Scarecrow;
 import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
 
@@ -32,6 +33,7 @@ public class MyGame implements Screen {
 	Tiles tiles;
 	Particle effect;
 	Sheep sheep;
+	Scarecrow scarecrow;
 
 	private final Main main;
 	
@@ -80,6 +82,7 @@ public class MyGame implements Screen {
 
 		batch.draw(gui.get("tiles0_1"), 0, 0);
 		sheep.render(batch);
+		scarecrow.render(batch);
 
 		//Напечатать текст
 		text.writeUpperleft(batch,
@@ -166,6 +169,9 @@ public class MyGame implements Screen {
 		
 		sheep = new Sheep();
 		sheep.create();
+		
+		scarecrow = new Scarecrow();
+		scarecrow.create();
 
 		Language.getAllStrings();
 
