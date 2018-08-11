@@ -4,12 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.game.AboutSGS;
 import com.sgstudio.sgs02.game.MyGame;
+import com.sgstudio.sgs02.game.Test;
 import com.sgstudio.sgs02.menu.Menu;
 
 public class Main extends Game {
 
     public MyGame game;
     public Menu menu;
+    public Test test;
     //public Defeat defeat;
     //public Victory victory;
     public AboutSGS aboutsgstudio;
@@ -22,6 +24,7 @@ public class Main extends Game {
         batch = new SpriteBatch();
         game = new MyGame(this);
         menu = new Menu(this);
+        test = new Test(this);
         aboutsgstudio = new AboutSGS(this);
 
 

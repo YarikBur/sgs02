@@ -48,7 +48,7 @@ public class Menu implements Screen {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
-        main.setScreen(main.game);
+        main.setScreen(main.test);
 
         Gdx.input.setInputProcessor(new InputProcessor(){
             @Override

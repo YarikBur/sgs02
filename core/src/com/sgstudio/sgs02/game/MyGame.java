@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.sgstudio.sgs02.utils.Language;
 import com.sgstudio.sgs02.utils.Particle;
 import com.sgstudio.sgs02.utils.Settings;
@@ -21,6 +22,7 @@ import com.sgstudio.sgs02.utils.controller.KeyManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.sgstudio.sgs02.menu.Menu;
 import com.sgstudio.sgs02.main.Main;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class MyGame implements Screen {
 	Text text; 
@@ -30,6 +32,10 @@ public class MyGame implements Screen {
 	Audio audio;
 	Tiles tiles;
 	Particle effect;
+	Sprite bg;
+
+	OrthographicCamera staticCamera;
+	OrthographicCamera camera;
 
 	private final Main main;
 	
@@ -38,37 +44,20 @@ public class MyGame implements Screen {
 	public MyGame(final Main main) {
 		this.main = main;
 
-//		staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-//		staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-//
-//		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-//		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 	}
 
-
-//	public void create () {
-//		batch = new SpriteBatch();
-//		img = new Texture("badlogic.jpg");
-//		key = new KeyManager();
-//		text = new Text();
-//		audio = new Audio();
-//		tiles = new Tiles();
-//		tiles.createAtlas("GUI.png", 4, 4);
-//		gui = tiles.getTextureRegion();
-//		effect = new Particle("test.p");
-//
-//		Language.getAllStrings();
-//
-//		Audio.randomStart();
-//	}
-//
-//
 	@Override
 	public void render (float delta) {
 		Audio.update();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		batch.draw(bg,0,0,800,600);
 		//batch.draw(img, 5, 5);
 
 		effect.draw(batch, Gdx.graphics.getDeltaTime());
@@ -161,9 +150,8 @@ public class MyGame implements Screen {
 		tiles.createAtlas("GUI.png", 4, 4);
 		gui = tiles.getTextureRegion();
 		effect = new Particle("test.p");
-
+		bg = new Sprite(new Texture("atlas/bg.png"), 1600,900);
 		Language.getAllStrings();
-
 		Audio.randomStart();
 	}
 
