@@ -18,7 +18,7 @@ public class DesktopLauncher {
 	static Settings cfg;
 	
 	
-	public static void main (String[] arg) throws FileNotFoundException, IOException  {
+	public static void main (String[] arg) throws FileNotFoundException, IOException {
 		locale = Locale.getDefault() + "";
 		
 		lan = new Language(locale);

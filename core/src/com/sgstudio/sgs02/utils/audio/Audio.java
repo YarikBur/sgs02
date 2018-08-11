@@ -89,9 +89,6 @@ public class Audio {
 						if(volume <= 0)
 							break;
 						
-						if(volume-minus < 0.24f)
-							minus = volume;
-						
 						music.setVolume(volume);
 						Thread.sleep(200);
 						volume-=0.025;
