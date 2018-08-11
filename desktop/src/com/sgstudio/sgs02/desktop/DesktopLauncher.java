@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.sgstudio.sgs02.game.MyGame;
+import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Language;
 import com.sgstudio.sgs02.utils.Settings;
 
@@ -30,6 +30,6 @@ public class DesktopLauncher {
 		config.title = "SGS02";
 		config.width = Integer.parseInt(Settings.getProperty("width"));
 		config.height = Integer.parseInt(Settings.getProperty("height"));
-		new LwjglApplication(new MyGame(), config);
+		new LwjglApplication(new Main(), config);
 	}
 }

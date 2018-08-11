@@ -20,6 +20,7 @@ import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.sgstudio.sgs02.menu.Menu;
+import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
 
 public class MyGame implements Screen {
@@ -30,6 +31,7 @@ public class MyGame implements Screen {
 	Audio audio;
 	Tiles tiles;
 	Particle effect;
+	Sheep sheep;
 
 	private final Main main;
 	
@@ -77,7 +79,7 @@ public class MyGame implements Screen {
 			effect.draw(batch, Gdx.graphics.getDeltaTime());
 
 		batch.draw(gui.get("tiles0_1"), 0, 0);
-
+		sheep.render(batch);
 
 		//Напечатать текст
 		text.writeUpperleft(batch,
@@ -161,6 +163,9 @@ public class MyGame implements Screen {
 		tiles.createAtlas("GUI.png", 4, 4);
 		gui = tiles.getTextureRegion();
 		effect = new Particle("test.p");
+		
+		sheep = new Sheep();
+		sheep.create();
 
 		Language.getAllStrings();
 
