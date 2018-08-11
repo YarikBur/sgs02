@@ -21,6 +21,9 @@ import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.sgstudio.sgs02.menu.Menu;
+import com.sgstudio.sgs02.game.characters.Hero;
+import com.sgstudio.sgs02.game.characters.Scarecrow;
+import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -32,10 +35,16 @@ public class MyGame implements Screen {
 	Audio audio;
 	Tiles tiles;
 	Particle effect;
+<<<<<<< HEAD
 	Sprite bg;
 
 	OrthographicCamera staticCamera;
 	OrthographicCamera camera;
+=======
+	Sheep sheep;
+	Scarecrow scarecrow;
+	Hero hero;
+>>>>>>> a345c45d53d59751567a256e29297af8dd1fddcd
 
 	private final Main main;
 	
@@ -66,7 +75,9 @@ public class MyGame implements Screen {
 			effect.draw(batch, Gdx.graphics.getDeltaTime());
 
 		batch.draw(gui.get("tiles0_1"), 0, 0);
-
+		sheep.render(batch);
+		scarecrow.render(batch);
+		hero.render(batch, key.getPressedLeft(), key.getPressedRight(), key.getPressedUp(), key.getPressedDown());
 
 		//Напечатать текст
 		text.writeUpperleft(batch,
@@ -150,7 +161,20 @@ public class MyGame implements Screen {
 		tiles.createAtlas("GUI.png", 4, 4);
 		gui = tiles.getTextureRegion();
 		effect = new Particle("test.p");
+<<<<<<< HEAD
 		bg = new Sprite(new Texture("atlas/bg.png"), 1600,900);
+=======
+		
+		sheep = new Sheep();
+		sheep.create();
+		
+		scarecrow = new Scarecrow();
+		scarecrow.create();
+		
+		hero = new Hero();
+		hero.create();
+
+>>>>>>> a345c45d53d59751567a256e29297af8dd1fddcd
 		Language.getAllStrings();
 		Audio.randomStart();
 	}

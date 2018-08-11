@@ -6,10 +6,9 @@ import java.util.Locale;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.sgstudio.sgs02.game.MyGame;
+import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Language;
 import com.sgstudio.sgs02.utils.Settings;
-import com.sgstudio.sgs02.main.Main;
 
 public class DesktopLauncher {
 	static String locale;
