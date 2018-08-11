@@ -7,14 +7,12 @@ public class Scarecrow {
 	private int range;
 	private int x;
 	private int y;
-	private static float width;
-	private static float height;
+	private final float width = 185/4;
+	private final float height = 146/4;
 	private Texture texture;
 	
 	public void create () {
 		texture = new Texture("pugalo.png");
-		width = 185/4;
-		height = 146/4;
 		x = 100;
 		y = 150;
 	}

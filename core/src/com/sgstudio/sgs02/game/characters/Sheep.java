@@ -8,14 +8,12 @@ public class Sheep {
 	private int velocity;
 	private int x;
 	private int y;
-	private static float width;
-	private static float height;
+	private final float width = 222/5;
+	private final float height = 152/5;
 	private Texture texture;
 	
 	public void create () {
 		texture = new Texture("sheep.png");
-		width = 222/5;
-		height = 152/5;
 		x = 100;
 		y = 100;
 	}

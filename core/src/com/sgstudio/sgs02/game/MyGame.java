@@ -75,6 +75,7 @@ public class MyGame implements Screen {
 			effect.draw(batch, Gdx.graphics.getDeltaTime());
 
 		batch.draw(gui.get("tiles0_1"), 0, 0);
+		
 		sheep.render(batch);
 		scarecrow.render(batch);
 		hero.render(batch, key.getPressedLeft(), key.getPressedRight(), key.getPressedUp(), key.getPressedDown());
