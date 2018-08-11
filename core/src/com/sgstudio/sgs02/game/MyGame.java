@@ -41,7 +41,6 @@ public class MyGame implements Screen {
 	OrthographicCamera staticCamera;
 	OrthographicCamera camera;
 
-	Sheep sheep;
 	Sheep[] sheep;
 	final int COUNTOFSHEEP = 6;
 	Scarecrow scarecrow;
@@ -168,7 +167,7 @@ public class MyGame implements Screen {
 		effect = new Particle("test.p");
 
 
-		bg = new Sprite(new Texture("atlas/bg.png"), 1600,900);
+		bg = new Sprite(new Texture("atlas/g4.png"));
 
 
 		sheep = new Sheep[COUNTOFSHEEP];
@@ -179,6 +178,9 @@ public class MyGame implements Screen {
 		
 		scarecrow = new Scarecrow();
 		scarecrow.create();
+
+		batch = MyGame.getBatch();
+		hero = new Hero(main,batch);
 
 
 

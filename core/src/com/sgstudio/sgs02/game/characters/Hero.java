@@ -67,7 +67,7 @@ public class Hero {
 			y+=speed;
 		}
 		if (keys.getPressedDown()){
-			if(Math.sqrt(Math.pow(x-width , 2) + Math.pow(y - speed*1.5 - height, 2)) > 450)
+			if(Math.sqrt(Math.pow(x-width , 2) + Math.pow(y - speed*1.5 - height, 2)) > 480)
 				y+= speed * 2;
 			y-=speed;
 		}
