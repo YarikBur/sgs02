@@ -111,7 +111,7 @@ public class Test implements Screen {
         hero = new Hero(main, batch);
 
         // Create Sheep
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 100; i++)
             list_sheep.add(new Sheep(main, batch));
     }
 
@@ -120,21 +120,42 @@ public class Test implements Screen {
         for(Sheep sheep: list_sheep)
             sheep.update();
         colSheepHero();
+        colSheepScare();
     }
 
     private void colSheepHero(){
+        /*
+            Function for check collision Hero with sheep and repale
+            Uses `list_sheep`, get<Class>()-functions and little Java.Math
+         */
         for (Sheep sheep: list_sheep)
         {
-            float coor_x = hero.GetX() - sheep.GetX();
-            float coor_y = hero.GetY() - sheep.GetY();
-
             if(Math.sqrt(Math.pow(sheep.GetX() - hero.GetX() , 2) + Math.pow(sheep.GetY() - hero.GetY(), 2)) < 50)
             {
+                float coor_x = hero.GetX() - sheep.GetX();
+                float coor_y = hero.GetY() - sheep.GetY();
                 sheep.SetX((int)(sheep.GetX() - coor_x));
                 sheep.SetY((int)(sheep.GetY() - coor_y));
             }
         }
+    }
 
+    private void colSheepScare(){
+        for (Sheep sheep: list_sheep)
+            for (Scarecrow scare: list_scarecrow){
+                if(Math.sqrt(Math.pow(sheep.GetX() - scare.GetX() , 2) + Math.pow(sheep.GetY() - scare.GetY(), 2)) < 100)
+                {
+                    float coor_x = scare.GetX() - sheep.GetX();
+                    float coor_y = scare.GetY() - sheep.GetY();
+                    sheep.SetX((int)(sheep.GetX() - coor_x));
+                    sheep.SetY((int)(sheep.GetY() - coor_y));
+                }
+        }
+    }
+
+    public void addScarecrow(int x, int y)
+    {
+        this.list_scarecrow.add(new Scarecrow(main,batch,x,y));
     }
 
     @Override

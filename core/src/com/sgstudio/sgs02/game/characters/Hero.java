@@ -55,6 +55,11 @@ public class Hero {
             this.x += coor_x * 0.05;
             this.y += coor_y * 0.05;
         }
+        if(Math.sqrt(Math.pow(x - width , 2) + Math.pow(y - height, 2)) < 30)
+        {
+            this.x += coor_x * 0.01;
+            this.y += coor_y * 0.01;
+        }
 
 		if (keys.getPressedLeft())
 			x -= speed;

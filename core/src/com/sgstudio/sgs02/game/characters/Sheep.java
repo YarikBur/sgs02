@@ -6,7 +6,7 @@ import com.sgstudio.sgs02.main.Main;
 
 public class Sheep {
 	private int mass;
-	private int velocity;
+	private int speed = 1;
 	private float x;
 	private float y;
 	private final float width = 222/5;
@@ -20,10 +20,15 @@ public class Sheep {
 
 	public Sheep(Main main, SpriteBatch batch){
         texture = new Texture("Models/sheep_one.png");
-        x = 960*(float)Math.random();
-        y = 960*(float)Math.random();
+        x = 1500*(float)Math.random();
+        y = 1500*(float)Math.random();
         this.batch = batch;
         this.main = main;
+
+        /*
+        TODO Add field vect_x and vect_y and change moving to % of vector
+        One time (in C-tor) save vector, after that go on it
+        */
     }
 	
 	public void render () {
@@ -34,25 +39,25 @@ public class Sheep {
 
 	    // Sheep's moving to 'lost' point.
         if ((x<lostX)&&(y<lostY)){
-            x++;
-            y++;
+            x+=speed;
+            y+=speed;
         } else if ((x<lostX)&&(y>lostY)){
-            x++;
-            y--;
+            x+=speed;
+            y-=speed;
         } else if ((x>lostX)&&(y<lostY)){
-            x--;
-            y++;
+            x-=speed;
+            y+=speed;
         } else if ((x>lostX)&&(y>lostY)){
-            x--;
-            y--;
+            x-=speed;
+            y-=speed;
         } else if (x<lostX)
-            x++;
+            x+=speed;
         else if (y<lostY)
-            y++;
+            y+=speed;
         else if (x>lostX)
-            x--;
+            x-=speed;
         else if (y>lostY)
-            x--;
+            y-=speed;
     }
 	
 	public void SetX(int x){
@@ -64,8 +69,8 @@ public class Sheep {
 	public void SetMass(int mass){
 		this.mass = mass;
 	}
-	public void SetVelocity(int velocity){
-		this.velocity = velocity;
+	public void SetSpeed(int speed){
+		this.speed = speed;
 	}
 	
 	public float GetX(){
@@ -77,7 +82,7 @@ public class Sheep {
 	public int GetMass(){
 		return mass;
 	}
-	public int GetVelocity(){
-		return velocity;
+	public int GetSpeed(){
+		return speed;
 	}
 }
