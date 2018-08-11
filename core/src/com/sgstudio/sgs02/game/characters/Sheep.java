@@ -6,21 +6,39 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Sheep {
 	private int mass;
 	private int velocity;
-	private int x;
-	private int y;
+	private float x;
+	private float y;
 	private final float width = 222/5;
 	private final float height = 152/5;
 	private Texture texture;
+	private int lostX = 300;
+	private int lostY = 300;
 	
 	public void create () {
 		texture = new Texture("sheep.png");
-		x = 100;
-		y = 100;
+		x = 650*(float)Math.random();
+		y = 600*(float)Math.random();
 	}
 	
 	public void render (SpriteBatch batch) {
 		batch.draw(texture, x, y, width, height);
-		x++;
+		if ((x<lostX)&&(y<lostY)){
+			x++;
+			y++;
+			} else if ((x<lostX)&&(y>lostY)){
+				x++;
+				y--;
+			} else if ((x>lostX)&&(y<lostY)){
+				x--;
+				y++;
+			} else if ((x>lostX)&&(y>lostY)){
+				x--;
+				y--;
+			} 
+			else if (x<lostX){x++;}
+			else if (y<lostY){y++;} 
+			else if (x>lostX){x--;} 
+			else if (y>lostY){x--;} 
 	}
 	
 	void SetX(int x){
@@ -36,10 +54,10 @@ public class Sheep {
 		this.velocity = velocity;
 	}
 	
-	int GetX(){
+	float GetX(){
 		return x;
 		}
-	int GetY(){
+	float GetY(){
 		return y;
 		}
 	int GetMass(){

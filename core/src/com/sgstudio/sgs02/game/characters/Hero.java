@@ -16,8 +16,8 @@ public class Hero {
 	private Sprite sprite;
 	
 	public void create () {
-		x = 150;
-		y = 150;
+		x = 720;
+		y = 600;
 		sprite = new Sprite(new Texture("farmer.png"));
 	}
 	

@@ -35,16 +35,14 @@ public class MyGame implements Screen {
 	Audio audio;
 	Tiles tiles;
 	Particle effect;
-<<<<<<< HEAD
 	Sprite bg;
 
 	OrthographicCamera staticCamera;
 	OrthographicCamera camera;
-=======
-	Sheep sheep;
+	Sheep[] sheep;
+	final int COUNTOFSHEEP = 6;
 	Scarecrow scarecrow;
 	Hero hero;
->>>>>>> a345c45d53d59751567a256e29297af8dd1fddcd
 
 	private final Main main;
 	
@@ -76,7 +74,10 @@ public class MyGame implements Screen {
 
 		batch.draw(gui.get("tiles0_1"), 0, 0);
 		
-		sheep.render(batch);
+		for (int i = 0; i < COUNTOFSHEEP; i++){
+			sheep[i].render(batch);
+		}
+			
 		scarecrow.render(batch);
 		hero.render(batch, key.getPressedLeft(), key.getPressedRight(), key.getPressedUp(), key.getPressedDown());
 
@@ -162,12 +163,13 @@ public class MyGame implements Screen {
 		tiles.createAtlas("GUI.png", 4, 4);
 		gui = tiles.getTextureRegion();
 		effect = new Particle("test.p");
-<<<<<<< HEAD
 		bg = new Sprite(new Texture("atlas/bg.png"), 1600,900);
-=======
 		
-		sheep = new Sheep();
-		sheep.create();
+		sheep = new Sheep[COUNTOFSHEEP];
+		for (int i = 0; i < COUNTOFSHEEP; i++){
+			sheep[i] = new Sheep();
+			sheep[i].create();
+		}
 		
 		scarecrow = new Scarecrow();
 		scarecrow.create();
@@ -175,7 +177,6 @@ public class MyGame implements Screen {
 		hero = new Hero();
 		hero.create();
 
->>>>>>> a345c45d53d59751567a256e29297af8dd1fddcd
 		Language.getAllStrings();
 		Audio.randomStart();
 	}
