@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.sgstudio.sgs02.menu.Menu;
 import com.sgstudio.sgs02.main.Main;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.sgstudio.sgs02.game.characters.Hero;
 
 public class Test implements Screen {
     Text text;
@@ -34,8 +35,10 @@ public class Test implements Screen {
     Particle effect;
     Sprite bg;
 
-    OrthographicCamera staticCamera;
-    OrthographicCamera camera;
+    private Hero hero;
+
+    public OrthographicCamera staticCamera;
+    public OrthographicCamera camera;
 
     private final Main main;
 
@@ -54,12 +57,22 @@ public class Test implements Screen {
     @Override
     public void render (float delta) {
         Audio.update();
+        staticCamera.update();
+        camera.position.set(hero.GetX(), hero.GetY(), 0);
+        camera.update();
+
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(bg,0,0,800,600);
+        bg.draw(batch);
+        text.writeUpperleft(batch,
+                Language.getMessage(8) + ": " + Settings.getProperty("width"),
+                Language.getMessage(9) + ": " + Settings.getProperty("height"),
+                Language.getMessage(10) + ": " + Variables.booleanToInt(Variables.stringToBoolean(Settings.getProperty("console"))));
+        hero.render();
         batch.end();
-        this.update();
     }
 
     @Override
@@ -77,7 +90,7 @@ public class Test implements Screen {
 
     @Override
     public void show(){
-        batch = new SpriteBatch();
+        batch = main.getBatch();;
         img = new Texture("badlogic.jpg");
         key = new KeyManager();
         text = new Text();
@@ -86,9 +99,11 @@ public class Test implements Screen {
         tiles.createAtlas("GUI.png", 4, 4);
         gui = tiles.getTextureRegion();
         effect = new Particle("test.p");
-        bg = new Sprite(new Texture("atlas/bg.png"), 1600,900);
+        bg = new Sprite(new Texture("atlas/g4.png"));
         Language.getAllStrings();
         Audio.randomStart();
+
+        hero = new Hero(main, batch);
     }
 
     @Override
@@ -104,29 +119,6 @@ public class Test implements Screen {
     @Override
     public void hide(){
 
-    }
-
-    private void update(){
-
-        if (key.getJustPressedUp()){
-            if (staticCamera.position.y < 1024)
-                staticCamera.translate(0, 3, 0);
-        }
-
-        if(key.getJustPressedDown()) {
-            if (staticCamera.position.y > 0)
-                staticCamera.translate(0, -3, 0);
-        }
-
-        if(key.getJustPressedLeft()) {
-            if (staticCamera.position.x > 0)
-                staticCamera.translate(-3, 0, 0);
-        }
-
-        if(key.getJustPressedRight()) {
-            if (staticCamera.position.x < 1024)
-                staticCamera.translate(3, 0, 0);
-        }
     }
 }
 
