@@ -13,7 +13,6 @@ public class Main extends Game {
 	
 	Audio audio;
 	
-	
     public MyGame game;
     public Menu menu;
     public Test test;

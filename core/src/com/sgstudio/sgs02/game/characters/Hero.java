@@ -25,6 +25,12 @@ public class Hero {
     private int x;
     private int y;
 
+    final private float imgX = 50;
+    final private float imgY = 50;
+
+    private float center_x;
+    private float center_y;
+
     private Texture texture;
     private Sprite sprite;
 
@@ -47,6 +53,8 @@ public class Hero {
         x = width = main.test.x_center;
         y = height = main.test.y_center;
 
+        center_x = x + imgX / 2;
+        center_y = y + imgY / 2;
 
         speed = 2;
         time_speed = 0;
@@ -55,26 +63,27 @@ public class Hero {
     }
 
     public void render() {
-        batch.draw(texture, x, y, 50, 50);
+        batch.draw(texture, x, y, imgX, imgY);
     }
 
     public void update() {
-
+        center_y = this.y + imgY / 2;
+        center_x = this.x + imgX / 2;
 
         float coor_x = width - this.x;
         float coor_y = height - this.y;
 
-        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) > 480) {
+        if (Math.sqrt(Math.pow(center_x - width, 2) + Math.pow(center_y - height, 2)) > 480) {
             this.x += coor_x * 0.05;
             this.y += coor_y * 0.05;
         }
 
-        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) < 40) {
+        if (Math.sqrt(Math.pow(center_x - width, 2) + Math.pow(center_y - height, 2)) < 40) {
             this.x -= coor_x * 0.1;
             this.y -= coor_y * 0.1;
         }
-        if(time_speed > 0){
-            if(time_speed + 10 < TimeUtils.millis()  / 1000){
+        if (time_speed > 0) {
+            if (time_speed + 10 < TimeUtils.millis() / 1000) {
                 time_speed = 0;
                 speed -= 5;
             }
@@ -93,27 +102,37 @@ public class Hero {
         if (keys.getPressedDown())
             y -= speed;
 
-        if (keys.getJustPressed1() && this.time_speed == 0 && points >= 1)
-        {
+        if (keys.getJustPressed1() && this.time_speed == 0 && points >= 1) {
             this.time_speed = TimeUtils.millis() / 1000;
             this.speed += 5;
             spend_points += 1;
         }
-        if (keys.getJustPressed2() && points >= 2)
-        {
+        if (keys.getJustPressed2() && points >= 2) {
             this.putScarecrow();
             spend_points += 2;
         }
         if (keys.getJustPressed3() && points >= 10)
-           plusLife();
+            plusLife();
 
-        points = (int)TimeUtils.millis() / 1000 - this.time - this.spend_points;
+        points = (int) TimeUtils.millis() / 1000 - this.time - this.spend_points;
     }
 
-    public int getPoints(){return this.points;}
-    public int getLifes(){return this.lifes;}
-    public void minusLife(){this.lifes--;}
-    private void plusLife(){this.spend_points+=10;lifes++;}
+    public int getPoints() {
+        return this.points;
+    }
+
+    public int getLifes() {
+        return this.lifes;
+    }
+
+    public void minusLife(int life) {
+        this.lifes-=life;
+    }
+
+    private void plusLife() {
+        this.spend_points += 10;
+        lifes++;
+    }
 
     private void putScarecrow() {
         main.test.addScarecrow(this.x, this.y);
@@ -149,5 +168,21 @@ public class Hero {
 
     int GetSpeed() {
         return speed;
+    }
+
+    public float GetImgX() {
+        return this.imgX;
+    }
+
+    public float GetImgY() {
+        return this.imgY;
+    }
+
+    public float getCenter_x(){
+        return this.center_x;
+    }
+
+    public float getCenter_y(){
+        return this.center_y;
     }
 }

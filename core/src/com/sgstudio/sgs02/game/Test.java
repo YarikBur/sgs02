@@ -38,8 +38,8 @@ public class Test implements Screen {
     public long time;
     public long score;
 
-    final public int x_center = 1035;
-    final public int y_center = 1080;
+    final public int x_center = 1080;
+    final public int y_center = 1085;
 
     //  Public Lists
     public List<Sheep> list_sheep = new ArrayList<Sheep>();
@@ -78,7 +78,7 @@ public class Test implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         bg.draw(batch);
-        batch.draw(img, x_center + 10, y_center + 10, 20, 20);
+        batch.draw(img, x_center - 10, y_center - 10, 20, 20);
         for (Scarecrow scare : list_scarecrow)
             scare.render();
         for (Sheep sheep : list_sheep)
@@ -99,8 +99,6 @@ public class Test implements Screen {
                 "Очки героя: " + hero.getPoints(), "Жизни: " + hero.getLifes());
 
         batch.end();
-
-
     }
 
     @Override
@@ -124,7 +122,6 @@ public class Test implements Screen {
         text = new Text();
         audio = new Audio();
         tiles = new Tiles();
-        tiles.createAtlas("GUI.png", 4, 4);
         gui = tiles.getTextureRegion();
         effect = new Particle("test.p");
         bg = new Sprite(new Texture("atlas/g4_new.png"));
@@ -155,18 +152,22 @@ public class Test implements Screen {
     }
 
     private void sheepJoin() {
+        List<Sheep> tmp_sheep = new ArrayList<Sheep>();
         for (Sheep sheep1 : list_sheep) {
             for (Sheep sheep2 : list_sheep) {
-                if (sheep1 == sheep2)
+                if (sheep1 == sheep2 || tmp_sheep.contains(sheep2))
                     continue;
-                float x1 = sheep1.GetX() + sheep1.getImgWidth() / 2;
-                float x2 = sheep2.GetX() + sheep2.getImgWidth() / 2;
-                float y1 = sheep1.GetY() + sheep1.getImgHeight() / 2;
-                float y2 = sheep2.GetY() + sheep2.getImgHeight() / 2;
-                if (Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)) < 3) {
+                float x1 = sheep1.getCenter_x();
+                float x2 = sheep2.getCenter_x();
+                float y1 = sheep1.getCenter_y();
+                float y2 = sheep2.getCenter_y();
+                if (Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)) < 20) {
+                    tmp_sheep.add(sheep1);
                     sheep1.joinSheeps();
+                    sheep1.SetMass(sheep1.GetMass()+sheep2.GetMass());
                     sheep2.SetX(-1000);
                     sheep2.SetY(-1000);
+
                 }
             }
         }
@@ -178,7 +179,7 @@ public class Test implements Screen {
             Uses `list_sheep`, get<Class>()-functions and little Java.Math
          */
         for (Sheep sheep : list_sheep) {
-            if (Math.sqrt(Math.pow(sheep.GetX() - hero.GetX(), 2) + Math.pow(sheep.GetY() - hero.GetY(), 2)) < 50) {
+            if (Math.sqrt(Math.pow(sheep.getCenter_x() - hero.getCenter_x(), 2) + Math.pow(sheep.getCenter_y() - hero.getCenter_y(), 2)) < 50) {
                 float coor_x = hero.GetX() - sheep.GetX();
                 float coor_y = hero.GetY() - sheep.GetY();
                 sheep.SetX((int) (sheep.GetX() - coor_x));
@@ -203,8 +204,8 @@ public class Test implements Screen {
 
     public void sheepHoly() {
         for (Sheep sheep : list_sheep) {
-            if (Math.sqrt(Math.pow(sheep.GetX() - x_center, 2) + Math.pow(sheep.GetY() - y_center, 2)) < 50) {
-                hero.minusLife();
+            if (Math.sqrt(Math.pow(sheep.getCenter_x() - x_center, 2) + Math.pow(sheep.getCenter_y() - y_center, 2)) < 50) {
+                hero.minusLife(sheep.GetMass());
                 sheep.SetX(-1000);
                 sheep.SetY(-1000);
             }
@@ -231,7 +232,7 @@ public class Test implements Screen {
             if (sheep.GetX() == -1000 && sheep.GetY() == -1000)
                 tmp_sheep.add(sheep);
         for (Sheep sheep : tmp_sheep)
-            list_scarecrow.remove(sheep);
+            list_sheep.remove(sheep);
 
     }
 

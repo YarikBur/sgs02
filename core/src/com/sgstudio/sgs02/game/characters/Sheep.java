@@ -2,6 +2,7 @@ package com.sgstudio.sgs02.game.characters;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.game.MyGame;
 import com.sgstudio.sgs02.game.Test.*;
 import com.sgstudio.sgs02.main.Main;
@@ -13,6 +14,9 @@ public class Sheep {
     private float y;
     private float img_width = 222 / 5;
     private float img_height = 152 / 5;
+    private float center_x;
+    private float center_y;
+
     private Texture texture;
 
     private float lostX;
@@ -20,6 +24,8 @@ public class Sheep {
 
     private float vect_x;
     private float vect_y;
+
+    private int counter;
 
     private SpriteBatch batch;
     private Main main;
@@ -41,25 +47,28 @@ public class Sheep {
         this.vect_x = this.lostX - this.x;
         this.vect_y = this.lostY - this.y;
 
+        this.center_x = x + img_width / 2;
+        this.center_y = y + img_height / 2;
+
+
         this.mass = 1;
     }
 
     public void render() {
-        batch.draw(texture, x, y, img_width, img_height);
+            batch.draw(texture, x, y, img_width, img_height);
     }
 
     public void update() {
+        this.center_x = x + img_width / 2;
+        this.center_y = y + img_height / 2;
 
-        if (Math.sqrt(Math.pow(x - lostY, 2) + Math.pow(y - lostY, 2)) > 550) {
+        if (Math.sqrt(Math.pow(this.x - lostY, 2) + Math.pow(this.y - lostY, 2)) > 550) {
             this.updateVect();
         }
 
-        if (Math.sqrt(Math.pow(x - lostY, 2) + Math.pow(y - lostY, 2)) < 30) {
-            // TODO Hero -1 life
-        } else {
-            this.x += this.vect_x * 0.001 * speed / mass;
-            this.y += this.vect_y * 0.001 * speed / mass;
-        }
+        this.x += this.vect_x * 0.001 * speed / mass;
+        this.y += this.vect_y * 0.001 * speed / mass;
+
     }
 
     public void updateVect() {
@@ -115,5 +124,13 @@ public class Sheep {
 
     public float getImgHeight() {
         return this.img_height;
+    }
+
+    public float getCenter_x() {
+        return this.center_x;
+    }
+
+    public float getCenter_y() {
+        return this.center_y;
     }
 }

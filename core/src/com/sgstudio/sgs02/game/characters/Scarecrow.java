@@ -8,12 +8,15 @@ import com.sgstudio.sgs02.main.Main;
 public class Scarecrow {
     private int x;
     private int y;
-    private final float width = 185 / 4;
-    private final float height = 146 / 4;
-    private Texture texture;
+    private final float imgWidth = 185 / 4;
+    private final float imgHeight = 146 / 4;
+    private float center_x;
+    private float center_y;
 
     private long time = 0;
 
+
+    private Texture texture;
     private Main main;
     private SpriteBatch batch;
 
@@ -28,11 +31,13 @@ public class Scarecrow {
     }
 
     public void render() {
-        batch.draw(texture, x, y, width, height);
+        batch.draw(texture, x, y, imgWidth, imgHeight);
     }
 
     public void update() {
-        if (this.time > 0)
+        center_x = this.x + imgWidth / 2;
+        center_y = this.y + imgHeight / 2;
+        if (this.time > 0) {
             if (this.time + 8 < TimeUtils.millis() / 1000) {
                 this.x *= -1;
                 this.y *= -1;
@@ -42,6 +47,7 @@ public class Scarecrow {
                 this.y = -1000;
                 this.time = 0;
             }
+        }
     }
 
     public int GetX() {
