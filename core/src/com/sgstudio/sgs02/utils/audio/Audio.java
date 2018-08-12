@@ -171,9 +171,9 @@ public class Audio {
 	
 	/**
 	 * Меняет громкость из диапозона [0; 100] в [0; 1]
-	 * @return
+	 * @return float
 	 */
-	private static float volume() {
+	public static float volume() {
 		if(!Variables.stringToBoolean(Settings.getProperty("mute")))
 			return Variables.stringToInt(Settings.getProperty("volume"))/100f;
 		else
