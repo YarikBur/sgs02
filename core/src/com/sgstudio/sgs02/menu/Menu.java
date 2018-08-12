@@ -45,18 +45,26 @@ public class Menu implements Screen {
 
         main.setScreen(main.test);
 
-        Gdx.input.setInputProcessor(new InputProcessor(){
+        Gdx.input.setInputProcessor(new InputProcessor() {
             @Override
-            public boolean keyDown(int keycode) { return false; }
+            public boolean keyDown(int keycode) {
+                return false;
+            }
 
             @Override
-            public boolean keyUp(int keycode) { return false; }
+            public boolean keyUp(int keycode) {
+                return false;
+            }
 
             @Override
-            public boolean keyTyped(char character) { return false; }
+            public boolean keyTyped(char character) {
+                return false;
+            }
 
             @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) { return false; }
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                return false;
+            }
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
@@ -64,22 +72,28 @@ public class Menu implements Screen {
             }
 
             @Override
-            public boolean touchDragged(int screenX, int screenY, int pointer) { return false; }
+            public boolean touchDragged(int screenX, int screenY, int pointer) {
+                return false;
+            }
 
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
                 return true;
-           }
+            }
 
             @Override
-            public boolean scrolled(int amount) { return false; }
+            public boolean scrolled(int amount) {
+                return false;
+            }
         });
     }
 
-    public static Map<String, TextureRegion> getAtlasSound(){ return atlasSound; }
+    public static Map<String, TextureRegion> getAtlasSound() {
+        return atlasSound;
+    }
 
 
-    private void renderMenu(){
+    private void renderMenu() {
 
     }
 

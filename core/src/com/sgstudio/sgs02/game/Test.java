@@ -58,7 +58,7 @@ public class Test implements Screen {
     }
 
     @Override
-    public void render (float delta) {
+    public void render(float delta) {
         this.update();
         Audio.update();
         staticCamera.update();
@@ -70,9 +70,11 @@ public class Test implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+
         bg.draw(batch);
+        batch.draw(img, 950, 950, 20, 20);
         hero.render();
-        for(Sheep sheep: list_sheep)
+        for (Sheep sheep : list_sheep)
             sheep.render();
         batch.end();
     }
@@ -84,15 +86,16 @@ public class Test implements Screen {
     }
 
     @Override
-    public void dispose () {
+    public void dispose() {
         batch.dispose();
         img.dispose();
         Audio.dispose();
     }
 
     @Override
-    public void show(){
-        batch = main.getBatch();;
+    public void show() {
+        batch = main.getBatch();
+        ;
         img = new Texture("badlogic.jpg");
         key = new KeyManager();
         text = new Text();
@@ -111,61 +114,63 @@ public class Test implements Screen {
             list_sheep.add(new Sheep(main, batch));
     }
 
-    public void update(){
+    public void update() {
         hero.update();
-        for(Sheep sheep: list_sheep)
+        for (Sheep sheep : list_sheep)
             sheep.update();
         colSheepHero();
         colSheepScare();
     }
 
-    private void colSheepHero(){
+    private void colSheepHero() {
         /*
             Function for check collision Hero with sheep and repale
             Uses `list_sheep`, get<Class>()-functions and little Java.Math
          */
-        for (Sheep sheep: list_sheep)
-        {
-            if(Math.sqrt(Math.pow(sheep.GetX() - hero.GetX() , 2) + Math.pow(sheep.GetY() - hero.GetY(), 2)) < 50)
-            {
+        for (Sheep sheep : list_sheep) {
+            if (Math.sqrt(Math.pow(sheep.GetX() - hero.GetX(), 2) + Math.pow(sheep.GetY() - hero.GetY(), 2)) < 50) {
                 float coor_x = hero.GetX() - sheep.GetX();
                 float coor_y = hero.GetY() - sheep.GetY();
-                sheep.SetX((int)(sheep.GetX() - coor_x));
-                sheep.SetY((int)(sheep.GetY() - coor_y));
+                sheep.SetX((int) (sheep.GetX() - coor_x));
+                sheep.SetY((int) (sheep.GetY() - coor_y));
+                sheep.reverseVect();
+                //sheep.updateVect();
             }
         }
     }
 
-    private void colSheepScare(){
-        for (Sheep sheep: list_sheep)
-            for (Scarecrow scare: list_scarecrow){
-                if(Math.sqrt(Math.pow(sheep.GetX() - scare.GetX() , 2) + Math.pow(sheep.GetY() - scare.GetY(), 2)) < 100)
-                {
+    private void colSheepScare() {
+        for (Sheep sheep : list_sheep)
+            for (Scarecrow scare : list_scarecrow) {
+                if (Math.sqrt(Math.pow(sheep.GetX() - scare.GetX(), 2) + Math.pow(sheep.GetY() - scare.GetY(), 2)) < 100) {
                     float coor_x = scare.GetX() - sheep.GetX();
                     float coor_y = scare.GetY() - sheep.GetY();
-                    sheep.SetX((int)(sheep.GetX() - coor_x));
-                    sheep.SetY((int)(sheep.GetY() - coor_y));
+                    sheep.SetX((int) (sheep.GetX() - coor_x));
+                    sheep.SetY((int) (sheep.GetY() - coor_y));
                 }
-        }
+            }
     }
 
-    public void addScarecrow(int x, int y)
-    {
-        this.list_scarecrow.add(new Scarecrow(main,batch,x,y));
+    public void sheepHoly() {
+
+    }
+
+    public void addScarecrow(int x, int y) {
+        this.list_scarecrow.add(new Scarecrow(main, batch, x, y));
     }
 
     @Override
-    public  void pause(){
-
-    }
-
-    @Override
-    public void resume(){
+    public void pause() {
 
     }
 
     @Override
-    public void hide(){
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
 
     }
 }

@@ -24,177 +24,175 @@ import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
 public class MyGame implements Screen {
-	private static SpriteBatch batch;
+    private static SpriteBatch batch;
 
-	Text text;
-	KeyManager key;
-	Texture img;
-	Audio audio;
-	Tiles tiles;
-	Particle effect;
+    Text text;
+    KeyManager key;
+    Texture img;
+    Audio audio;
+    Tiles tiles;
+    Particle effect;
 
-	Sprite bg;
+    Sprite bg;
 
-	OrthographicCamera staticCamera;
-	OrthographicCamera camera;
+    OrthographicCamera staticCamera;
+    OrthographicCamera camera;
 
-	Sheep[] sheep;
-	final int COUNTOFSHEEP = 6;
-	Scarecrow scarecrow;
-	Hero hero;
-
-
-	private final Main main;
-	
-	Map<String, TextureRegion> gui;
-
-	public MyGame(final Main main) {
-		this.main = main;
-
-		staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-	}
-
-	@Override
-	public void render (float delta) {
-		Audio.update();
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(bg,0,0,1280,720);
-		//batch.draw(img, 5, 5);
-
-		effect.draw(batch, Gdx.graphics.getDeltaTime());
-		effect.setPosition(Variables.stringToInt(Settings.getProperty("width")) / 2, Variables.stringToInt(Settings.getProperty("height")) / 2);
-		if(effect.getParticle().isComplete())
-			effect.draw(batch, Gdx.graphics.getDeltaTime());
-
-		batch.draw(gui.get("tiles0_1"), 0, 0);
-
-		for (int i = 0; i < COUNTOFSHEEP; i++)
-			sheep[i].render();
-
-		//scarecrow.render(batch);
-		hero.render();
-
-		//Напечатать текст
-		text.writeUpperleft(batch,
-				Language.getMessage(8) + ": " + Settings.getProperty("width"),
-				Language.getMessage(9) + ": " + Settings.getProperty("height"),
-				Language.getMessage(10) + ": " + Variables.booleanToInt(Variables.stringToBoolean(Settings.getProperty("console"))));
-
-		text.writeUpperRight(batch,
-				Language.getMessage(12) + ": " + Audio.getPlayed(),
-				Language.getMessage(13) + ": " + Settings.getProperty("volume"));
-
-		//Включить/Выключить вывод в консоль
-		if(key.getJustPressedE()) {
-			boolean console = !Settings.stringToBoolean(Settings.getProperty("console"));
-			Settings.setProperty("console", console + "");
-		}
-
-		//Управление музыкой
-		if(key.getJustPressedUp()) {
-			int vol = Variables.stringToInt(Settings.getProperty("volume"));
-			vol+=10;
-			Audio.setVolume(vol);
-		}
-
-		if(key.getJustPressedDown()) {
-			int vol = Variables.stringToInt(Settings.getProperty("volume"));
-			vol-=10;
-			Audio.setVolume(vol);
-		}
-
-		if(key.getJustPressedLeft()) {
-			int vol = Audio.getPlayed();
-			vol-=1;
-			Audio.smoothAttenuation(vol);
-		}
-
-		if(key.getJustPressedRight()) {
-			int vol = Audio.getPlayed();
-			vol+=1;
-			Audio.smoothAttenuation(vol);
-		}
+    Sheep[] sheep;
+    final int COUNTOFSHEEP = 6;
+    Scarecrow scarecrow;
+    Hero hero;
 
 
+    private final Main main;
 
-		//Поменять язык
-		if(key.getJustPressedT()) {
-			String lan = Settings.getProperty("language");
-			if(lan.equals("ru_RU"))
-				Settings.setProperty("language", "en_UK");
-			else
-				Settings.setProperty("language", "ru_RU");
-		}
-		batch.end();
-	}
+    Map<String, TextureRegion> gui;
 
-	@Override 
-	public void resize(int width, int height) { 
-		Settings.setProperty("width", width + ""); 
-		Settings.setProperty("height", height + ""); 
-	} 
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-		Audio.dispose();
-	}
+    public MyGame(final Main main) {
+        this.main = main;
 
-	@Override
-	public void show(){
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		key = new KeyManager();
-		text = new Text();
-		audio = new Audio();
-		tiles = new Tiles();
-		tiles.createAtlas("GUI.png", 4, 4);
-		gui = tiles.getTextureRegion();
-		effect = new Particle("test.p");
+        staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+    }
+
+    @Override
+    public void render(float delta) {
+        Audio.update();
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(bg, 0, 0, 1280, 720);
+        //batch.draw(img, 5, 5);
+
+        effect.draw(batch, Gdx.graphics.getDeltaTime());
+        effect.setPosition(Variables.stringToInt(Settings.getProperty("width")) / 2, Variables.stringToInt(Settings.getProperty("height")) / 2);
+        if (effect.getParticle().isComplete())
+            effect.draw(batch, Gdx.graphics.getDeltaTime());
+
+        batch.draw(gui.get("tiles0_1"), 0, 0);
+
+        for (int i = 0; i < COUNTOFSHEEP; i++)
+            sheep[i].render();
+
+        //scarecrow.render(batch);
+        hero.render();
+
+        //Напечатать текст
+        text.writeUpperleft(batch,
+                Language.getMessage(8) + ": " + Settings.getProperty("width"),
+                Language.getMessage(9) + ": " + Settings.getProperty("height"),
+                Language.getMessage(10) + ": " + Variables.booleanToInt(Variables.stringToBoolean(Settings.getProperty("console"))));
+
+        text.writeUpperRight(batch,
+                Language.getMessage(12) + ": " + Audio.getPlayed(),
+                Language.getMessage(13) + ": " + Settings.getProperty("volume"));
+
+        //Включить/Выключить вывод в консоль
+        if (key.getJustPressedE()) {
+            boolean console = !Settings.stringToBoolean(Settings.getProperty("console"));
+            Settings.setProperty("console", console + "");
+        }
+
+        //Управление музыкой
+        if (key.getJustPressedUp()) {
+            int vol = Variables.stringToInt(Settings.getProperty("volume"));
+            vol += 10;
+            Audio.setVolume(vol);
+        }
+
+        if (key.getJustPressedDown()) {
+            int vol = Variables.stringToInt(Settings.getProperty("volume"));
+            vol -= 10;
+            Audio.setVolume(vol);
+        }
+
+        if (key.getJustPressedLeft()) {
+            int vol = Audio.getPlayed();
+            vol -= 1;
+            Audio.smoothAttenuation(vol);
+        }
+
+        if (key.getJustPressedRight()) {
+            int vol = Audio.getPlayed();
+            vol += 1;
+            Audio.smoothAttenuation(vol);
+        }
 
 
-		bg = new Sprite(new Texture("menu/about.png"));
+        //Поменять язык
+        if (key.getJustPressedT()) {
+            String lan = Settings.getProperty("language");
+            if (lan.equals("ru_RU"))
+                Settings.setProperty("language", "en_UK");
+            else
+                Settings.setProperty("language", "ru_RU");
+        }
+        batch.end();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        Settings.setProperty("width", width + "");
+        Settings.setProperty("height", height + "");
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        img.dispose();
+        Audio.dispose();
+    }
+
+    @Override
+    public void show() {
+        batch = new SpriteBatch();
+        img = new Texture("badlogic.jpg");
+        key = new KeyManager();
+        text = new Text();
+        audio = new Audio();
+        tiles = new Tiles();
+        tiles.createAtlas("GUI.png", 4, 4);
+        gui = tiles.getTextureRegion();
+        effect = new Particle("test.p");
 
 
-		sheep = new Sheep[COUNTOFSHEEP];
-		for (int i = 0; i < COUNTOFSHEEP; i++)
-			sheep[i] = new Sheep(main, batch);
-		
-		//scarecrow = new Scarecrow();
-		//scarecrow.create();
-
-		batch = MyGame.getBatch();
-		hero = new Hero(main,batch);
+        bg = new Sprite(new Texture("menu/about.png"));
 
 
+        sheep = new Sheep[COUNTOFSHEEP];
+        for (int i = 0; i < COUNTOFSHEEP; i++)
+            sheep[i] = new Sheep(main, batch);
 
-		Language.getAllStrings();
-		Audio.randomStart();
-	}
+        //scarecrow = new Scarecrow();
+        //scarecrow.create();
 
-	 @Override
-	 public  void pause(){
+        batch = MyGame.getBatch();
+        hero = new Hero(main, batch);
 
-	 }
 
-	 @Override
-	 public void resume(){
+        Language.getAllStrings();
+        Audio.randomStart();
+    }
 
-	 }
+    @Override
+    public void pause() {
 
-	@Override
-	public void hide(){
+    }
 
-	}
+    @Override
+    public void resume() {
 
-	public static SpriteBatch getBatch() {
-		return batch;
-	}
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    public static SpriteBatch getBatch() {
+        return batch;
+    }
 }

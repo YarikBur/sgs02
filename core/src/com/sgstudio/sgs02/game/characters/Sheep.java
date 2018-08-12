@@ -2,42 +2,68 @@ package com.sgstudio.sgs02.game.characters;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.sgs02.game.MyGame;
 import com.sgstudio.sgs02.main.Main;
 
 public class Sheep {
-	private int mass;
-	private int speed = 1;
-	private float x;
-	private float y;
-	private final float width = 222/5;
-	private final float height = 152/5;
-	private Texture texture;
-	private int lostX = 960;
-	private int lostY = 960;
+    private int mass;
+    private int speed = 1;
+    private float x;
+    private float y;
+    private final float width = 222 / 5;
+    private final float height = 152 / 5;
+    private Texture texture;
 
-	private SpriteBatch batch;
-	private Main main;
+    private float lostX;
+    private float lostY;
 
-	public Sheep(Main main, SpriteBatch batch){
-        texture = new Texture("Models/sheep.png");
-        x = 1500*(float)Math.random();
-        y = 1500*(float)Math.random();
+    private float vect_x;
+    private float vect_y;
+
+    private SpriteBatch batch;
+    private Main main;
+
+    public Sheep(Main main, SpriteBatch batch) {
+        texture = new Texture("Models/sheep_one.png");
+        x = 1500 * (float) Math.random();
+        y = 1500 * (float) Math.random();
         this.batch = batch;
         this.main = main;
 
+        this.lostX = 960;
+        this.lostY = 960;
         /*
         TODO Add field vect_x and vect_y and change moving to % of vector
         One time (in C-tor) save vector, after that go on it
         */
+        this.vect_x = this.lostX - this.x;
+        this.vect_y = this.lostY - this.y;
+
+        this.mass = 1;
     }
-	
-	public void render () {
-		batch.draw(texture, x, y, width, height);
-	}
 
-	public void update(){
+    public void render() {
+        batch.draw(texture, x, y, width, height);
+    }
 
-	    // Sheep's moving to 'lost' point.
+    public void update() {
+
+        //New moving
+
+        if (Math.sqrt(Math.pow(x - lostY, 2) + Math.pow(y - lostY, 2)) > 550) {
+            this.updateVect();
+        }
+
+        if (Math.sqrt(Math.pow(x - lostY, 2) + Math.pow(y - lostY, 2)) < 40) {
+            // TODO Hero -1 life
+        } else {
+            this.x += this.vect_x * 0.001 * speed / mass;
+            this.y += this.vect_y * 0.001 * speed / mass;
+        }
+
+
+        // Sheep's moving to 'lost' point.
+        /*
         if ((x<lostX)&&(y<lostY)){
             x+=speed;
             y+=speed;
@@ -58,31 +84,48 @@ public class Sheep {
             x-=speed;
         else if (y>lostY)
             y-=speed;
+    */
     }
-	
-	public void SetX(int x){
-		this.x = x;
-		}
-	public void SetY(int y){
-		this.y = y;
-		}
-	public void SetMass(int mass){
-		this.mass = mass;
-	}
-	public void SetSpeed(int speed){
-		this.speed = speed;
-	}
-	
-	public float GetX(){
-		return this.x;
-		}
-	public float GetY(){
-		return y;
-		}
-	public int GetMass(){
-		return mass;
-	}
-	public int GetSpeed(){
-		return speed;
-	}
+
+    public void updateVect() {
+        this.vect_x = this.lostX - this.x;
+        this.vect_y = this.lostY - this.y;
+    }
+
+    public void reverseVect() {
+        this.vect_x *= -1;
+        this.vect_y *= -1;
+    }
+
+    public void SetX(int x) {
+        this.x = x;
+    }
+
+    public void SetY(int y) {
+        this.y = y;
+    }
+
+    public void SetMass(int mass) {
+        this.mass = mass;
+    }
+
+    public void SetSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public float GetX() {
+        return this.x;
+    }
+
+    public float GetY() {
+        return y;
+    }
+
+    public int GetMass() {
+        return mass;
+    }
+
+    public int GetSpeed() {
+        return speed;
+    }
 }

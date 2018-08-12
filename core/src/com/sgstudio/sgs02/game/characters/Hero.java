@@ -1,103 +1,135 @@
 package com.sgstudio.sgs02.game.characters;
 
+import java.util.Calendar;
+import java.util.Date;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
+import sun.util.calendar.BaseCalendar;
 
 public class Hero {
-	private int potatoes;
-	private int speed;
-	private int x;
-	private int y;
+    private int potatoes;
 
-	private Texture texture;
-	private Sprite sprite;
+    private int speed;
+    private long time_speed;
 
-	private Main main;
-	private KeyManager keys;
-	private SpriteBatch batch;
-	private int width;
-	private int height;
+    private int x;
+    private int y;
 
-	public Hero(Main main, SpriteBatch batch)
-	{
-		this.main = main;
+    private Texture texture;
+    private Sprite sprite;
 
-		keys = new KeyManager();
-		this.batch = batch;
-		texture = new Texture("farmer.png");
-		x  = 960;
-		y  = 960;
-		sprite = new Sprite(texture);
-		width = 960;
-		height = 960;
-		speed = 2;
-	}
+    private Main main;
+    private KeyManager keys;
+    private SpriteBatch batch;
+    private int width;
+    private int height;
 
-	public void render () {
-		batch.draw(texture, x, y,50,50);
-	}
+    private int lifes;
 
-	public void update(){
+    public Hero(Main main, SpriteBatch batch) {
+        this.main = main;
+        this.lifes = 10;
 
-		float coor_x = width - this.x;
-		float coor_y = height - this.y;
+        keys = new KeyManager();
+        this.batch = batch;
+        texture = new Texture("farmer.png");
+        x = 960;
+        y = 960;
+        sprite = new Sprite(texture);
+        width = 960;
+        height = 960;
 
-        if(Math.sqrt(Math.pow(x - width , 2) + Math.pow(y - height, 2)) > 480)
-        {
+        speed = 2;
+        time_speed = 0;
+    }
+
+    public void render() {
+        batch.draw(texture, x, y, 50, 50);
+    }
+
+    public void update() {
+
+        float coor_x = width - this.x;
+        float coor_y = height - this.y;
+
+        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) > 480) {
             this.x += coor_x * 0.05;
             this.y += coor_y * 0.05;
         }
-        if(Math.sqrt(Math.pow(x - width , 2) + Math.pow(y - height, 2)) < 30)
-        {
+
+        /*
+        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) < 30) {
             this.x += coor_x * 0.01;
             this.y += coor_y * 0.01;
         }
+        */
+        if(time_speed > 0){
+            Calendar cal = Calendar.getInstance();
+            if(time_speed + 10 < cal.getTimeInMillis() / 1000){
+                time_speed = 0;
+                speed -= 5;
+            }
+        }
 
-		if (keys.getPressedLeft())
-			x -= speed;
 
-		if (keys.getPressedRight())
-			x+=speed;
 
-		if (keys.getPressedUp())
-			y+=speed;
+        if (keys.getPressedLeft())
+            x -= speed;
 
-		if (keys.getPressedDown())
-			y-=speed;
+        if (keys.getPressedRight())
+            x += speed;
 
-	}
+        if (keys.getPressedUp())
+            y += speed;
 
-	private void putScarecrow(){
-       // Test.addScarecrow();
+        if (keys.getPressedDown())
+            y -= speed;
+
+        if (keys.getJustPressed1())
+        {
+            Calendar cal = Calendar.getInstance();
+            this.time_speed = cal.getTimeInMillis() / 1000;
+            this.speed += 5;
+        }
+
     }
 
-	public void SetX(int x){
+    private void putScarecrow() {
+        // Test.addScarecrow();
+    }
+
+    public void SetX(int x) {
         this.x = x;
     }
 
-	public void SetY(int y){
-		this.y = y;
-		}
-	public void SetPotatoes(int potatoes){
-		this.potatoes = potatoes;
-	}
-	public void SetSpeed(int speed){
-		this.speed = speed;
-	}
+    public void SetY(int y) {
+        this.y = y;
+    }
 
-	public float GetX(){
-		return x;
-		}
-	public float GetY(){
-		return y;
-		}
-	int GetPotatoes(){
-		return potatoes;
-	}
-	int GetSpeed(){
-		return speed;
-	}
+    public void SetPotatoes(int potatoes) {
+        this.potatoes = potatoes;
+    }
+
+    public void SetSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public float GetX() {
+        return x;
+    }
+
+    public float GetY() {
+        return y;
+    }
+
+    int GetPotatoes() {
+        return potatoes;
+    }
+
+    int GetSpeed() {
+        return speed;
+    }
 }

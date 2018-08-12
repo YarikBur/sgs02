@@ -96,4 +96,28 @@ public class KeyManager {
 		else
 			return false;
 	}
+	public boolean getJustPressed1() {
+		if(Gdx.input.isKeyJustPressed(Keys.NUM_1))
+			return true;
+		else
+			return false;
+	}
+	public boolean getJustPressed2() {
+		if(Gdx.input.isKeyJustPressed(Keys.NUM_2))
+			return true;
+		else
+			return false;
+	}
+	public boolean getJustPressed3() {
+		if(Gdx.input.isKeyJustPressed(Keys.NUM_3))
+			return true;
+		else
+			return false;
+	}
+	public boolean getJustPressed4() {
+		if(Gdx.input.isKeyJustPressed(Keys.NUM_4))
+			return true;
+		else
+			return false;
+	}
 }

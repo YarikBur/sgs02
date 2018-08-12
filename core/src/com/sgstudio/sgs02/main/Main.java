@@ -27,11 +27,11 @@ public class Main extends Game {
         test = new Test(this);
         aboutsgstudio = new AboutSGS(this);
 
-        setScreen(aboutsgstudio);
+        setScreen(test);
     }
 
     @Override
-    public void render(){
+    public void render() {
         super.render();
     }
 
@@ -41,11 +41,13 @@ public class Main extends Game {
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
 
     }
 
-    public SpriteBatch getBatch(){ return batch; }
+    public SpriteBatch getBatch() {
+        return batch;
+    }
 
 }
 
