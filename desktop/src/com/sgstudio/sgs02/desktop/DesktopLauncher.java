@@ -28,8 +28,13 @@ public class DesktopLauncher {
 		
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "SGS02";
-		config.width = Integer.parseInt(Settings.getProperty("width"));
-		config.height = Integer.parseInt(Settings.getProperty("height"));
+//		config.width = Integer.parseInt(Settings.getProperty("width"));
+//		config.height = Integer.parseInt(Settings.getProperty("height"));
+		
+		config.width = 1280;
+		config.height = 720;
+		config.resizable = false;
+		
 		new LwjglApplication(new Main(), config);
 	}
 }

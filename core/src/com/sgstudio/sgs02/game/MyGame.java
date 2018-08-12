@@ -1,7 +1,5 @@
 package com.sgstudio.sgs02.game;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
@@ -66,7 +64,7 @@ public class MyGame implements Screen {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-//		batch.draw(bg,0,0,800,600);
+		batch.draw(bg,0,0,1280,720);
 		//batch.draw(img, 5, 5);
 
 		effect.draw(batch, Gdx.graphics.getDeltaTime());
@@ -162,7 +160,7 @@ public class MyGame implements Screen {
 		effect = new Particle("test.p");
 
 
-		bg = new Sprite(new Texture("atlas/g4.png"));
+		bg = new Sprite(new Texture("menu/about.png"));
 
 
 		sheep = new Sheep[COUNTOFSHEEP];

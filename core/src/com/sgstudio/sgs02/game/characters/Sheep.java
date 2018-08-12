@@ -19,7 +19,7 @@ public class Sheep {
 	private Main main;
 
 	public Sheep(Main main, SpriteBatch batch){
-        texture = new Texture("Models/sheep_one.png");
+        texture = new Texture("Models/sheep.png");
         x = 1500*(float)Math.random();
         y = 1500*(float)Math.random();
         this.batch = batch;
