@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.menu.Menu;
+import com.sgstudio.sgs02.utils.Variables;
+import com.sgstudio.sgs02.utils.audio.Audio;
+import com.sgstudio.sgs02.utils.controller.KeyManager;
 
 public class Settings implements Screen{
     private Main main;
@@ -16,8 +19,9 @@ public class Settings implements Screen{
 	private Menu menu;
     
     private Sprite settings;
-    
     private SpriteBatch batch;
+
+    private KeyManager key;
     
     public Settings(Main main) {
         this.main = main;
@@ -35,6 +39,8 @@ public class Settings implements Screen{
 
         batch = new SpriteBatch();
         settings = new Sprite(new Texture("menu/settings.png"));
+        
+        key = new KeyManager();
         
         menu = new Menu(main);
         Gdx.input.setInputProcessor(new InputProcessor(){
@@ -115,6 +121,16 @@ public class Settings implements Screen{
         batch.begin();
         
         batch.draw(settings, 0, 0, 1280, 720);
+        
+        if(key.getJustPressedLeft())
+        	Audio.setVolume(Variables.stringToInt(com.sgstudio.sgs02.utils.Settings.getProperty("volume"))-10);
+        if(key.getJustPressedRight())
+        	Audio.setVolume(Variables.stringToInt(com.sgstudio.sgs02.utils.Settings.getProperty("volume"))+10);
+        if(key.getJustPressedUp())
+        	com.sgstudio.sgs02.utils.Settings.setProperty("mute", "true");
+        if(key.getJustPressedDown())
+        	com.sgstudio.sgs02.utils.Settings.setProperty("mute", "false");
+        
         batch.end();
     }
 

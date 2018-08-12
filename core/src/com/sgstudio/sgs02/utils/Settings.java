@@ -21,8 +21,8 @@ public class Settings {
 	private static String path = null;
 	
 	//Стандартные настройки
-	private static String key[] = {"console", "width", "height", "language", "volume"};
-	private static String value[] = {"true", "800", "600", "en_UK", "100"};
+	private static String key[] = {"console", "width", "height", "language", "volume", "mute"};
+	private static String value[] = {"true", "800", "600", "en_UK", "100", "false"};
 	
 	//Переменная используется, если изначально файла settings.cfg не существовало
 	private static boolean loaded = false;

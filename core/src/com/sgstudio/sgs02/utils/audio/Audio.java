@@ -173,7 +173,10 @@ public class Audio {
 	 * @return
 	 */
 	private static float volume() {
-		return Variables.stringToInt(Settings.getProperty("volume"))/100f;
+		if(!Variables.stringToBoolean(Settings.getProperty("mute")))
+			return Variables.stringToInt(Settings.getProperty("volume"))/100f;
+		else
+			return 0f;
 	}
 
 	public static void dispose() {
