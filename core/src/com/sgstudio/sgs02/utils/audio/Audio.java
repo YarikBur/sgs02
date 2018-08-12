@@ -66,6 +66,7 @@ public class Audio {
 	public static void randomStart() {
 		play = Random.randomInt(1, 9);
 		List.getMusic(play).play();
+		List.getMusic(play).setVolume(volume());
 		play();
 	}
 	
@@ -173,7 +174,10 @@ public class Audio {
 	 * @return
 	 */
 	private static float volume() {
-		return Variables.stringToInt(Settings.getProperty("volume"))/100f;
+		if(!Variables.stringToBoolean(Settings.getProperty("mute")))
+			return Variables.stringToInt(Settings.getProperty("volume"))/100f;
+		else
+			return 0f;
 	}
 
 	public static void dispose() {

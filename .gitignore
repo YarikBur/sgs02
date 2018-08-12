@@ -136,3 +136,7 @@ gradle/
 /bin/
 
 desktop/settings\.cfg
+
+core/src/com/sgstudio/sgs02/game/Settings\.java
+
+core/src/com/sgstudio/sgs02/utils/Settings\.java

@@ -21,8 +21,8 @@ public class Settings {
 	private static String path = null;
 	
 	//Стандартные настройки
-	private static String key[] = {"console", "width", "height", "language", "volume"};
-	private static String value[] = {"true", "800", "600", "en_UK", "100"};
+	private static String key[] = {"console", "width", "height", "language", "volume", "mute"};
+	private static String value[] = {"true", "800", "600", "en_UK", "100", "false"};
 	
 	//Переменная используется, если изначально файла settings.cfg не существовало
 	private static boolean loaded = false;
@@ -133,12 +133,13 @@ public class Settings {
 		for(int i=0; i<Settings.key.length; i++) {
 			if(Settings.key[i].equals(key)) {
 				Settings.value[i] = value;
-				setProperty(Settings.key, Settings.value);
+				Settings.value[i] = value;
 				if(out())
 					System.out.println(Language.getMessage(1) + key + " = " + value);
 			} else
 				Settings.value[i] = getProperty(Settings.key[i]);
 		}
+		setProperty(Settings.key, Settings.value);
 	}
 	
 	/**
