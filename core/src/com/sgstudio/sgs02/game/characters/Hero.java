@@ -82,7 +82,6 @@ public class Hero {
         }
 
 
-
         if (keys.getPressedLeft())
             x -= speed;
 
