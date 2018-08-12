@@ -3,11 +3,13 @@ package com.sgstudio.sgs02.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.main.Main;
+import com.sgstudio.sgs02.utils.audio.Audio;
 
 public class Menu implements Screen {
 	@SuppressWarnings("unused")
@@ -21,6 +23,8 @@ public class Menu implements Screen {
     public Menu(final Main main) {
         this.main = main;
     }
+    
+    private Sound clic_pressed, clic_released;
     
     //About
     int aboutX[] = {785, 865, 1015, 960};
@@ -45,6 +49,8 @@ public class Menu implements Screen {
     	m = new Menu(main);
     	
     	bg = new Sprite(new Texture("menu/menu.png"));
+    	clic_pressed = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_pressed.mp3"));
+    	clic_released = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_released.mp3"));
     	
     	batch = new SpriteBatch();
     	
@@ -89,15 +95,19 @@ public class Menu implements Screen {
             	x0 = screenX;
             	y0 = screenY;
 
-            	if(screen(aboutX, aboutY))
+            	if(screen(aboutX, aboutY)) {
+            		clic_pressed.play(Audio.volume());
             		slide = true;
-            	else if(screen(playX, playY))
+            	} else if(screen(playX, playY)) {
+            		clic_pressed.play(Audio.volume());
             		slide = true;
-            	else if(screen(settingsX, settingsY))
+            	} else if(screen(settingsX, settingsY)) {
+            		clic_pressed.play(Audio.volume());
             		slide = true;
-            	else if(screen(exitX, exitY))
+        		} else if(screen(exitX, exitY)) {
+        			clic_pressed.play(Audio.volume());
             		slide = true;
-            	else
+        		} else
             		slide = false;
             	
                 return false;
@@ -106,17 +116,19 @@ public class Menu implements Screen {
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
             	
-            	if(slide && screen(aboutX, aboutY))
+            	if(slide && screen(aboutX, aboutY)) {
+            		clic_released.play(Audio.volume());
             		main.setScreen(main.aboutsgstudio);
-            	
-            	if(slide && screen(playX, playY))
+            	} else if(slide && screen(playX, playY)) {
+            		clic_released.play(Audio.volume());
             		main.setScreen(main.test);
-            	
-            	if(slide && screen(settingsX, settingsY))
+            	} else if(slide && screen(settingsX, settingsY)) {
+            		clic_released.play(Audio.volume());
             		main.setScreen(main.settings);
-            	
-            	if(slide && screen(exitX, exitY))
+            	} else if(slide && screen(exitX, exitY)) {
+            		clic_released.play(Audio.volume());
             		Gdx.app.exit();
+            	}
             	
                 return false;
             }
