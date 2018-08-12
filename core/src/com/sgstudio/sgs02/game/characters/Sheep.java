@@ -3,6 +3,7 @@ package com.sgstudio.sgs02.game.characters;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.game.MyGame;
+import com.sgstudio.sgs02.game.Test.*;
 import com.sgstudio.sgs02.main.Main;
 
 public class Sheep {
@@ -30,8 +31,9 @@ public class Sheep {
         this.batch = batch;
         this.main = main;
 
-        this.lostX = 960;
-        this.lostY = 960;
+        this.lostX = main.test.x_center;
+        this.lostY = main.test.y_center;
+
         /*
         TODO Add field vect_x and vect_y and change moving to % of vector
         One time (in C-tor) save vector, after that go on it
@@ -48,43 +50,16 @@ public class Sheep {
 
     public void update() {
 
-        //New moving
-
         if (Math.sqrt(Math.pow(x - lostY, 2) + Math.pow(y - lostY, 2)) > 550) {
             this.updateVect();
         }
 
-        if (Math.sqrt(Math.pow(x - lostY, 2) + Math.pow(y - lostY, 2)) < 40) {
+        if (Math.sqrt(Math.pow(x - lostY, 2) + Math.pow(y - lostY, 2)) < 30) {
             // TODO Hero -1 life
         } else {
             this.x += this.vect_x * 0.001 * speed / mass;
             this.y += this.vect_y * 0.001 * speed / mass;
         }
-
-
-        // Sheep's moving to 'lost' point.
-        /*
-        if ((x<lostX)&&(y<lostY)){
-            x+=speed;
-            y+=speed;
-        } else if ((x<lostX)&&(y>lostY)){
-            x+=speed;
-            y-=speed;
-        } else if ((x>lostX)&&(y<lostY)){
-            x-=speed;
-            y+=speed;
-        } else if ((x>lostX)&&(y>lostY)){
-            x-=speed;
-            y-=speed;
-        } else if (x<lostX)
-            x+=speed;
-        else if (y<lostY)
-            y+=speed;
-        else if (x>lostX)
-            x-=speed;
-        else if (y>lostY)
-            y-=speed;
-    */
     }
 
     public void updateVect() {

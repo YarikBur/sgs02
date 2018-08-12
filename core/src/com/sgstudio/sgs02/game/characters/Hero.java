@@ -43,11 +43,10 @@ public class Hero {
         keys = new KeyManager();
         this.batch = batch;
         texture = new Texture("farmer.png");
-        x = 960;
-        y = 960;
         sprite = new Sprite(texture);
-        width = 960;
-        height = 960;
+        x = width = main.test.x_center;
+        y = height = main.test.y_center;
+
 
         speed = 2;
         time_speed = 0;
@@ -70,7 +69,7 @@ public class Hero {
             this.y += coor_y * 0.05;
         }
 
-        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) < 80) {
+        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) < 40) {
             this.x -= coor_x * 0.1;
             this.y -= coor_y * 0.1;
         }
@@ -113,7 +112,7 @@ public class Hero {
 
     public int getPoints(){return this.points;}
     public int getLifes(){return this.lifes;}
-    public void minusLife(){lifes--;}
+    public void minusLife(){this.lifes--;}
     private void plusLife(){this.spend_points+=10;lifes++;}
 
     private void putScarecrow() {

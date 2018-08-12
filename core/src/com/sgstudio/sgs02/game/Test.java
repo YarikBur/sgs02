@@ -1,6 +1,5 @@
 package com.sgstudio.sgs02.game;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +17,11 @@ import com.sgstudio.sgs02.game.characters.Hero;
 import com.sgstudio.sgs02.game.characters.Scarecrow;
 import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
-import com.sgstudio.sgs02.utils.*;
+import com.sgstudio.sgs02.utils.Language;
+import com.sgstudio.sgs02.utils.Particle;
 import com.sgstudio.sgs02.utils.Settings;
+import com.sgstudio.sgs02.utils.Text;
+import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
@@ -35,6 +37,9 @@ public class Test implements Screen {
 
     public long time;
     public long score;
+
+    final public int x_center = 1035;
+    final public int y_center = 1080;
 
     //  Public Lists
     public List<Sheep> list_sheep = new ArrayList<Sheep>();
@@ -73,7 +78,7 @@ public class Test implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         bg.draw(batch);
-        batch.draw(img, 970, 970, 20, 20);
+        batch.draw(img, x_center + 10, y_center + 10, 20, 20);
         for (Scarecrow scare: list_scarecrow)
             scare.render();
         for (Sheep sheep : list_sheep)
@@ -92,7 +97,6 @@ public class Test implements Screen {
                 Language.getMessage(12) + ": " + Audio.getPlayed(),
                 Language.getMessage(13) + ": " + Settings.getProperty("volume"),
                 "Очки героя: " + hero.getPoints(), "Жизни: " + hero.getLifes());
-
 
         batch.end();
 
@@ -123,7 +127,7 @@ public class Test implements Screen {
         tiles.createAtlas("GUI.png", 4, 4);
         gui = tiles.getTextureRegion();
         effect = new Particle("test.p");
-        bg = new Sprite(new Texture("atlas/g4.png"));
+        bg = new Sprite(new Texture("atlas/g4_new.png"));
         Language.getAllStrings();
         Audio.randomStart();
         hero = new Hero(main, batch);
@@ -144,7 +148,9 @@ public class Test implements Screen {
             scare.update();
         colSheepHero();
         colSheepScare();
+        sheepHoly();
         clearScarecow();
+        clearSheep();
     }
 
     private void colSheepHero() {
@@ -167,7 +173,7 @@ public class Test implements Screen {
     private void colSheepScare() {
         for (Sheep sheep : list_sheep)
             for (Scarecrow scare : list_scarecrow) {
-                if (Math.sqrt(Math.pow(sheep.GetX() - scare.GetX(), 2) + Math.pow(sheep.GetY() - scare.GetY(), 2)) < 100) {
+                if (Math.sqrt(Math.pow(sheep.GetX() - scare.GetX(), 2) + Math.pow(sheep.GetY() - scare.GetY(), 2)) < 80) {
                     float coor_x = scare.GetX() - sheep.GetX();
                     float coor_y = scare.GetY() - sheep.GetY();
                     sheep.SetX((int) (sheep.GetX() - coor_x));
@@ -177,17 +183,37 @@ public class Test implements Screen {
     }
 
     public void sheepHoly() {
-
+        for (Sheep sheep : list_sheep) {
+            if (Math.sqrt(Math.pow(sheep.GetX() - x_center, 2) + Math.pow(sheep.GetY() - y_center, 2)) < 50) {
+                hero.minusLife();
+                sheep.SetX(-1000);
+                sheep.SetY(-1000);
+            }
+        }
     }
 
     public void addScarecrow(int x, int y) {
         this.list_scarecrow.add(new Scarecrow(main, batch, x, y));
     }
 
-    public void clearScarecow(){
+    private void clearScarecow(){
+        List<Scarecrow> tmp_scarecrow = new ArrayList<Scarecrow>();
         for (Scarecrow scare: list_scarecrow)
-            if(scare.GetX() == 0 && scare.GetY() == 0)
-                list_scarecrow.remove(scare);
+            if(scare.GetX() == -1000 && scare.GetY() == -1000)
+                tmp_scarecrow.add(scare);
+        for (Scarecrow scare: tmp_scarecrow)
+            list_scarecrow.remove(scare);
+    }
+
+    private void clearSheep(){
+
+        List<Sheep> tmp_sheep = new ArrayList<Sheep>();
+        for (Sheep sheep: list_sheep)
+            if(sheep.GetX() == -1000 && sheep.GetY() == -1000)
+                tmp_sheep.add(sheep);
+        for (Sheep sheep: tmp_sheep)
+            list_scarecrow.remove(sheep);
+
     }
 
     @Override
@@ -204,5 +230,6 @@ public class Test implements Screen {
     public void hide() {
 
     }
+
 }
 
