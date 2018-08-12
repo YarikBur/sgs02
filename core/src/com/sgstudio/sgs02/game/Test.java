@@ -1,5 +1,6 @@
 package com.sgstudio.sgs02.game;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,15 +13,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.game.characters.Hero;
 import com.sgstudio.sgs02.game.characters.Scarecrow;
 import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
-import com.sgstudio.sgs02.utils.Language;
-import com.sgstudio.sgs02.utils.Particle;
+import com.sgstudio.sgs02.utils.*;
 import com.sgstudio.sgs02.utils.Settings;
-import com.sgstudio.sgs02.utils.Text;
-import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
@@ -33,6 +32,9 @@ public class Test implements Screen {
     Tiles tiles;
     Particle effect;
     Sprite bg;
+
+    public long time;
+    public long score;
 
     //  Public Lists
     public List<Sheep> list_sheep = new ArrayList<Sheep>();
@@ -70,15 +72,31 @@ public class Test implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-
         bg.draw(batch);
-        batch.draw(img, 950, 950, 20, 20);
-        hero.render();
+        batch.draw(img, 970, 970, 20, 20);
         for (Scarecrow scare: list_scarecrow)
             scare.render();
         for (Sheep sheep : list_sheep)
             sheep.render();
+        hero.render();
         batch.end();
+
+        batch.setProjectionMatrix(staticCamera.combined);
+        batch.begin();
+        text.writeUpperleft(batch,
+                "Высота" + ": " + hero.GetX(),
+                "Ширина" + ": " + hero.GetY(),
+                "Время" + ": " + (TimeUtils.millis() / 1000 - this.time));
+
+        text.writeUpperRight(batch,
+                Language.getMessage(12) + ": " + Audio.getPlayed(),
+                Language.getMessage(13) + ": " + Settings.getProperty("volume"),
+                "Очки героя: " + hero.getPoints(), "Жизни: " + hero.getLifes());
+
+
+        batch.end();
+
+
     }
 
     @Override
@@ -97,7 +115,6 @@ public class Test implements Screen {
     @Override
     public void show() {
         batch = main.getBatch();
-        ;
         img = new Texture("badlogic.jpg");
         key = new KeyManager();
         text = new Text();
@@ -110,6 +127,9 @@ public class Test implements Screen {
         Language.getAllStrings();
         Audio.randomStart();
         hero = new Hero(main, batch);
+
+        time = TimeUtils.millis() / 1000;
+
 
         // Create Sheep
         for (int i = 0; i < 100; i++)

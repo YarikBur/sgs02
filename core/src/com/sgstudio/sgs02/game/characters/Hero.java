@@ -10,11 +10,17 @@ import com.sgstudio.sgs02.game.Test;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
+import java.sql.Time;
+
 public class Hero {
     private int potatoes;
 
     private int speed;
     private long time_speed;
+
+    private int points;
+    private int spend_points;
+    private int time;
 
     private int x;
     private int y;
@@ -45,6 +51,8 @@ public class Hero {
 
         speed = 2;
         time_speed = 0;
+        this.time = (int) TimeUtils.millis() / 1000;
+        this.spend_points = 0;
     }
 
     public void render() {
@@ -52,6 +60,7 @@ public class Hero {
     }
 
     public void update() {
+
 
         float coor_x = width - this.x;
         float coor_y = height - this.y;
@@ -61,12 +70,10 @@ public class Hero {
             this.y += coor_y * 0.05;
         }
 
-        /*
-        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) < 30) {
-            this.x += coor_x * 0.01;
-            this.y += coor_y * 0.01;
+        if (Math.sqrt(Math.pow(x - width, 2) + Math.pow(y - height, 2)) < 80) {
+            this.x -= coor_x * 0.1;
+            this.y -= coor_y * 0.1;
         }
-        */
         if(time_speed > 0){
             if(time_speed + 10 < TimeUtils.millis()  / 1000){
                 time_speed = 0;
@@ -88,17 +95,27 @@ public class Hero {
         if (keys.getPressedDown())
             y -= speed;
 
-        if (keys.getJustPressed1())
+        if (keys.getJustPressed1() && this.time_speed == 0 && points >= 1)
         {
             this.time_speed = TimeUtils.millis() / 1000;
             this.speed += 5;
+            spend_points += 1;
         }
-        if (keys.getJustPressed2())
+        if (keys.getJustPressed2() && points >= 2)
         {
             this.putScarecrow();
+            spend_points += 2;
         }
+        if (keys.getJustPressed3() && points >= 10)
+           plusLife();
 
+        points = (int)TimeUtils.millis() / 1000 - this.time - this.spend_points;
     }
+
+    public int getPoints(){return this.points;}
+    public int getLifes(){return this.lifes;}
+    public void minusLife(){lifes--;}
+    private void plusLife(){this.spend_points+=10;lifes++;}
 
     private void putScarecrow() {
         main.test.addScarecrow(this.x, this.y);
