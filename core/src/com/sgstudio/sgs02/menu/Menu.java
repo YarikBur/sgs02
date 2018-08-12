@@ -183,6 +183,10 @@ public class Menu implements Screen {
 
     @Override
     public void dispose() {
+    	Audio.dispose();
+    	batch.dispose();
+    	clic_pressed.dispose();
+    	clic_released.dispose();
     }
 
 }
