@@ -11,8 +11,8 @@ public class Sheep {
     private int speed = 1;
     private float x;
     private float y;
-    private final float width = 222 / 5;
-    private final float height = 152 / 5;
+    private float img_width = 222 / 5;
+    private float img_height = 152 / 5;
     private Texture texture;
 
     private float lostX;
@@ -45,7 +45,7 @@ public class Sheep {
     }
 
     public void render() {
-        batch.draw(texture, x, y, width, height);
+        batch.draw(texture, x, y, img_width, img_height);
     }
 
     public void update() {
@@ -102,5 +102,18 @@ public class Sheep {
 
     public int GetSpeed() {
         return speed;
+    }
+
+    public void joinSheeps() {
+        this.img_height *= 1.2;
+        this.img_width *= 1.2;
+    }
+
+    public float getImgWidth() {
+        return this.img_width;
+    }
+
+    public float getImgHeight() {
+        return this.img_height;
     }
 }

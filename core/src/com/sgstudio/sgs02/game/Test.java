@@ -79,7 +79,7 @@ public class Test implements Screen {
         batch.begin();
         bg.draw(batch);
         batch.draw(img, x_center + 10, y_center + 10, 20, 20);
-        for (Scarecrow scare: list_scarecrow)
+        for (Scarecrow scare : list_scarecrow)
             scare.render();
         for (Sheep sheep : list_sheep)
             sheep.render();
@@ -144,13 +144,32 @@ public class Test implements Screen {
         hero.update();
         for (Sheep sheep : list_sheep)
             sheep.update();
-        for (Scarecrow scare: list_scarecrow)
+        for (Scarecrow scare : list_scarecrow)
             scare.update();
         colSheepHero();
         colSheepScare();
         sheepHoly();
+        sheepJoin();
         clearScarecow();
         clearSheep();
+    }
+
+    private void sheepJoin() {
+        for (Sheep sheep1 : list_sheep) {
+            for (Sheep sheep2 : list_sheep) {
+                if (sheep1 == sheep2)
+                    continue;
+                float x1 = sheep1.GetX() + sheep1.getImgWidth() / 2;
+                float x2 = sheep2.GetX() + sheep2.getImgWidth() / 2;
+                float y1 = sheep1.GetY() + sheep1.getImgHeight() / 2;
+                float y2 = sheep2.GetY() + sheep2.getImgHeight() / 2;
+                if (Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)) < 3) {
+                    sheep1.joinSheeps();
+                    sheep2.SetX(-1000);
+                    sheep2.SetY(-1000);
+                }
+            }
+        }
     }
 
     private void colSheepHero() {
@@ -196,22 +215,22 @@ public class Test implements Screen {
         this.list_scarecrow.add(new Scarecrow(main, batch, x, y));
     }
 
-    private void clearScarecow(){
+    private void clearScarecow() {
         List<Scarecrow> tmp_scarecrow = new ArrayList<Scarecrow>();
-        for (Scarecrow scare: list_scarecrow)
-            if(scare.GetX() == -1000 && scare.GetY() == -1000)
+        for (Scarecrow scare : list_scarecrow)
+            if (scare.GetX() == -1000 && scare.GetY() == -1000)
                 tmp_scarecrow.add(scare);
-        for (Scarecrow scare: tmp_scarecrow)
+        for (Scarecrow scare : tmp_scarecrow)
             list_scarecrow.remove(scare);
     }
 
-    private void clearSheep(){
+    private void clearSheep() {
 
         List<Sheep> tmp_sheep = new ArrayList<Sheep>();
-        for (Sheep sheep: list_sheep)
-            if(sheep.GetX() == -1000 && sheep.GetY() == -1000)
+        for (Sheep sheep : list_sheep)
+            if (sheep.GetX() == -1000 && sheep.GetY() == -1000)
                 tmp_sheep.add(sheep);
-        for (Sheep sheep: tmp_sheep)
+        for (Sheep sheep : tmp_sheep)
             list_scarecrow.remove(sheep);
 
     }
