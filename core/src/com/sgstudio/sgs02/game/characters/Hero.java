@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.sgs02.game.Test;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
@@ -70,7 +71,6 @@ public class Hero {
             if(time_speed + 10 < TimeUtils.millis()  / 1000){
                 time_speed = 0;
                 speed -= 5;
-
             }
         }
 
@@ -93,11 +93,15 @@ public class Hero {
             this.time_speed = TimeUtils.millis() / 1000;
             this.speed += 5;
         }
+        if (keys.getJustPressed2())
+        {
+            this.putScarecrow();
+        }
 
     }
 
     private void putScarecrow() {
-        // Test.addScarecrow();
+        main.test.addScarecrow(this.x, this.y);
     }
 
     public void SetX(int x) {

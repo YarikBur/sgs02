@@ -74,6 +74,8 @@ public class Test implements Screen {
         bg.draw(batch);
         batch.draw(img, 950, 950, 20, 20);
         hero.render();
+        for (Scarecrow scare: list_scarecrow)
+            scare.render();
         for (Sheep sheep : list_sheep)
             sheep.render();
         batch.end();
@@ -118,8 +120,11 @@ public class Test implements Screen {
         hero.update();
         for (Sheep sheep : list_sheep)
             sheep.update();
+        for (Scarecrow scare: list_scarecrow)
+            scare.update();
         colSheepHero();
         colSheepScare();
+        clearScarecow();
     }
 
     private void colSheepHero() {
@@ -157,6 +162,12 @@ public class Test implements Screen {
 
     public void addScarecrow(int x, int y) {
         this.list_scarecrow.add(new Scarecrow(main, batch, x, y));
+    }
+
+    public void clearScarecow(){
+        for (Scarecrow scare: list_scarecrow)
+            if(scare.GetX() == 0 && scare.GetY() == 0)
+                list_scarecrow.remove(scare);
     }
 
     @Override
