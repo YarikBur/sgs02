@@ -1,6 +1,5 @@
 package com.sgstudio.sgs02.game;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +17,11 @@ import com.sgstudio.sgs02.game.characters.Hero;
 import com.sgstudio.sgs02.game.characters.Scarecrow;
 import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
-import com.sgstudio.sgs02.utils.*;
+import com.sgstudio.sgs02.utils.Language;
+import com.sgstudio.sgs02.utils.Particle;
 import com.sgstudio.sgs02.utils.Settings;
+import com.sgstudio.sgs02.utils.Text;
+import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
@@ -123,7 +125,7 @@ public class Test implements Screen {
         tiles.createAtlas("GUI.png", 4, 4);
         gui = tiles.getTextureRegion();
         effect = new Particle("test.p");
-        bg = new Sprite(new Texture("atlas/g4.png"));
+        bg = new Sprite(new Texture("atlas/g4_new.png"));
         Language.getAllStrings();
         Audio.randomStart();
         hero = new Hero(main, batch);
