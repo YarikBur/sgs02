@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.game.AboutSGS;
 import com.sgstudio.sgs02.game.MyGame;
+import com.sgstudio.sgs02.game.Settings;
 import com.sgstudio.sgs02.game.Test;
 import com.sgstudio.sgs02.menu.Menu;
 
@@ -15,6 +16,7 @@ public class Main extends Game {
     //public Defeat defeat;
     //public Victory victory;
     public AboutSGS aboutsgstudio;
+    public Settings settings;
     //public Tutorial tutorial;
 
     private SpriteBatch batch;
@@ -25,9 +27,10 @@ public class Main extends Game {
         game = new MyGame(this);
         menu = new Menu(this);
         test = new Test(this);
+        settings = new Settings(this);
         aboutsgstudio = new AboutSGS(this);
 
-        setScreen(test);
+        setScreen(menu);
     }
 
     @Override

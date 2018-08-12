@@ -1,106 +1,152 @@
 package com.sgstudio.sgs02.menu;
 
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.sgstudio.sgs02.main.Main;
-import com.sgstudio.sgs02.utils.Tiles;
 
 public class Menu implements Screen {
-    private Map<String, TextureRegion> atlasMenu;
-    private static Map<String, TextureRegion> atlasSound;
-    private boolean Moved[] = {false, false, false, false, false};
-    private boolean Pressed[] = {false, false, false, false, false};
-    private boolean Play = true;
-
+	@SuppressWarnings("unused")
+	private Menu m;
     private final Main main;
-    private Tiles tiles;
 
     private SpriteBatch batch;
-
-    BitmapFont miniFont;
-
-    private static Music sound;
-    //private static MusicGame music;
-
-    private OrthographicCamera camera;
+    
+    private Sprite bg;
 
     public Menu(final Main main) {
         this.main = main;
     }
-
-    private float width, height;
-
+    
+    //About
+    int aboutX[] = {785, 865, 1015, 960};
+    int aboutY[] = {510, 505, 600, 620};
+    
+    //Play
+    int playX[] = {515, 485, 655, 680};
+    int playY[] = {580, 540, 515, 548};
+    
+    //Settings
+    int settingsX[] = {490, 450, 750, 805};
+    int settingsY[] = {650, 600, 545, 580};
+    
+    //Exit
+    int exitX[] = {585, 760, 805, 640};
+    int exitY[] = {650, 615, 655, 700};
+    
+    int x0, y0;
+    
     @Override
     public void show() {
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-
-        main.setScreen(main.test);
-
-        Gdx.input.setInputProcessor(new InputProcessor() {
-            @Override
+    	m = new Menu(main);
+    	
+    	bg = new Sprite(new Texture("menu/menu.png"));
+    	
+    	batch = new SpriteBatch();
+    	
+        Gdx.input.setInputProcessor(new InputProcessor(){
+        	private boolean slide = false;
+        	
+        	private boolean screen(int pointsX[], int pointsY[]) {
+        		int x1 = pointsX[0], x2 = pointsX[1], x3 = pointsX[2], x4 = x1, x5 = x3, x6 = pointsX[3];
+        	    int y1 = pointsY[0], y2 = pointsY[1], y3 = pointsY[2], y4 = y1, y5 = y3, y6 = pointsY[3];
+        	    
+            	boolean screen = false;
+            	
+            	if(((x1-x0)*(y2-y1)-(x2-x1)*(y1-y0)) < 0 || ((x2-x0)*(y3-y2)-(x3-x2)*(y2-y0)) < 0 || ((x3-x0)*(y1-y3)-(x1-x3)*(y3-y0)) < 0)
+            		screen = false;
+            	else
+            		screen = true;
+            	if(!screen)
+	            	if(((x4-x0)*(y5-y4)-(x5-x4)*(y4-y0)) < 0 || ((x5-x0)*(y6-y5)-(x6-x5)*(y5-y0)) < 0 || ((x6-x0)*(y4-y6)-(x4-x6)*(y6-y0)) < 0)
+	            		screen = false;
+	            	else
+	            		screen = true;
+            	return screen;
+            }
+        	
+        	@Override
             public boolean keyDown(int keycode) {
-                return false;
+            	return false;
             }
 
             @Override
             public boolean keyUp(int keycode) {
-                return false;
+            	return false;
             }
 
             @Override
             public boolean keyTyped(char character) {
-                return false;
+            	return false;
             }
-
+            
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            	x0 = screenX;
+            	y0 = screenY;
+
+            	if(screen(aboutX, aboutY))
+            		slide = true;
+            	else if(screen(playX, playY))
+            		slide = true;
+            	else if(screen(settingsX, settingsY))
+            		slide = true;
+            	else if(screen(exitX, exitY))
+            		slide = true;
+            	else
+            		slide = false;
+            	
                 return false;
             }
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+            	
+            	if(slide && screen(aboutX, aboutY))
+            		main.setScreen(main.aboutsgstudio);
+            	
+            	if(slide && screen(playX, playY))
+            		main.setScreen(main.test);
+            	
+            	if(slide && screen(settingsX, settingsY))
+            		main.setScreen(main.settings);
+            	
+            	if(slide && screen(exitX, exitY))
+            		Gdx.app.exit();
+            	
                 return false;
             }
 
             @Override
             public boolean touchDragged(int screenX, int screenY, int pointer) {
-                return false;
+            	return false;
             }
 
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
-                return true;
+                return false;
             }
 
             @Override
             public boolean scrolled(int amount) {
-                return false;
+            	return false;
             }
         });
-    }
-
-    public static Map<String, TextureRegion> getAtlasSound() {
-        return atlasSound;
-    }
-
-
-    private void renderMenu() {
-
     }
 
 
     @Override
     public void render(float delta) {
-
+    	Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        
+        batch.draw(bg, 0, 0, 1280, 720);
+        batch.end();
     }
 
     @Override
