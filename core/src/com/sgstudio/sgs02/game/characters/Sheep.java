@@ -55,7 +55,7 @@ public class Sheep {
     }
 
     public void render() {
-            batch.draw(texture, x, y, img_width, img_height);
+        batch.draw(texture, x, y, img_width, img_height);
     }
 
     public void update() {

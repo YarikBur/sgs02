@@ -10,9 +10,9 @@ import com.sgstudio.sgs02.menu.Menu;
 import com.sgstudio.sgs02.utils.audio.Audio;
 
 public class Main extends Game {
-	
-	Audio audio;
-	
+
+    Audio audio;
+
     public MyGame game;
     public Menu menu;
     public Test test;
@@ -26,11 +26,11 @@ public class Main extends Game {
 
     @Override
     public void create() {
-    	audio = new Audio();
-    	
+        audio = new Audio();
+
         batch = new SpriteBatch();
-        
-        
+
+
         game = new MyGame(this);
         menu = new Menu(this);
         test = new Test(this);

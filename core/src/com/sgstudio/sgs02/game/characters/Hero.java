@@ -126,7 +126,7 @@ public class Hero {
     }
 
     public void minusLife(int life) {
-        this.lifes-=life;
+        this.lifes -= life;
     }
 
     private void plusLife() {
@@ -178,11 +178,11 @@ public class Hero {
         return this.imgY;
     }
 
-    public float getCenter_x(){
+    public float getCenter_x() {
         return this.center_x;
     }
 
-    public float getCenter_y(){
+    public float getCenter_y() {
         return this.center_y;
     }
 }

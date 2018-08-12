@@ -164,7 +164,7 @@ public class Test implements Screen {
                 if (Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)) < 20) {
                     tmp_sheep.add(sheep1);
                     sheep1.joinSheeps();
-                    sheep1.SetMass(sheep1.GetMass()+sheep2.GetMass());
+                    sheep1.SetMass(sheep1.GetMass() + sheep2.GetMass());
                     sheep2.SetX(-1000);
                     sheep2.SetY(-1000);
 
