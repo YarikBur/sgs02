@@ -133,12 +133,13 @@ public class Settings {
 		for(int i=0; i<Settings.key.length; i++) {
 			if(Settings.key[i].equals(key)) {
 				Settings.value[i] = value;
-				setProperty(Settings.key, Settings.value);
+				Settings.value[i] = value;
 				if(out())
 					System.out.println(Language.getMessage(1) + key + " = " + value);
 			} else
 				Settings.value[i] = getProperty(Settings.key[i]);
 		}
+		setProperty(Settings.key, Settings.value);
 	}
 	
 	/**

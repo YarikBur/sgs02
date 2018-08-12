@@ -66,6 +66,7 @@ public class Audio {
 	public static void randomStart() {
 		play = Random.randomInt(1, 9);
 		List.getMusic(play).play();
+		List.getMusic(play).setVolume(volume());
 		play();
 	}
 	

@@ -127,9 +127,9 @@ public class Settings implements Screen{
         if(key.getJustPressedRight())
         	Audio.setVolume(Variables.stringToInt(com.sgstudio.sgs02.utils.Settings.getProperty("volume"))+10);
         if(key.getJustPressedUp())
-        	com.sgstudio.sgs02.utils.Settings.setProperty("mute", "true");
-        if(key.getJustPressedDown())
         	com.sgstudio.sgs02.utils.Settings.setProperty("mute", "false");
+        if(key.getJustPressedDown())
+        	com.sgstudio.sgs02.utils.Settings.setProperty("mute", "true");
         
         batch.end();
     }
