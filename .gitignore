@@ -134,3 +134,5 @@ gradlew
 
 gradle/
 /bin/
+
+desktop/settings\.cfg
