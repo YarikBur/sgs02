@@ -34,12 +34,32 @@ public class Sheep {
     
     private float angle = 0;
 	private Sprite sprite;
+    final private double x_center = 1080;
+    final private double y_center = 1085;
+    final private double radius = 910;
+
 
     public Sheep(Main main, SpriteBatch batch) {
         texture = new Texture("Models/sheep_one.png");
         sprite = new Sprite(texture);
         x = 1500 * (float) Math.random();
         y = 1500 * (float) Math.random();
+        if ((Math.pow(x - main.test.x_center - 10 , 2) + Math.pow(y - main.test.y_center - 10 , 2)) >= Math.pow(radius , 2)){
+        	if ((x < 1520) && (x > 570)){
+        		if ((x - main.test.x_center) < 0 ){
+        			x = (float) ((main.test.x_center - radius) * Math.random());
+        		} else {
+        			x = (float) (main.test.x_center + radius + 580 * Math.random());
+        		}
+        	}
+        	if ((y < 1520) && (y > 650)){
+        		if ((y - main.test.y_center) < 0 ){
+        			y = (float) ((main.test.y_center - radius) * Math.random());
+        		} else {
+        			y = (float) (main.test.y_center + radius + 580 * Math.random());
+        		}
+        	}
+        }
         this.batch = batch;
         this.main = main;
 
