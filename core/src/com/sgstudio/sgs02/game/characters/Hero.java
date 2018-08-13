@@ -69,6 +69,7 @@ public class Hero {
 
     public void update() {
         if (lifes <= 0){
+            main.mainLevel.lostTime = TimeUtils.millis() / 1000 - main.mainLevel.startTime;
             this.main.setScreen(main.defeat);
         }
     	center_y = this.y + imgY / 2;
@@ -107,16 +108,19 @@ public class Hero {
             y -= speed;
 
         if (keys.getJustPressed1() && this.time_speed == 0 && points >= 1) {
+            main.mainLevel.count_speed += 1;
             this.time_speed = TimeUtils.millis() / 1000;
             this.speed += 5;
-            spend_points += 1;
         }
         if (keys.getJustPressed2() && points >= 2) {
+            main.mainLevel.count_scarecrow += 1;
             this.putScarecrow();
-            spend_points += 2;
         }
         if (keys.getJustPressed3() && points >= 10)
+        {
+            main.mainLevel.count_added_lifes += 1;
             plusLife();
+        }
 
         points = (int) TimeUtils.millis() / 1000 - this.time - this.spend_points;
     }

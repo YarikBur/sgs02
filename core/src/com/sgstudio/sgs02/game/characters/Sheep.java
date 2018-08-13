@@ -52,6 +52,7 @@ public class Sheep {
     }
 
     public Sheep(Main main, SpriteBatch batch) {
+        main.mainLevel.count_sheep += 1;
         texture = new Texture("Models/sheep_one.png");
         sprite = new Sprite(texture);
         Spawn(RANDOM_NUMBER);

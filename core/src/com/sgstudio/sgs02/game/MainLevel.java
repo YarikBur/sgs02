@@ -33,10 +33,18 @@ public class MainLevel implements Screen {
     Particle effect;
     Sprite bg;
 
+
+
     public long time;
-    private long startTime;
+    public long startTime;
     private long lastTime;
-    public long score;
+    public long lostTime;
+
+    public long score = 0;
+    public long count_sheep = 0;
+    public long count_speed = 0;
+    public long count_scarecrow = 0;
+    public long count_added_lifes = 0;
 
     final public int x_center = 1080;
     final public int y_center = 1085;
@@ -103,10 +111,6 @@ public class MainLevel implements Screen {
                 "Очки героя: " + hero.getPoints(), "Жизни: " + hero.getLifes());
 
         batch.end();
-    }
-
-    public void defeat(){
-        main.setScreen(main.defeat);
     }
 
     private void level()

@@ -114,13 +114,19 @@ public class Defeat implements Screen {
         bg.draw(batch);
 
         if (key.getPressedAny())
+        {
+            main.mainLevel = new MainLevel(main);
             main.setScreen(main.menu);
+        }
 
-        text.writeUpperCenter(batch, "Вы набрали: " + main.mainLevel.score + " очков");
+        text.writeUpperCenter(batch, "Вы набрали: " + main.mainLevel.lostTime + " очков");
 
-        text.writeUpperleft(batch);
+        text.writeUpperleft(batch, "Ваш герой использовал:",
+                "Быстрый бег: " + main.mainLevel.count_speed + " раз",
+                "Установку пугал: " + main.mainLevel.count_scarecrow + " раз",
+                "Добавление жизней: " + main.mainLevel.count_added_lifes + " раз");
 
-        text.writeUpperRight(batch);
+        text.writeUpperRight(batch, "Общее количество овец: " + main.mainLevel.count_sheep);
 
         batch.end();
     }
