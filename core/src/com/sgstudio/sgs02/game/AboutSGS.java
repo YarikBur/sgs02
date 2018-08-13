@@ -82,7 +82,6 @@ public class AboutSGS implements Screen{
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
             	x0 = screenX;
             	y0 = screenY;
-            	System.out.print("x: " + screenX + "; y: " + screenY);
             	
             	if(screen(backX, backY)){
             	    clic_pressed.play();
