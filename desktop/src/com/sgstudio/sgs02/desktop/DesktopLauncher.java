@@ -26,7 +26,7 @@ public class DesktopLauncher {
 			System.out.println(Language.getMessage(2) + locale);
 		
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "SGS02";
+		config.title = "Holly Sheep";
 		
 		config.width = 1280;
 		config.height = 720;
