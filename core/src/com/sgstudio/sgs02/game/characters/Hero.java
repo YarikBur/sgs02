@@ -236,6 +236,9 @@ public class Hero {
             y -= speed;
 
         if (keys.getJustPressed1() && this.time_speed == 0 && points >= 3) {
+            Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/run1.mp3"));
+            long id = sound1.play(1.0f);
+            sound1.setVolume(id,0.2f);
             main.mainLevel.count_speed += 1;
             this.time_speed = TimeUtils.millis() / 1000;
             this.speed += 5;
