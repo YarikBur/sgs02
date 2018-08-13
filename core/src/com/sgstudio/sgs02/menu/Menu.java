@@ -45,9 +45,13 @@ public class Menu implements Screen {
     
     int x0, y0;
     
-    @Override
+    @SuppressWarnings("static-access")
+	@Override
     public void show() {
     	m = new Menu(main);
+    	
+    	if(!main.getAudio().isPlayedMusic())
+    		main.getAudio().Attenuation(3);
     	
     	bg = new Sprite(new Texture("menu/menu.png"));
     	clic_pressed = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_pressed.mp3"));
@@ -154,6 +158,7 @@ public class Menu implements Screen {
 
     @Override
     public void render(float delta) {
+    	Audio.update();
     	Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
@@ -184,7 +189,6 @@ public class Menu implements Screen {
 
     @Override
     public void dispose() {
-    	Audio.dispose();
     	batch.dispose();
     	clic_pressed.dispose();
     	clic_released.dispose();

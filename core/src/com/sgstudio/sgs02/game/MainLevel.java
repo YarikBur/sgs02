@@ -75,6 +75,9 @@ public class MainLevel implements Screen {
 
     @Override
     public void render(float delta) {
+    	if(!Audio.isPlayedMusic())
+    		Audio.Attenuation(2);
+    	
         level();
         this.update();
         Audio.update();
@@ -181,6 +184,7 @@ public class MainLevel implements Screen {
 
     @Override
     public void show() {
+    	Audio.Attenuation(4);
         batch = main.getBatch();
         img = new Texture("Models/untitled.png");
         key = new KeyManager();

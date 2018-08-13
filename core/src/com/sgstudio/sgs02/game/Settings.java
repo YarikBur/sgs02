@@ -128,20 +128,25 @@ public class Settings implements Screen{
     
     @Override
     public void render(float delta) {
+    	Audio.update();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         
         batch.draw(settings, 0, 0, 1280, 720);
         
-        if(key.getJustPressedLeft())
+        if(key.getJustPressedLeft()) {
         	Audio.setVolume(Variables.stringToInt(com.sgstudio.sgs02.utils.Settings.getProperty("volume"))-10);
-        if(key.getJustPressedRight())
+        }
+        if(key.getJustPressedRight()) {
         	Audio.setVolume(Variables.stringToInt(com.sgstudio.sgs02.utils.Settings.getProperty("volume"))+10);
-        if(key.getJustPressedUp())
+        }
+        if(key.getJustPressedUp()) {
         	com.sgstudio.sgs02.utils.Settings.setProperty("mute", "false");
-        if(key.getJustPressedDown())
+        }
+        if(key.getJustPressedDown()) {
         	com.sgstudio.sgs02.utils.Settings.setProperty("mute", "true");
+        }
         
         batch.end();
     }

@@ -2,7 +2,6 @@ package com.sgstudio.sgs02.desktop;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Locale;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
