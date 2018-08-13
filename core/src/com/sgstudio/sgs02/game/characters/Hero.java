@@ -2,6 +2,7 @@ package com.sgstudio.sgs02.game.characters;
 
 import java.util.Map;
 
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -47,8 +48,9 @@ public class Hero {
     Sprite img_runOn;
     Sprite img_runOff;
     Sprite img_life;
-    
+
     private Tiles tiles;
+    Sprite img_scrow;
 
     private int lifes;
     
@@ -58,7 +60,7 @@ public class Hero {
     	tiles = new Tiles();
     	tiles.createAtlas("icons/health_anim.png", 1, 11);
     	health = tiles.getTextureRegion();
-    	
+
         this.main = main;
         this.lifes = 10;
 
@@ -68,15 +70,21 @@ public class Hero {
         sprite = new Sprite(texture);
         x = width = main.mainLevel.x_center;
         y = height = main.mainLevel.y_center;
+        int i = 500;
 
+        img_scrow = new Sprite(new Texture("icons/pugalo_icon.png"));
         img_runOff = new Sprite(new Texture("icons/speed_icon_off.png"));
         img_runOn = new Sprite(new Texture("icons/speed_icon_on.png"));
         img_runOn.setSize(36 * 3,30 * 3);
         img_runOff.setSize(36 * 3,30 * 3);
+        img_runOn.setPosition(i,0);
+        img_runOff.setPosition( i,0);
 
         img_life = new Sprite(new Texture("icons/health_add.png"));
-        img_life.setPosition(36 * 3,0);
-        img_life.setSize(36*3,30*3);
+        img_scrow.setPosition(36 * 3 + i,0);
+        img_life.setPosition(36 * 3 * 2 + i,0);
+        img_life.setSize(36 * 3 ,30 * 3);
+        img_scrow.setSize(36*3,30*3);
 
         center_x = x + imgX / 2;
         center_y = y + imgY / 2;
@@ -138,8 +146,9 @@ public class Hero {
                 img_runOn.draw(batch);
         }
         img_life.draw(batch);
-        
+
         batch.draw(health.get("tiles0_0"), 0, 0);
+        img_scrow.draw(batch);
     }
 
     public void update() {
