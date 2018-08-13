@@ -10,9 +10,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Tiles;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Sheep {
     private int mass;
