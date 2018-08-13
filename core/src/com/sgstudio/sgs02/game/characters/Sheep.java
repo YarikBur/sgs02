@@ -24,7 +24,11 @@ public class Sheep {
     private float center_x;
     private float center_y;
 
+    public float stateTime;
+
     private Texture texture;
+    public Tiles tiles;
+    public Animation<TextureRegion> anim;
 
     private float lostX;
     private float lostY;
