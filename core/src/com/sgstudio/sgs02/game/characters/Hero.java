@@ -69,7 +69,7 @@ public class Hero {
 
     public void update() {
         if (lifes <= 0){
-            this.main.setScreen(main.menu);
+            this.main.setScreen(main.defeat);
         }
     	center_y = this.y + imgY / 2;
         center_x = this.x + imgX / 2;

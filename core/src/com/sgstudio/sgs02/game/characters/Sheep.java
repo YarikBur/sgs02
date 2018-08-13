@@ -107,8 +107,8 @@ public class Sheep {
             this.updateVect();
         }
 
-        this.x += this.vect_x * 0.001 * speed / (mass * 0.5);
-        this.y += this.vect_y * 0.001 * speed / (mass * 0.5);
+        this.x += this.vect_x * 0.001 * speed ;
+        this.y += this.vect_y * 0.001 * speed ;
         
         angle = MathUtils.atan2(this.vect_y, this.vect_x);
     }
