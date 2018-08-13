@@ -133,15 +133,15 @@ public class Hero {
     	}
     	if (keys.getPressedRight() && keys.getPressedUp()){
     		if ((angle != 45)||(angle != -315)){if(angle == -315){angle = 45;}
-	    		if (((angle >= -135)&&(angle < 45))||((angle >= 220)&&(angle <= 0))){
+	    		if (((angle >= -135)&&(angle < 45))||((angle >= 225)&&(angle <= 360))){
 	    			angle+=dellta_angle;
 	    		} else {
 	    			angle-=dellta_angle;
 	    		}
     		}
     	}
-    	if (keys.getPressedRight() && keys.getPressedDown()){if(angle == -45){angle = 315;}
-    		if ((angle != -45)||(angle != 315)){
+    	if (keys.getPressedRight() && keys.getPressedDown()){
+    		if ((angle != -45)||(angle != 315)){if(angle == -45){angle = 315;}
 	    		if (((angle >= 135)&&(angle < 315))||((angle <= -225)&&(angle >= -360))){
 	    			angle+=dellta_angle;
 	    		} else {
