@@ -30,7 +30,7 @@ public class Language {
 	 * @return
 	 */
 	public static String getMessage(int key) {
-		if(Settings.getProperty("language").equals("ru_RU"))
+		if(Settings.getProperty("language").equals("en_UK"))
 			return getMessageRU(key);
 		else
 			return getMessageEN(key);

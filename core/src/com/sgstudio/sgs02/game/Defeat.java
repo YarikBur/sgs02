@@ -45,7 +45,7 @@ public class Defeat implements Screen {
         key = new KeyManager();
         text = new Text();
         audio = new Audio();
-        bg = new Sprite(new Texture("atlas/g4.png"));
+        bg = new Sprite(new Texture("menu/about.png"));
         Language.getAllStrings();
         Audio.randomStart();
         Gdx.input.setInputProcessor(new InputProcessor() {
@@ -119,14 +119,11 @@ public class Defeat implements Screen {
             main.setScreen(main.menu);
         }
 
-        text.writeUpperCenter(batch, "Вы набрали: " + main.mainLevel.lostTime + " очков");
+        text.writeUpperCenter(batch, "You got " + main.mainLevel.lostTime + " points","","Your hero used:",
+                "Fast Running: " + main.mainLevel.count_speed + " times",
+                "Inserting Scarecrow: " + main.mainLevel.count_scarecrow + " times",
+                "Adding Lifes: " + main.mainLevel.count_added_lifes + " times","","Count of sheep: " + main.mainLevel.count_sheep);
 
-        text.writeUpperleft(batch, "Ваш герой использовал:",
-                "Быстрый бег: " + main.mainLevel.count_speed + " раз",
-                "Установку пугал: " + main.mainLevel.count_scarecrow + " раз",
-                "Добавление жизней: " + main.mainLevel.count_added_lifes + " раз");
-
-        text.writeUpperRight(batch, "Общее количество овец: " + main.mainLevel.count_sheep);
 
         batch.end();
     }

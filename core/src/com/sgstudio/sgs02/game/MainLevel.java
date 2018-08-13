@@ -81,7 +81,7 @@ public class MainLevel implements Screen {
         camera.position.set(hero.GetX(), hero.GetY(), 0);
         camera.update();
 
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 1, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.setProjectionMatrix(camera.combined);
@@ -98,17 +98,13 @@ public class MainLevel implements Screen {
         batch.setProjectionMatrix(staticCamera.combined);
         batch.begin();
         
-        text.writeUpperCenter(batch, "Тест", "Это тестовая строка", "тест вывода номер 3");
+        text.writeUpperCenter(batch, "Points: " + hero.getPoints());
         
         text.writeUpperleft(batch,
-                "Высота" + ": " + hero.GetX(),
-                "Ширина" + ": " + hero.GetY(),
-                "Время" + ": " + (TimeUtils.millis() / 1000 - this.time));
+                "Time: " + (TimeUtils.millis() / 1000 - this.time));
 
         text.writeUpperRight(batch,
-                Language.getMessage(12) + ": " + Audio.getPlayed(),
-                Language.getMessage(13) + ": " + Settings.getProperty("volume"),
-                "Очки героя: " + hero.getPoints(), "Жизни: " + hero.getLifes());
+                "Lifes: " + hero.getLifes());
         hero.static_render();
         batch.end();
     }
