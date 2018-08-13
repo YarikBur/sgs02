@@ -1,20 +1,20 @@
 package com.sgstudio.sgs02.game.characters;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.sgstudio.sgs02.game.MyGame;
-import com.sgstudio.sgs02.game.Test.*;
 import com.sgstudio.sgs02.main.Main;
+import com.sgstudio.sgs02.utils.Tiles;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Sheep {
-
     private int mass;
     private float speed = 1;
     private float x;
@@ -52,6 +52,16 @@ public class Sheep {
     }
 
     public Sheep(Main main, SpriteBatch batch) {
+    	tiles = new Tiles();
+    	tiles.createAtlas("Models/sheep_animation.png", 2, 1);
+    	Texture sheep = new Texture("Models/sheep_animation.png");
+    	TextureRegion[][] tmp = TextureRegion.split(sheep, sheep.getWidth(), sheep.getHeight()/2);
+    	TextureRegion[] walk = new TextureRegion[2];
+    	walk[0] = tmp[0][0];
+    	walk[1] = tmp[1][0];
+    	anim = new Animation<TextureRegion>(0.45f, walk);
+    	stateTime=0f;
+    	
         main.mainLevel.count_sheep += 1;
         texture = new Texture("Models/sheep_one.png");
         sprite = new Sprite(texture);
@@ -97,7 +107,9 @@ public class Sheep {
     }
 
     public void render() {
-        batch.draw(sprite, x, y, img_width/2, img_height/2, img_width, img_height, 1, 1, angle * MathUtils.radiansToDegrees + 180);
+    	stateTime += Gdx.graphics.getDeltaTime();
+    	TextureRegion currentFrame = anim.getKeyFrame(stateTime, true);
+        batch.draw(currentFrame, x, y, img_width/2, img_height/2, img_width, img_height, 1, 1, angle * MathUtils.radiansToDegrees + 180);
     }
 
     public void update() {
