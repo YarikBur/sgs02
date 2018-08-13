@@ -117,7 +117,9 @@ public class Defeat implements Screen {
 
         if (key.getPressedAny() && (int)TimeUtils.millis() / 1000  - time > 2)
         {
+            main.mainLevel.dispose();
             main.mainLevel = new MainLevel(main);
+            Audio.dispose();
             main.setScreen(main.menu);
         }
 

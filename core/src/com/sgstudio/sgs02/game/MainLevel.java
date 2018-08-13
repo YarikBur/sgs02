@@ -28,7 +28,7 @@ public class MainLevel implements Screen {
     KeyManager key;
     SpriteBatch batch;
     Texture img;
-    Audio audio;
+    public Audio audio;
     Tiles tiles;
     Particle effect;
     Sprite bg;
@@ -167,9 +167,21 @@ public class MainLevel implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
         img.dispose();
         Audio.dispose();
+
+
+        time = 0;
+        startTime = 0;
+        lastTime = 0;
+        lostTime = 0;
+
+        score = 0;
+        count_sheep = 0;
+        count_speed = 0;
+        count_scarecrow = 0;
+        count_added_lifes = 0;
+
     }
 
     @Override

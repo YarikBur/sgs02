@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.main.Main;
+import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
 import java.sql.Time;
@@ -70,6 +71,7 @@ public class Hero {
     public void update() {
         if (lifes <= 0){
             main.mainLevel.lostTime = TimeUtils.millis() / 1000 - main.mainLevel.startTime;
+            Audio.dispose();
             this.main.setScreen(main.defeat);
         }
     	center_y = this.y + imgY / 2;
