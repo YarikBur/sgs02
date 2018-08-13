@@ -51,6 +51,7 @@ public class Hero {
     private int lifes;
 
     private int angle = 0;
+    private int dellta_angle = 3;
 
     public Hero(Main main, SpriteBatch batch) {
         tiles = new Tiles();
@@ -94,42 +95,78 @@ public class Hero {
     public void render() {
     	if ((angle == 360)||(angle == -360)){angle = 0;}
         batch.draw(sprite, x, y, sprite.getWidth()/2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle);
-    	if (keys.getPressedDown()){
+    	if (keys.getPressedDown() && !keys.getPressedLeft() && !keys.getPressedRight() && !keys.getPressedUp()){
     		if ((angle != -90)||(angle != 270)){
 				if (((angle >= 90)&&(angle < 270))||((angle > -270)&&(angle <= -90))){
-					angle++;
+					angle+=dellta_angle;
 				} else {
-					angle--;
+					angle-=dellta_angle;
 				}
 			}
     	}
-    	if (keys.getPressedUp()){
+    	if (keys.getPressedUp() && !keys.getPressedLeft() && !keys.getPressedRight() && !keys.getPressedDown()){
     		if ((angle != -270)||(angle != 90)){ if(angle == -270){angle = 90;}
 	    		if (((angle >= -90)&&(angle < 90))||((angle >= 270)&&(angle <= 0))){
-	    			angle++;
+	    			angle+=dellta_angle;
 	    		} else {
-	    			angle--;
+	    			angle-=dellta_angle;
 	    		}
     		}
     	}
-    	if (keys.getPressedLeft()){
+    	if (keys.getPressedLeft() && !keys.getPressedRight() && !keys.getPressedDown() && !keys.getPressedUp()){
     		if ((angle != 180)||(angle != -180)){ 
 	    		if (((angle >= 0)&&(angle < 180))||((angle < -180)&&(angle >= -360))){
-	    			angle++;
+	    			angle+=dellta_angle;
 	    		} else {
-	    			angle--;
+	    			angle-=dellta_angle;
 	    		}
     		}
     	}
-    	if (keys.getPressedRight()){
+    	if (keys.getPressedRight() && !keys.getPressedLeft() && !keys.getPressedDown() && !keys.getPressedUp()){
     		if ((angle != 0)||(angle != 360)||(angle != -360)){
 	    		if (((angle >= 180)&&(angle < 360))||((angle >= -180)&&(angle < 0))){
-	    			angle++;
+	    			angle+=dellta_angle;
 	    		} else {
-	    			angle--;
+	    			angle-=dellta_angle;
 	    		}
     		}
     	}
+    	if (keys.getPressedRight() && keys.getPressedUp()){
+    		if ((angle != 45)||(angle != -315)){if(angle == -315){angle = 45;}
+	    		if (((angle >= -135)&&(angle < 45))||((angle >= 220)&&(angle <= 0))){
+	    			angle+=dellta_angle;
+	    		} else {
+	    			angle-=dellta_angle;
+	    		}
+    		}
+    	}
+    	if (keys.getPressedRight() && keys.getPressedDown()){if(angle == -45){angle = 315;}
+    		if ((angle != -45)||(angle != 315)){
+	    		if (((angle >= 135)&&(angle < 315))||((angle <= -225)&&(angle >= -360))){
+	    			angle+=dellta_angle;
+	    		} else {
+	    			angle-=dellta_angle;
+	    		}
+    		}
+    	}
+    	if (keys.getPressedLeft() && keys.getPressedUp()){if(angle == -225){angle = 135;}
+			if ((angle != -225)||(angle != 135)){
+	    		if (((angle >= -45)&&(angle < 135))||((angle >= 315)&&(angle <= 360))){
+	    			angle+=dellta_angle;
+	    		} else {
+	    			angle-=dellta_angle;
+	    		}
+			}
+		}
+    	if (keys.getPressedLeft() && keys.getPressedDown()){if(angle == -135){angle = 225;}
+			if ((angle != 225)||(angle != -135)){
+	    		if (((angle >= 45)&&(angle < 225))||((angle < -135)&&(angle >= 310))){
+	    			angle+=dellta_angle;
+	    		} else {
+	    			angle-=dellta_angle;
+	    		}
+			}
+		}
     }
     public void static_render() {
         img_runOff.draw(batch);
