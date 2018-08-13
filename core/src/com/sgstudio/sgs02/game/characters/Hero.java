@@ -148,9 +148,18 @@ public class Hero {
                 img_runOn.draw(batch);
         }
         img_life.draw(batch);
-
-        batch.draw(health.get("tiles0_0"), 0, 0);
         img_scrow.draw(batch);
+
+        renderLife();
+    }
+    
+    private void renderLife() {
+    	if(this.getLifes() <= 0)
+    		batch.draw(health.get("tiles0_0"), 0, 0);
+    	else if(this.getLifes() >= 10)
+    		batch.draw(health.get("tiles0_10"), 0, 0);
+    	else
+    		batch.draw(health.get("tiles0_" + this.getLifes()), 0, 0);
     }
 
     public void update() {
