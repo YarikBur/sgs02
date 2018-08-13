@@ -1,16 +1,19 @@
 package com.sgstudio.sgs02.game.characters;
 
-//import java.util.Calendar;
+import java.util.Map;
 
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+//import java.util.Calendar;
+
+import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.main.Main;
+import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
-
-import java.sql.Time;
 
 public class Hero {
     private int potatoes;
@@ -33,6 +36,7 @@ public class Hero {
 
     private Texture texture;
     private Sprite sprite;
+    private Map<String, TextureRegion> health;
 
     private Main main;
     private KeyManager keys;
@@ -43,12 +47,18 @@ public class Hero {
     Sprite img_runOn;
     Sprite img_runOff;
     Sprite img_life;
+    
+    private Tiles tiles;
 
     private int lifes;
     
     private int angle = 0;
 
     public Hero(Main main, SpriteBatch batch) {
+    	tiles = new Tiles();
+    	tiles.createAtlas("icons/health_anim.png", 1, 11);
+    	health = tiles.getTextureRegion();
+    	
         this.main = main;
         this.lifes = 10;
 
@@ -128,6 +138,8 @@ public class Hero {
                 img_runOn.draw(batch);
         }
         img_life.draw(batch);
+        
+        batch.draw(health.get("tiles0_0"), 0, 0);
     }
 
     public void update() {
