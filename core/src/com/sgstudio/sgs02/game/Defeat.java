@@ -40,6 +40,7 @@ public class Defeat implements Screen {
 
     @Override
     public void show() {
+    	Audio.Attenuation(1);
         time = (int)TimeUtils.millis() / 1000;
         batch = main.getBatch();
         key = new KeyManager();
@@ -94,6 +95,8 @@ public class Defeat implements Screen {
 
     @Override
     public void render(float delta) {
+    	if(!Audio.isPlayedMusic())
+    		Audio.Attenuation(5);
         staticCamera.update();
 
         Gdx.gl.glClearColor(1, 0, 0, 1);

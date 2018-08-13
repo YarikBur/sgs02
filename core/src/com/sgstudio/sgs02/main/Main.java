@@ -26,8 +26,7 @@ public class Main extends Game {
         audio = new Audio();
 
         batch = new SpriteBatch();
-
-
+        
         game = new MyGame(this);
         menu = new Menu(this);
         test = new Test(this);
@@ -37,6 +36,10 @@ public class Main extends Game {
         aboutsgstudio = new AboutSGS(this);
 
         setScreen(menu);
+    }
+    
+    public Audio getAudio() {
+    	return audio;
     }
 
     @Override

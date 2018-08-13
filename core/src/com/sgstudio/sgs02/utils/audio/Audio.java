@@ -21,6 +21,10 @@ public class Audio {
 	private static boolean played = false;
 	private static boolean smooth = false;
 	
+	public static boolean isPlayedMusic() {
+		return List.playedMusic();
+	}
+	
 	/**
 	 * Инициализация класса
 	 */
@@ -44,11 +48,7 @@ public class Audio {
 	 * Включает новый трек, если предыдущая закончилась
 	 */
 	public static void update() {
-		if(!smooth)
-			if(!List.playedMusic()) {
-				played = false;
-				startNewMusic();
-			}
+		List.getPlayedMusic().setVolume(volume());
 	}
 	
 	/**
@@ -68,6 +68,18 @@ public class Audio {
 		List.getMusic(play).play();
 		List.getMusic(play).setVolume(volume());
 		play();
+	}
+	
+	/**
+	 * Резко выключает музыку и включает другую по номеру
+	 * @param number - номер трека, который надо будет включить
+	 */
+	public static void Attenuation(int number) {
+			if(List.playedMusic())
+				List.getPlayedMusic().stop();
+			List.getMusic(number).play();
+			play();
+			smooth = false;
 	}
 	
 	/**
@@ -117,7 +129,8 @@ public class Audio {
 					System.out.println(Language.getMessage(12) + ": " + number);
 				music = List.getMusic(play);
 				volume = music.getVolume();
-				changeVolume();
+				if(List.playedMusic())
+					changeVolume();
 				played = false;
 				startNewMusic(number);
 			}
