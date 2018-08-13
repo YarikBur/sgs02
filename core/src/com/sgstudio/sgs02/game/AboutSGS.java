@@ -3,6 +3,7 @@ package com.sgstudio.sgs02.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -18,6 +19,7 @@ public class AboutSGS implements Screen{
     private Sprite about;
     
     private SpriteBatch batch;
+    private Sound clic_pressed, clic_released;
     
     public AboutSGS(Main main) {
         this.main = main;
@@ -35,6 +37,9 @@ public class AboutSGS implements Screen{
 
         batch = new SpriteBatch();
         about = new Sprite(new Texture("menu/about.png"));
+
+        clic_pressed = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_pressed.mp3"));
+        clic_released = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_released.mp3"));
         
         menu = new Menu(main);
         Gdx.input.setInputProcessor(new InputProcessor(){
@@ -79,16 +84,21 @@ public class AboutSGS implements Screen{
             	y0 = screenY;
             	System.out.print("x: " + screenX + "; y: " + screenY);
             	
-            	if(screen(backX, backY))
-            		slide = true;
+            	if(screen(backX, backY)){
+            	    clic_pressed.play();
+                    slide = true;
+                }
+
             	
                 return false;
             }
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-            	if(slide && screen(backX, backY))
-            		main.setScreen(main.menu);
+            	if(slide && screen(backX, backY)){
+                    main.setScreen(main.menu);
+                    clic_released.play();
+                }
                 return false;
             }
 
