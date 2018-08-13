@@ -10,9 +10,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Tiles;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Sheep {
     private int mass;
@@ -36,16 +33,20 @@ public class Sheep {
     private float vect_x;
     private float vect_y;
 
-    private int counter;
+    @SuppressWarnings("unused")
+	private int counter;
 
     private SpriteBatch batch;
-    private Main main;
+    @SuppressWarnings("unused")
+	private Main main;
     
     private float angle = 0;
+	@SuppressWarnings("unused")
 	private Sprite sprite;
 //	final private double x_center = 1080;
 //  final private double y_center = 1085;
-    final private double radius = 910;
+    @SuppressWarnings("unused")
+	final private double radius = 910;
     int[] spawnX = {1075, 1260 , 1410, 1480, 1480, 1390, 1215, 1025, 840, 670, 600, 550, 600, 710 ,870};
 	int[] spawnY = {1515, 1450 , 1300, 1115, 910, 720, 600, 550, 590, 630, 850, 1040, 1230, 1380 ,1500};
 	int RANDOM_NUMBER;

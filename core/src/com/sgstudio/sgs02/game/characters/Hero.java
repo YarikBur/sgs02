@@ -74,7 +74,45 @@ public class Hero {
     }
 
     public void render() {
-        batch.draw(sprite, x, y, sprite.getWidth()/2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle++);
+        if ((angle == 360)||(angle == -360)){angle = 0;}
+        batch.draw(sprite, x, y, sprite.getWidth()/2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle);
+        if (keys.getPressedDown()){
+            if ((angle != 90)||(angle != -270)){
+                if ((angle > 270)||(angle < -90)){
+                    angle++;
+                } else {
+                    angle--;
+                }
+            }
+        }
+        if (keys.getPressedUp()){
+            if ((angle != 270)||(angle != -90)){
+                if ((angle > 90)||(angle < -270)){
+                    angle--;
+                } else {
+                    angle++;
+                }
+            }
+        }
+        if (keys.getPressedLeft()){
+            if ((angle != 180)||(angle != -180)){
+                if ((angle > 180)||(angle < -180)){
+                    angle++;
+                } else {
+                    angle--;
+                }
+            }
+        }
+        if (keys.getPressedRight()){
+            if ((angle != 0)||(angle != 0)){
+                if ((angle > 0)||(angle < 269)){
+                    angle--;
+                } else if (angle < 91){
+                    angle++;
+                }
+            }
+        }
+        System.out.println(angle);
     }
 
     public void static_render(){
@@ -217,6 +255,4 @@ public class Hero {
     public float getCenter_y() {
         return this.center_y;
     }
-
-    public long getTimeSpeed(){return this.time_speed;}
 }
