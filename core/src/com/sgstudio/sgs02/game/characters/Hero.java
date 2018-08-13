@@ -53,13 +53,13 @@ public class Hero {
     Sprite img_scrow;
 
     private int lifes;
-    
+
     private int angle = 0;
 
     public Hero(Main main, SpriteBatch batch) {
-    	tiles = new Tiles();
-    	tiles.createAtlas("icons/health_anim.png", 1, 11);
-    	health = tiles.getTextureRegion();
+        tiles = new Tiles();
+        tiles.createAtlas("icons/health_anim.png", 1, 11);
+        health = tiles.getTextureRegion();
 
         this.main = main;
         this.lifes = 10;
@@ -75,16 +75,16 @@ public class Hero {
         img_scrow = new Sprite(new Texture("icons/pugalo_icon.png"));
         img_runOff = new Sprite(new Texture("icons/speed_icon_off.png"));
         img_runOn = new Sprite(new Texture("icons/speed_icon_on.png"));
-        img_runOn.setSize(36 * 3,30 * 3);
-        img_runOff.setSize(36 * 3,30 * 3);
-        img_runOn.setPosition(i,0);
-        img_runOff.setPosition( i,0);
+        img_runOn.setSize(36 * 3, 30 * 4);
+        img_runOff.setSize(36 * 3, 30 * 4);
+        img_runOn.setPosition(i, 0);
+        img_runOff.setPosition(i, 0);
 
         img_life = new Sprite(new Texture("icons/health_add.png"));
-        img_scrow.setPosition(36 * 3 + i,0);
-        img_life.setPosition(36 * 3 * 2 + i,0);
-        img_life.setSize(36 * 3 ,30 * 3);
-        img_scrow.setSize(36*3,30*3);
+        img_scrow.setPosition(36 * 3 + i, 0);
+        img_life.setPosition(36 * 3 * 2 + i, 0);
+        img_life.setSize(36 * 3, 30 * 4);
+        img_scrow.setSize(36 * 3, 30 * 4);
 
         center_x = x + imgX / 2;
         center_y = y + imgY / 2;
@@ -96,40 +96,42 @@ public class Hero {
     }
 
     public void render() {
-        if ((angle == 360)||(angle == -360)){angle = 0;}
-        batch.draw(sprite, x, y, sprite.getWidth()/2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle);
-        if (keys.getPressedDown()){
-            if ((angle != 90)||(angle != -270)){
-                if ((angle > 270)||(angle < -90)){
+        if ((angle == 360) || (angle == -360)) {
+            angle = 0;
+        }
+        batch.draw(sprite, x, y, sprite.getWidth() / 2, sprite.getHeight() / 2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle);
+        if (keys.getPressedDown()) {
+            if ((angle != 90) || (angle != -270)) {
+                if ((angle > 270) || (angle < -90)) {
                     angle++;
                 } else {
                     angle--;
                 }
             }
         }
-        if (keys.getPressedUp()){
-            if ((angle != 270)||(angle != -90)){
-                if ((angle > 90)||(angle < -270)){
+        if (keys.getPressedUp()) {
+            if ((angle != 270) || (angle != -90)) {
+                if ((angle > 90) || (angle < -270)) {
                     angle--;
                 } else {
                     angle++;
                 }
             }
         }
-        if (keys.getPressedLeft()){
-            if ((angle != 180)||(angle != -180)){
-                if ((angle > 180)||(angle < -180)){
+        if (keys.getPressedLeft()) {
+            if ((angle != 180) || (angle != -180)) {
+                if ((angle > 180) || (angle < -180)) {
                     angle++;
                 } else {
                     angle--;
                 }
             }
         }
-        if (keys.getPressedRight()){
-            if ((angle != 0)||(angle != 0)){
-                if ((angle > 0)||(angle < 269)){
+        if (keys.getPressedRight()) {
+            if ((angle != 0) || (angle != 0)) {
+                if ((angle > 0) || (angle < 269)) {
                     angle--;
-                } else if (angle < 91){
+                } else if (angle < 91) {
                     angle++;
                 }
             }
@@ -137,12 +139,12 @@ public class Hero {
         System.out.println(angle);
     }
 
-    public void static_render(){
+    public void static_render() {
         img_runOff.draw(batch);
-        if (time_speed > 0){
-            if(time_speed + 8 > TimeUtils.millis() / 1000)
+        if (time_speed > 0) {
+            if (time_speed + 8 > TimeUtils.millis() / 1000)
                 img_runOn.draw(batch);
-            else if(time_speed + 10 > TimeUtils.millis() / 1000 && ((int)TimeUtils.millis() / 10) % 2 == 0)
+            else if (time_speed + 10 > TimeUtils.millis() / 1000 && ((int) TimeUtils.millis() / 10) % 2 == 0)
                 img_runOn.draw(batch);
         }
         img_life.draw(batch);
@@ -152,12 +154,12 @@ public class Hero {
     }
 
     public void update() {
-        if (lifes <= 0){
+        if (lifes <= 0) {
             main.mainLevel.lostTime = TimeUtils.millis() / 1000 - main.mainLevel.startTime;
             Audio.dispose();
             this.main.setScreen(main.defeat);
         }
-    	center_y = this.y + imgY / 2;
+        center_y = this.y + imgY / 2;
         center_x = this.x + imgX / 2;
 
         float coor_x = width - this.x;
@@ -202,8 +204,7 @@ public class Hero {
             main.mainLevel.count_scarecrow += 1;
             this.putScarecrow();
         }
-        if (keys.getJustPressed3() && points >= 10)
-        {
+        if (keys.getJustPressed3() && points >= 10) {
             main.mainLevel.count_added_lifes += 1;
             plusLife();
         }
