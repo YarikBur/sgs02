@@ -1,17 +1,15 @@
 package com.sgstudio.sgs02.game.characters;
 
-//import java.util.Calendar;
-
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+//import java.util.Calendar;
+
+import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
-import java.util.Scanner;
-
-import java.sql.Time;
 
 public class Hero {
     private int potatoes;
