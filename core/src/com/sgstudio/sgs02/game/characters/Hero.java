@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
+import java.util.Scanner;
 
 import java.sql.Time;
 
@@ -86,7 +87,7 @@ public class Hero {
     	}
     	if (keys.getPressedLeft()){
     		if ((angle != 180)||(angle != -180)){
-	    		if (angle > 0){
+	    		if ((angle > 180)||(angle < -180)){
 	    			angle++;
 	    		} else {
 	    			angle--;
@@ -94,16 +95,16 @@ public class Hero {
     		}
     	}
     	if (keys.getPressedRight()){
-    		if ((angle != 360)||(angle != 0)){
-	    		if ((angle > 180)||(angle > -180)){
-	    			angle++;
-	    		} else {
+    		if ((angle != 0)||(angle != 0)){
+	    		if ((angle > 0)||(angle < 269)){
 	    			angle--;
+	    		} else if (angle < 91){
+	    			angle++;
 	    		}
     		}
     	}
+        System.out.println(angle);
     }
-
     public void update() {
         if (lifes <= 0){
             this.main.setScreen(main.defeat);
