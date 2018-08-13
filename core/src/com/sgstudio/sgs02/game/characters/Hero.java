@@ -143,7 +143,7 @@ public class Hero {
         img_life.draw(batch);
         img_scrow.draw(batch);
 
-        renderLife(10, 10);
+        renderLife(1280-10-health.get("tiles0_0").getRegionWidth(), 720-10-health.get("tiles0_0").getRegionHeight());
     }
     
     private void renderLife(int x, int y) {
