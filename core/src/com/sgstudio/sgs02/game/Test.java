@@ -79,7 +79,7 @@ public class Test implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         bg.draw(batch);
-        batch.draw(img, x_center - 10, y_center - 10, 20, 20);
+        batch.draw(img, x_center - 10, y_center - 10, 30, 30);
         for (Scarecrow scare : list_scarecrow)
             scare.render();
         for (Sheep sheep : list_sheep)
@@ -89,6 +89,9 @@ public class Test implements Screen {
 
         batch.setProjectionMatrix(staticCamera.combined);
         batch.begin();
+        
+        text.writeUpperCenter(batch, "Тест", "Это тестовая строка", "тест вывода номер 3");
+        
         text.writeUpperleft(batch,
                 "Высота" + ": " + hero.GetX(),
                 "Ширина" + ": " + hero.GetY(),
@@ -118,7 +121,7 @@ public class Test implements Screen {
     @Override
     public void show() {
         batch = main.getBatch();
-        img = new Texture("badlogic.jpg");
+        img = new Texture("Models/untitled.png");
         key = new KeyManager();
         text = new Text();
         audio = new Audio();

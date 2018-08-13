@@ -122,4 +122,19 @@ public class Text {
 			i += indentation;
 		}
 	}
+	
+	/**
+	 * Выводит по центру и чуть выше
+	 * @param batch
+	 * @param strings
+	 */
+	public void writeUpperCenter(SpriteBatch batch, String... strings) {
+		int i = Variables.stringToInt(Settings.getProperty("height"))-Variables.stringToInt(Settings.getProperty("height"))/4;
+		int x = 0;
+		for(String str : strings) {
+			x = Integer.parseInt(Settings.getProperty("width"))/2 - (str.length()*14)/2;
+			getFont().draw(batch, str, x, i);
+			i-=indentation;
+		}
+	}
 }
