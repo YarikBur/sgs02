@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sgstudio.sgs02.game.Test;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
@@ -52,8 +51,8 @@ public class Hero {
         this.batch = batch;
         texture = new Texture("farmer.png");
         sprite = new Sprite(texture);
-        x = width = main.test.x_center;
-        y = height = main.test.y_center;
+        x = width = main.mainLevel.x_center;
+        y = height = main.mainLevel.y_center;
 
         center_x = x + imgX / 2;
         center_y = y + imgY / 2;
@@ -106,6 +105,9 @@ public class Hero {
     }
 
     public void update() {
+        if (lifes <= 0){
+            this.main.setScreen(main.defeat);
+        }
     	center_y = this.y + imgY / 2;
         center_x = this.x + imgX / 2;
 
@@ -174,7 +176,7 @@ public class Hero {
     }
 
     private void putScarecrow() {
-        main.test.addScarecrow(this.x, this.y);
+        main.mainLevel.addScarecrow(this.x, this.y);
     }
 
     public void SetX(int x) {

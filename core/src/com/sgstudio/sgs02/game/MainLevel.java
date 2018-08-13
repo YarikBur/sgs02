@@ -1,9 +1,5 @@
 package com.sgstudio.sgs02.game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
@@ -18,15 +14,16 @@ import com.sgstudio.sgs02.game.characters.Hero;
 import com.sgstudio.sgs02.game.characters.Scarecrow;
 import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
-import com.sgstudio.sgs02.utils.Language;
-import com.sgstudio.sgs02.utils.Particle;
+import com.sgstudio.sgs02.utils.*;
 import com.sgstudio.sgs02.utils.Settings;
-import com.sgstudio.sgs02.utils.Text;
-import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
-public class Test implements Screen {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class MainLevel implements Screen {
     Text text;
     KeyManager key;
     SpriteBatch batch;
@@ -37,6 +34,8 @@ public class Test implements Screen {
     Sprite bg;
 
     public long time;
+    private long startTime;
+    private long lastTime;
     public long score;
 
     final public int x_center = 1080;
@@ -55,7 +54,7 @@ public class Test implements Screen {
 
     Map<String, TextureRegion> gui;
 
-    public Test(final Main main) {
+    public MainLevel(final Main main) {
         this.main = main;
 
         staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -67,6 +66,7 @@ public class Test implements Screen {
 
     @Override
     public void render(float delta) {
+        level();
         this.update();
         Audio.update();
         staticCamera.update();
@@ -105,6 +105,56 @@ public class Test implements Screen {
         batch.end();
     }
 
+    public void defeat(){
+        main.setScreen(main.defeat);
+    }
+
+    private void level()
+    {
+        double sec = TimeUtils.millis() / 1000 - this.startTime;
+
+        if (sec <= 0 || sec <= this.lastTime)
+            return;
+        else
+            this.lastTime = TimeUtils.millis() / 1000 - this.startTime;
+
+        if (sec > 0 && sec <= 5) {
+            for (int i = 0; i < 3; i++)
+                list_sheep.add(new Sheep(this.main, this.batch));
+        }
+        if (sec > 5 && sec <= 20)
+            return;
+        if (sec > 20 && sec < 51) {
+            list_sheep.add(new Sheep(this.main, this.batch));
+            return;
+        }
+        if (sec == 51) {
+            for (Sheep sheep: this.list_sheep){
+                sheep.SetSpeed(sheep.GetSpeed()*1.1);
+            }
+        }
+        if (sec > 51 && sec < 61){
+            for (Sheep sheep: this.list_sheep){
+                sheep.SetSpeed(sheep.GetSpeed()*1.01);
+            }
+        }
+        if (sec >= 61){
+            if(sec % 5 == 0){
+                for(Sheep sheep: list_sheep){
+                    sheep.SetSpeed(sheep.GetSpeed()*1.01);
+                }
+            }
+            if (sec % 30 == 29){
+                for(Sheep sheep: list_sheep){
+                    sheep.SetSpeed(sheep.GetSpeed() + 1);
+                }
+            }
+            if(sec % 2 == 1){
+                list_sheep.add(new Sheep(this.main, this.batch));
+            }
+        }
+    }
+
     @Override
     public void resize(int width, int height) {
         Settings.setProperty("width", width + "");
@@ -134,6 +184,7 @@ public class Test implements Screen {
         hero = new Hero(main, batch);
 
         time = TimeUtils.millis() / 1000;
+        startTime = time;
         
         Gdx.input.setInputProcessor(new InputProcessor() {
 			
@@ -185,11 +236,6 @@ public class Test implements Screen {
 				return false;
 			}
 		});
-
-
-        // Create Sheep
-        for (int i = 0; i < 100; i++)
-            list_sheep.add(new Sheep(main, batch));
     }
 
     public void update() {

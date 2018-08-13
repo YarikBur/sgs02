@@ -1,69 +1,157 @@
 package com.sgstudio.sgs02.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
+import com.sgstudio.sgs02.game.characters.Hero;
+import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.menu.Menu;
+import com.sgstudio.sgs02.utils.Language;
+import com.sgstudio.sgs02.utils.Particle;
+import com.sgstudio.sgs02.utils.Settings;
+import com.sgstudio.sgs02.utils.Text;
+import com.sgstudio.sgs02.utils.Tiles;
+import com.sgstudio.sgs02.utils.audio.Audio;
+import com.sgstudio.sgs02.utils.controller.KeyManager;
 
-public class Defeat implements Screen{
-	
-	private Main main;
-	SpriteBatch batch;
-	Sprite defeat;
-	private Menu menu;
+public class Defeat implements Screen {
 
-	public Defeat(Main main) {
-		this.main = main;
-	}
+    private final OrthographicCamera staticCamera;
+    private Main main;
+    SpriteBatch batch;
+    Sprite defeat;
+    private Menu menu;
+    private Sprite bg;
+    private Audio audio;
+    private KeyManager key;
+    private Text text;
 
-	@Override
-	public void show() {
-        batch = new SpriteBatch();
-        defeat = new Sprite(new Texture(""));
-        menu = new Menu(main);
-        
-	}
-	
-	@Override
-	public void render(float delta) {
-//        Gdx.gl.glClearColor(0, 0, 0, 1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        batch.begin();
-//        batch.draw(defeat, 0, 0, 1280, 720);
-//        batch.end();
-	}
+    public Defeat(Main main) {
+        this.main = main;
 
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
+        staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+    }
 
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void show() {
+        batch = main.getBatch();
+        key = new KeyManager();
+        text = new Text();
+        audio = new Audio();
+        bg = new Sprite(new Texture("atlas/g4.png"));
+        Language.getAllStrings();
+        Audio.randomStart();
+        Gdx.input.setInputProcessor(new InputProcessor() {
 
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
+            @Override
+            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+                // TODO Auto-generated method stub
+                return false;
+            }
 
-	@Override
-	public void hide() {
-        this.dispose();		
-	}
+            @Override
+            public boolean touchDragged(int screenX, int screenY, int pointer) {
+                // TODO Auto-generated method stub
+                return false;
+            }
 
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public boolean scrolled(int amount) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public boolean mouseMoved(int screenX, int screenY) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public boolean keyUp(int keycode) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public boolean keyTyped(char character) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+
+            @Override
+            public boolean keyDown(int keycode) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void render(float delta) {
+        staticCamera.update();
+
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.setProjectionMatrix(staticCamera.combined);
+        batch.begin();
+        bg.draw(batch);
+
+        if (key.getPressedAny())
+            main.setScreen(main.menu);
+
+        text.writeUpperCenter(batch, "Вы набрали: " + main.mainLevel.score + " очков");
+
+        text.writeUpperleft(batch);
+
+        text.writeUpperRight(batch);
+
+        batch.end();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void pause() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void resume() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void hide() {
+        this.dispose();
+    }
+
+    @Override
+    public void dispose() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

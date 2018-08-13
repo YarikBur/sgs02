@@ -121,7 +121,7 @@ public class Menu implements Screen {
             		main.setScreen(main.aboutsgstudio);
             	} else if(slide && screen(playX, playY)) {
             		clic_released.play(Audio.volume());
-            		main.setScreen(main.test);
+            		main.setScreen(main.mainLevel);
             	} else if(slide && screen(settingsX, settingsY)) {
             		clic_released.play(Audio.volume());
             		main.setScreen(main.settings);
