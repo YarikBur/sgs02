@@ -134,7 +134,7 @@ public class Text {
 		for(String str : strings) {
 			x = Integer.parseInt(Settings.getProperty("width"))/2 - (str.length()*14)/2;
 			getFont().draw(batch, str, x, i);
-			i+=indentation;
+			i-=indentation;
 		}
 	}
 }
