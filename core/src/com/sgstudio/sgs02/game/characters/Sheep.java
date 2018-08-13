@@ -9,9 +9,14 @@ import com.sgstudio.sgs02.game.MyGame;
 import com.sgstudio.sgs02.game.Test.*;
 import com.sgstudio.sgs02.main.Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Sheep {
+
     private int mass;
-    private int speed = 1;
+    private float speed = 1;
     private float x;
     private float y;
     private float img_width = 222 / 5;
@@ -40,7 +45,7 @@ public class Sheep {
     int[] spawnX = {1075, 1260 , 1410, 1480, 1480, 1390, 1215, 1025, 840, 670, 600, 550, 600, 710 ,870};
 	int[] spawnY = {1515, 1450 , 1300, 1115, 910, 720, 600, 550, 590, 630, 850, 1040, 1230, 1380 ,1500};
 	int RANDOM_NUMBER;
-    
+
     public int Spawn(int RANDOM_NUMBER) {
     	this.RANDOM_NUMBER = (int) (14 * Math.random());
     	return this.RANDOM_NUMBER;
@@ -102,8 +107,8 @@ public class Sheep {
             this.updateVect();
         }
 
-        this.x += this.vect_x * 0.001 * speed / mass;
-        this.y += this.vect_y * 0.001 * speed / mass;
+        this.x += this.vect_x * 0.001 * speed / (mass * 0.5);
+        this.y += this.vect_y * 0.001 * speed / (mass * 0.5);
         
         angle = MathUtils.atan2(this.vect_y, this.vect_x);
     }
@@ -130,8 +135,8 @@ public class Sheep {
         this.mass = mass;
     }
 
-    public void SetSpeed(int speed) {
-        this.speed = speed;
+    public void SetSpeed(double speed) {
+        this.speed = (float)speed;
     }
 
     public float GetX() {
@@ -146,8 +151,8 @@ public class Sheep {
         return mass;
     }
 
-    public int GetSpeed() {
-        return speed;
+    public float GetSpeed() {
+        return this.speed;
     }
 
     public void joinSheeps() {
