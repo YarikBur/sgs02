@@ -51,6 +51,7 @@ public class Menu implements Screen {
     	
     	if(!Audio.isPlayedMusic())
     		Audio.Attenuation(3);
+    	Audio.update();
     	
     	bg = new Sprite(new Texture("menu/menu.png"));
     	clic_pressed = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_pressed.mp3"));
