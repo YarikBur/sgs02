@@ -40,6 +40,10 @@ public class Hero {
     private int width;
     private int height;
 
+    Sprite img_runOn;
+    Sprite img_runOff;
+    SpriteBatch img_life;
+
     private int lifes;
     
     private int angle = 0;
@@ -55,6 +59,11 @@ public class Hero {
         x = width = main.mainLevel.x_center;
         y = height = main.mainLevel.y_center;
 
+        img_runOff = new Sprite(new Texture("Spells/run_off.png"));
+        img_runOn = new Sprite(new Texture("Spells/run_on.png"));
+        /*img_life = new SpriteBatch(new Texture("Spells/Life.png"));
+        img_life.setX(80);
+*/
         center_x = x + imgX / 2;
         center_y = y + imgY / 2;
 
@@ -66,6 +75,17 @@ public class Hero {
 
     public void render() {
         batch.draw(sprite, x, y, sprite.getWidth()/2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle++);
+    }
+
+    public void static_render(){
+        img_runOff.draw(batch);
+        if (time_speed > 0){
+            if(time_speed + 8 > TimeUtils.millis() / 1000)
+                img_runOn.draw(batch);
+            else if(time_speed + 10 > TimeUtils.millis() / 1000 && ((int)TimeUtils.millis() / 10) % 2 == 0)
+                img_runOn.draw(batch);
+        }
+        //img_life.draw(batch);
     }
 
     public void update() {
@@ -197,4 +217,6 @@ public class Hero {
     public float getCenter_y() {
         return this.center_y;
     }
+
+    public long getTimeSpeed(){return this.time_speed;}
 }
