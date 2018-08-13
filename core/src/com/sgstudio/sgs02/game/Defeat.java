@@ -1,7 +1,6 @@
 package com.sgstudio.sgs02.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,15 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.sgstudio.sgs02.game.characters.Hero;
-import com.sgstudio.sgs02.game.characters.Sheep;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.menu.Menu;
 import com.sgstudio.sgs02.utils.Language;
-import com.sgstudio.sgs02.utils.Particle;
-import com.sgstudio.sgs02.utils.Settings;
 import com.sgstudio.sgs02.utils.Text;
-import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 
@@ -28,9 +22,11 @@ public class Defeat implements Screen {
     private Main main;
     SpriteBatch batch;
     Sprite defeat;
-    private Menu menu;
+    @SuppressWarnings("unused")
+	private Menu menu;
     private Sprite bg;
-    private Audio audio;
+    @SuppressWarnings("unused")
+	private Audio audio;
     private KeyManager key;
     private Text text;
     long time;

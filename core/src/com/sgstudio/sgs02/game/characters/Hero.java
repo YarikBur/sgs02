@@ -1,17 +1,20 @@
 package com.sgstudio.sgs02.game.characters;
 
-//import java.util.Calendar;
+import java.util.Map;
 
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+//import java.util.Calendar;
+
+import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.main.Main;
+import com.sgstudio.sgs02.utils.Tiles;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
-import java.util.Scanner;
-
-import java.sql.Time;
 
 public class Hero {
     private int potatoes;
@@ -34,6 +37,7 @@ public class Hero {
 
     private Texture texture;
     private Sprite sprite;
+    private Map<String, TextureRegion> health;
 
     private Main main;
     private KeyManager keys;
@@ -41,11 +45,22 @@ public class Hero {
     private int width;
     private int height;
 
+    Sprite img_runOn;
+    Sprite img_runOff;
+    Sprite img_life;
+
+    private Tiles tiles;
+    Sprite img_scrow;
+
     private int lifes;
-    
+
     private int angle = 0;
 
     public Hero(Main main, SpriteBatch batch) {
+        tiles = new Tiles();
+        tiles.createAtlas("icons/health_anim.png", 1, 11);
+        health = tiles.getTextureRegion();
+
         this.main = main;
         this.lifes = 10;
 
@@ -55,6 +70,21 @@ public class Hero {
         sprite = new Sprite(texture);
         x = width = main.mainLevel.x_center;
         y = height = main.mainLevel.y_center;
+        int i = 500;
+
+        img_scrow = new Sprite(new Texture("icons/pugalo_icon.png"));
+        img_runOff = new Sprite(new Texture("icons/speed_icon_off.png"));
+        img_runOn = new Sprite(new Texture("icons/speed_icon_on.png"));
+        img_runOn.setSize(36 * 3, 30 * 4);
+        img_runOff.setSize(36 * 3, 30 * 4);
+        img_runOn.setPosition(i, 0);
+        img_runOff.setPosition(i, 0);
+
+        img_life = new Sprite(new Texture("icons/health_add.png"));
+        img_scrow.setPosition(36 * 3 + i, 0);
+        img_life.setPosition(36 * 3 * 2 + i, 0);
+        img_life.setSize(36 * 3, 30 * 4);
+        img_scrow.setSize(36 * 3, 30 * 4);
 
         center_x = x + imgX / 2;
         center_y = y + imgY / 2;
@@ -106,13 +136,37 @@ public class Hero {
     	}
         System.out.println(angle);
     }
+
+    public void static_render() {
+        img_runOff.draw(batch);
+        if (time_speed > 0) {
+            if (time_speed + 8 > TimeUtils.millis() / 1000)
+                img_runOn.draw(batch);
+            else if (time_speed + 10 > TimeUtils.millis() / 1000 && ((int) TimeUtils.millis() / 10) % 2 == 0)
+                img_runOn.draw(batch);
+        }
+        img_life.draw(batch);
+        img_scrow.draw(batch);
+
+        renderLife(10, 10);
+    }
+    
+    private void renderLife(int x, int y) {
+    	if(this.getLifes() <= 0)
+    		batch.draw(health.get("tiles0_0"), x, y);
+    	else if(this.getLifes() >= 10)
+    		batch.draw(health.get("tiles0_10"), x, y);
+    	else
+    		batch.draw(health.get("tiles0_" + this.getLifes()), x, y);
+    }
+
     public void update() {
-        if (lifes <= 0){
+        if (lifes <= 0) {
             main.mainLevel.lostTime = TimeUtils.millis() / 1000 - main.mainLevel.startTime;
             Audio.dispose();
             this.main.setScreen(main.defeat);
         }
-    	center_y = this.y + imgY / 2;
+        center_y = this.y + imgY / 2;
         center_x = this.x + imgX / 2;
 
         float coor_x = width - this.x;
@@ -157,8 +211,7 @@ public class Hero {
             main.mainLevel.count_scarecrow += 1;
             this.putScarecrow();
         }
-        if (keys.getJustPressed3() && points >= 10)
-        {
+        if (keys.getJustPressed3() && points >= 10) {
             main.mainLevel.count_added_lifes += 1;
             plusLife();
         }

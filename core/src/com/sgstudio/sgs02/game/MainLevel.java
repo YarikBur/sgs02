@@ -109,7 +109,7 @@ public class MainLevel implements Screen {
                 Language.getMessage(12) + ": " + Audio.getPlayed(),
                 Language.getMessage(13) + ": " + Settings.getProperty("volume"),
                 "Очки героя: " + hero.getPoints(), "Жизни: " + hero.getLifes());
-
+        hero.static_render();
         batch.end();
     }
 

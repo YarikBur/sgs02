@@ -10,14 +10,17 @@ public class Scarecrow {
     private int y;
     private final float imgWidth = 185 / 4;
     private final float imgHeight = 146 / 4;
-    private float center_x;
-    private float center_y;
+    @SuppressWarnings("unused")
+	private float center_x;
+    @SuppressWarnings("unused")
+	private float center_y;
 
     private long time = 0;
 
 
     private Texture texture;
-    private Main main;
+    @SuppressWarnings("unused")
+	private Main main;
     private SpriteBatch batch;
 
 
