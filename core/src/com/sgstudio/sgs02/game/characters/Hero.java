@@ -41,6 +41,8 @@ public class Hero {
     private int height;
 
     private int lifes;
+    
+    private int angle = 0;
 
     public Hero(Main main, SpriteBatch batch) {
         this.main = main;
@@ -63,11 +65,11 @@ public class Hero {
     }
 
     public void render() {
-        batch.draw(texture, x, y, imgX, imgY);
+        batch.draw(sprite, x, y, sprite.getWidth()/2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle++);
     }
 
     public void update() {
-        center_y = this.y + imgY / 2;
+    	center_y = this.y + imgY / 2;
         center_x = this.x + imgX / 2;
 
         float coor_x = width - this.x;

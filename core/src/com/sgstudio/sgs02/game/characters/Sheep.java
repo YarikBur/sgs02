@@ -1,7 +1,9 @@
 package com.sgstudio.sgs02.game.characters;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.game.MyGame;
 import com.sgstudio.sgs02.game.Test.*;
@@ -29,9 +31,13 @@ public class Sheep {
 
     private SpriteBatch batch;
     private Main main;
+    
+    private float angle = 0;
+	private Sprite sprite;
 
     public Sheep(Main main, SpriteBatch batch) {
         texture = new Texture("Models/sheep_one.png");
+        sprite = new Sprite(texture);
         x = 1500 * (float) Math.random();
         y = 1500 * (float) Math.random();
         this.batch = batch;
@@ -55,7 +61,7 @@ public class Sheep {
     }
 
     public void render() {
-        batch.draw(texture, x, y, img_width, img_height);
+        batch.draw(sprite, x, y, img_width/2, img_height/2, img_width, img_height, 1, 1, angle * MathUtils.radiansToDegrees + 180);
     }
 
     public void update() {
@@ -68,7 +74,8 @@ public class Sheep {
 
         this.x += this.vect_x * 0.001 * speed / mass;
         this.y += this.vect_y * 0.001 * speed / mass;
-
+        
+        angle = MathUtils.atan2(this.vect_y, this.vect_x);
     }
 
     public void updateVect() {
