@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.menu.Menu;
+import com.sgstudio.sgs02.utils.Text;
 import com.sgstudio.sgs02.utils.Variables;
 import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
@@ -26,6 +27,8 @@ public class Settings implements Screen{
 
     private KeyManager key;
     
+    private Text text;
+    
     public Settings(Main main) {
         this.main = main;
     }
@@ -39,7 +42,9 @@ public class Settings implements Screen{
     
     @Override
     public void show() {
-
+    	
+    	text = new Text();
+    	
         batch = new SpriteBatch();
         settings = new Sprite(new Texture("menu/settings.png"));
 
@@ -134,6 +139,10 @@ public class Settings implements Screen{
         batch.begin();
         
         batch.draw(settings, 0, 0, 1280, 720);
+        
+        text.writeUpperleft(batch, "Volume: " + com.sgstudio.sgs02.utils.Settings.getProperty("volume"),
+        		"Mute: " + com.sgstudio.sgs02.utils.Settings.getProperty("mute"));
+        
         
         if(key.getJustPressedLeft()) {
         	Audio.setVolume(Variables.stringToInt(com.sgstudio.sgs02.utils.Settings.getProperty("volume"))-10);
