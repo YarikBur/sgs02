@@ -28,15 +28,23 @@ public class MainLevel implements Screen {
     KeyManager key;
     SpriteBatch batch;
     Texture img;
-    Audio audio;
+    public Audio audio;
     Tiles tiles;
     Particle effect;
     Sprite bg;
 
+
+
     public long time;
-    private long startTime;
+    public long startTime;
     private long lastTime;
-    public long score;
+    public long lostTime;
+
+    public long score = 0;
+    public long count_sheep = 0;
+    public long count_speed = 0;
+    public long count_scarecrow = 0;
+    public long count_added_lifes = 0;
 
     final public int x_center = 1080;
     final public int y_center = 1085;
@@ -105,10 +113,6 @@ public class MainLevel implements Screen {
         batch.end();
     }
 
-    public void defeat(){
-        main.setScreen(main.defeat);
-    }
-
     private void level()
     {
         double sec = TimeUtils.millis() / 1000 - this.startTime;
@@ -163,9 +167,21 @@ public class MainLevel implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
         img.dispose();
         Audio.dispose();
+
+
+        time = 0;
+        startTime = 0;
+        lastTime = 0;
+        lostTime = 0;
+
+        score = 0;
+        count_sheep = 0;
+        count_speed = 0;
+        count_scarecrow = 0;
+        count_added_lifes = 0;
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.sgstudio.sgs02.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -20,6 +21,8 @@ public class Settings implements Screen{
     
     private Sprite settings;
     private SpriteBatch batch;
+
+    private Sound clic_pressed, clic_released;
 
     private KeyManager key;
     
@@ -39,6 +42,9 @@ public class Settings implements Screen{
 
         batch = new SpriteBatch();
         settings = new Sprite(new Texture("menu/settings.png"));
+
+        clic_pressed = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_pressed.mp3"));
+        clic_released = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_released.mp3"));
         
         key = new KeyManager();
         
@@ -82,9 +88,12 @@ public class Settings implements Screen{
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
             	x0 = screenX;
             	y0 = screenY;
-            	
+
             	if(screen(backX, backY))
-            		slide = true;
+            	{
+                    clic_pressed.play();
+                    slide = true;
+            	}
             	
                 return false;
             }
@@ -92,7 +101,10 @@ public class Settings implements Screen{
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
             	if(slide && screen(backX, backY))
+            	{
             		main.setScreen(main.menu);
+            		clic_released.play();
+            	}
                 return false;
             }
 

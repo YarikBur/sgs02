@@ -33,6 +33,7 @@ public class Defeat implements Screen {
     private Audio audio;
     private KeyManager key;
     private Text text;
+    long time;
 
     public Defeat(Main main) {
         this.main = main;
@@ -43,6 +44,7 @@ public class Defeat implements Screen {
 
     @Override
     public void show() {
+        time = (int)TimeUtils.millis() / 1000;
         batch = main.getBatch();
         key = new KeyManager();
         text = new Text();
@@ -113,14 +115,22 @@ public class Defeat implements Screen {
         batch.begin();
         bg.draw(batch);
 
-        if (key.getPressedAny())
+        if (key.getPressedAny() && (int)TimeUtils.millis() / 1000  - time > 2)
+        {
+            main.mainLevel.dispose();
+            main.mainLevel = new MainLevel(main);
+            Audio.dispose();
             main.setScreen(main.menu);
+        }
 
-        text.writeUpperCenter(batch, "Вы набрали: " + main.mainLevel.score + " очков");
+        text.writeUpperCenter(batch, "Вы набрали: " + main.mainLevel.lostTime + " очков");
 
-        text.writeUpperleft(batch);
+        text.writeUpperleft(batch, "Ваш герой использовал:",
+                "Быстрый бег: " + main.mainLevel.count_speed + " раз",
+                "Установку пугал: " + main.mainLevel.count_scarecrow + " раз",
+                "Добавление жизней: " + main.mainLevel.count_added_lifes + " раз");
 
-        text.writeUpperRight(batch);
+        text.writeUpperRight(batch, "Общее количество овец: " + main.mainLevel.count_sheep);
 
         batch.end();
     }

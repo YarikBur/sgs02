@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.sgs02.main.Main;
+import com.sgstudio.sgs02.utils.audio.Audio;
 import com.sgstudio.sgs02.utils.controller.KeyManager;
 import java.util.Scanner;
 
@@ -107,6 +108,8 @@ public class Hero {
     }
     public void update() {
         if (lifes <= 0){
+            main.mainLevel.lostTime = TimeUtils.millis() / 1000 - main.mainLevel.startTime;
+            Audio.dispose();
             this.main.setScreen(main.defeat);
         }
     	center_y = this.y + imgY / 2;
@@ -144,17 +147,21 @@ public class Hero {
         if (keys.getPressedDown())
             y -= speed;
 
-        if (keys.getJustPressed1() && this.time_speed == 0 && points >= 1) {
+        if (keys.getJustPressed1() && this.time_speed == 0 && points >= 3) {
+            main.mainLevel.count_speed += 1;
             this.time_speed = TimeUtils.millis() / 1000;
             this.speed += 5;
-            spend_points += 1;
+            this.spend_points += 3;
         }
-        if (keys.getJustPressed2() && points >= 2) {
+        if (keys.getJustPressed2() && points >= 4) {
+            main.mainLevel.count_scarecrow += 1;
             this.putScarecrow();
-            spend_points += 2;
         }
         if (keys.getJustPressed3() && points >= 10)
+        {
+            main.mainLevel.count_added_lifes += 1;
             plusLife();
+        }
 
         points = (int) TimeUtils.millis() / 1000 - this.time - this.spend_points;
     }
@@ -178,6 +185,7 @@ public class Hero {
 
     private void putScarecrow() {
         main.mainLevel.addScarecrow(this.x, this.y);
+        this.spend_points += 4;
     }
 
     public void SetX(int x) {
