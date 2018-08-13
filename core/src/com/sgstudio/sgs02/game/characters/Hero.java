@@ -134,7 +134,6 @@ public class Hero {
 	    		}
     		}
     	}
-        System.out.println(angle);
     }
 
     public void static_render() {
