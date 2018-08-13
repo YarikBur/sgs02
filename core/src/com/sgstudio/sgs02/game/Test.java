@@ -89,6 +89,9 @@ public class Test implements Screen {
 
         batch.setProjectionMatrix(staticCamera.combined);
         batch.begin();
+        
+        text.writeUpperCenter(batch, "Тест", "Это тестовая строка", "тест вывода номер 3");
+        
         text.writeUpperleft(batch,
                 "Высота" + ": " + hero.GetX(),
                 "Ширина" + ": " + hero.GetY(),
