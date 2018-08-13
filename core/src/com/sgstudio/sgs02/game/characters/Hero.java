@@ -236,7 +236,7 @@ public class Hero {
             y -= speed;
 
         if (keys.getJustPressed1() && this.time_speed == 0 && points >= 3) {
-            Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/run1.mp3"));
+            Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/run.mp3"));
             long id = sound1.play(1.0f);
             sound1.setVolume(id,0.2f);
             main.mainLevel.count_speed += 1;
@@ -254,6 +254,9 @@ public class Hero {
         if (keys.getJustPressed3() && points >= 10) {
             main.mainLevel.count_added_lifes += 1;
             plusLife();
+            Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/life.mp3"));
+            long id = sound1.play(1.0f);
+            sound1.setVolume(id,0.1f);
         }
 
         points = (int) TimeUtils.millis() / 1000 - this.time - this.spend_points;
