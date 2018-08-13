@@ -42,7 +42,7 @@ public class Hero {
 
     Sprite img_runOn;
     Sprite img_runOff;
-    SpriteBatch img_life;
+    Sprite img_life;
 
     private int lifes;
     
@@ -59,11 +59,15 @@ public class Hero {
         x = width = main.mainLevel.x_center;
         y = height = main.mainLevel.y_center;
 
-        img_runOff = new Sprite(new Texture("Spells/run_off.png"));
-        img_runOn = new Sprite(new Texture("Spells/run_on.png"));
-        /*img_life = new SpriteBatch(new Texture("Spells/Life.png"));
-        img_life.setX(80);
-*/
+        img_runOff = new Sprite(new Texture("icons/speed_icon_off.png"));
+        img_runOn = new Sprite(new Texture("icons/speed_icon_on.png"));
+        img_runOn.setSize(36 * 3,30 * 3);
+        img_runOff.setSize(36 * 3,30 * 3);
+
+        img_life = new Sprite(new Texture("icons/health_add.png"));
+        img_life.setPosition(36 * 3,0);
+        img_life.setSize(36*3,30*3);
+
         center_x = x + imgX / 2;
         center_y = y + imgY / 2;
 
@@ -123,7 +127,7 @@ public class Hero {
             else if(time_speed + 10 > TimeUtils.millis() / 1000 && ((int)TimeUtils.millis() / 10) % 2 == 0)
                 img_runOn.draw(batch);
         }
-        //img_life.draw(batch);
+        img_life.draw(batch);
     }
 
     public void update() {
