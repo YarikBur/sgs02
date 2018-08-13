@@ -45,13 +45,12 @@ public class Menu implements Screen {
     
     int x0, y0;
     
-    @SuppressWarnings("static-access")
 	@Override
     public void show() {
     	m = new Menu(main);
     	
-    	if(!main.getAudio().isPlayedMusic())
-    		main.getAudio().Attenuation(3);
+    	if(!Audio.isPlayedMusic())
+    		Audio.Attenuation(3);
     	
     	bg = new Sprite(new Texture("menu/menu.png"));
     	clic_pressed = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_pressed.mp3"));

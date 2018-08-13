@@ -26,10 +26,12 @@ public class Defeat implements Screen {
 	private Menu menu;
     private Sprite bg;
     @SuppressWarnings("unused")
-	private Audio audio;
     private KeyManager key;
     private Text text;
-    long time;
+    public long time;
+    public long startTime;
+    private long lastTime;
+    public long lostTime;
 
     public Defeat(Main main) {
         this.main = main;
@@ -45,10 +47,8 @@ public class Defeat implements Screen {
         batch = main.getBatch();
         key = new KeyManager();
         text = new Text();
-        audio = new Audio();
         bg = new Sprite(new Texture("menu/result.png"));
         Language.getAllStrings();
-        Audio.randomStart();
         Gdx.input.setInputProcessor(new InputProcessor() {
 
             @Override
@@ -97,6 +97,15 @@ public class Defeat implements Screen {
     public void render(float delta) {
     	if(!Audio.isPlayedMusic())
     		Audio.Attenuation(5);
+    	
+    	
+    	double sec = TimeUtils.millis() / 1000 - this.startTime;
+
+        if (sec <= 0 || sec <= this.lastTime)
+            return;
+        else
+            this.lastTime = TimeUtils.millis() / 1000 - this.startTime;
+    	
         staticCamera.update();
 
         Gdx.gl.glClearColor(1, 0, 0, 1);

@@ -132,7 +132,6 @@ public class Test implements Screen {
         effect = new Particle("test.p");
         bg = new Sprite(new Texture("atlas/g4_new.png"));
         Language.getAllStrings();
-        Audio.randomStart();
         hero = new Hero(main, batch);
 
         time = TimeUtils.millis() / 1000;

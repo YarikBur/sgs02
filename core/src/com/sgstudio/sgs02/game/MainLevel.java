@@ -29,9 +29,7 @@ public class MainLevel implements Screen {
     KeyManager key;
     SpriteBatch batch;
     Texture img;
-    public Audio audio;
     Tiles tiles;
-    Particle effect;
     Sprite bg;
 
 
@@ -166,8 +164,6 @@ public class MainLevel implements Screen {
     @Override
     public void dispose() {
         img.dispose();
-        Audio.dispose();
-
 
         time = 0;
         startTime = 0;
@@ -179,7 +175,6 @@ public class MainLevel implements Screen {
         count_speed = 0;
         count_scarecrow = 0;
         count_added_lifes = 0;
-
     }
 
     @Override
@@ -189,13 +184,10 @@ public class MainLevel implements Screen {
         img = new Texture("Models/untitled.png");
         key = new KeyManager();
         text = new Text();
-        audio = new Audio();
         tiles = new Tiles();
         gui = tiles.getTextureRegion();
-        effect = new Particle("test.p");
         bg = new Sprite(new Texture("atlas/g4_new.png"));
         Language.getAllStrings();
-        Audio.randomStart();
         hero = new Hero(main, batch);
 
         time = TimeUtils.millis() / 1000;
@@ -205,49 +197,41 @@ public class MainLevel implements Screen {
 			
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean touchDragged(int screenX, int screenY, int pointer) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean scrolled(int amount) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean mouseMoved(int screenX, int screenY) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean keyUp(int keycode) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean keyTyped(char character) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean keyDown(int keycode) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 		});

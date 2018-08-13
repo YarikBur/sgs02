@@ -174,7 +174,6 @@ public class MyGame implements Screen {
 
 
         Language.getAllStrings();
-        Audio.randomStart();
     }
 
     @Override

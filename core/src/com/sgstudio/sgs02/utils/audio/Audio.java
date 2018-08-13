@@ -2,7 +2,6 @@ package com.sgstudio.sgs02.utils.audio;
 
 import com.badlogic.gdx.audio.Music;
 import com.sgstudio.sgs02.utils.Language;
-import com.sgstudio.sgs02.utils.Random;
 import com.sgstudio.sgs02.utils.Settings;
 import com.sgstudio.sgs02.utils.Variables;
 
@@ -19,6 +18,7 @@ public class Audio {
 	
 	private static boolean created = false;
 	private static boolean played = false;
+	@SuppressWarnings("unused")
 	private static boolean smooth = false;
 	
 	public static boolean isPlayedMusic() {
@@ -58,16 +58,6 @@ public class Audio {
 		played = true;
 		if(Settings.out())
 			System.out.println(Language.getMessage(11) + ": " + play);
-	}
-	
-	/**
-	 * Включает рандомный трек
-	 */
-	public static void randomStart() {
-		play = Random.randomInt(1, 9);
-		List.getMusic(play).play();
-		List.getMusic(play).setVolume(volume());
-		play();
 	}
 	
 	/**
@@ -137,16 +127,6 @@ public class Audio {
 			
 		});
 		smooth.start();
-	}
-	
-	/**
-	 * Включает рандомно трек
-	 */
-	private static void startNewMusic() {
-		if(!played) {
-			played = true;
-			randomStart();
-		}
 	}
 	
 	/**
