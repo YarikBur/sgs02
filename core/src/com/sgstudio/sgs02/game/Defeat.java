@@ -33,6 +33,7 @@ public class Defeat implements Screen {
     private Audio audio;
     private KeyManager key;
     private Text text;
+    long time;
 
     public Defeat(Main main) {
         this.main = main;
@@ -43,6 +44,7 @@ public class Defeat implements Screen {
 
     @Override
     public void show() {
+        time = (int)TimeUtils.millis() / 1000;
         batch = main.getBatch();
         key = new KeyManager();
         text = new Text();
@@ -113,7 +115,7 @@ public class Defeat implements Screen {
         batch.begin();
         bg.draw(batch);
 
-        if (key.getPressedAny())
+        if (key.getPressedAny() && (int)TimeUtils.millis() / 1000  - time > 2)
         {
             main.mainLevel = new MainLevel(main);
             main.setScreen(main.menu);

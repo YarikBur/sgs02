@@ -107,12 +107,13 @@ public class Hero {
         if (keys.getPressedDown())
             y -= speed;
 
-        if (keys.getJustPressed1() && this.time_speed == 0 && points >= 1) {
+        if (keys.getJustPressed1() && this.time_speed == 0 && points >= 3) {
             main.mainLevel.count_speed += 1;
             this.time_speed = TimeUtils.millis() / 1000;
             this.speed += 5;
+            this.spend_points += 3;
         }
-        if (keys.getJustPressed2() && points >= 2) {
+        if (keys.getJustPressed2() && points >= 4) {
             main.mainLevel.count_scarecrow += 1;
             this.putScarecrow();
         }
@@ -144,6 +145,7 @@ public class Hero {
 
     private void putScarecrow() {
         main.mainLevel.addScarecrow(this.x, this.y);
+        this.spend_points += 4;
     }
 
     public void SetX(int x) {
