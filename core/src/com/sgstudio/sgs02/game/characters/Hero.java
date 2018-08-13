@@ -2,14 +2,10 @@ package com.sgstudio.sgs02.game.characters;
 
 import java.util.Map;
 
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-//import java.util.Calendar;
-
 import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Tiles;
