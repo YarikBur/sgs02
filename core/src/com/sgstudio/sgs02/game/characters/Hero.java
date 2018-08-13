@@ -69,8 +69,8 @@ public class Hero {
     	if ((angle == 360)||(angle == -360)){angle = 0;}
         batch.draw(sprite, x, y, sprite.getWidth()/2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, angle);
     	if (keys.getPressedDown()){
-    		if ((angle != 90)||(angle != -270)){
-				if ((angle > 270)||(angle < -90)){
+    		if ((angle != -90)||(angle != 270)){
+				if (((angle > 90)&&(angle < 270))||((angle > -90)&&(angle < 90))){
 					angle++;
 				} else {
 					angle--;
@@ -78,17 +78,17 @@ public class Hero {
 			}
     	}
     	if (keys.getPressedUp()){
-    		if ((angle != 270)||(angle != -90)){
-	    		if ((angle > 90)||(angle < -270)){
-	    			angle--;
-	    		} else {
+    		if ((angle != -270)||(angle != 90)){
+	    		if (((angle >= -90)&&(angle < 90))||((angle >= 270)&&(angle <= 0))){
 	    			angle++;
+	    		} else {
+	    			angle--;
 	    		}
     		}
     	}
     	if (keys.getPressedLeft()){
     		if ((angle != 180)||(angle != -180)){
-	    		if ((angle > 180)||(angle < -180)){
+	    		if (((angle >= 0)&&(angle < 180))||((angle < -180)&&(angle > -360))){
 	    			angle++;
 	    		} else {
 	    			angle--;
@@ -96,11 +96,11 @@ public class Hero {
     		}
     	}
     	if (keys.getPressedRight()){
-    		if ((angle != 0)||(angle != 0)){
-	    		if ((angle > 0)||(angle < 269)){
-	    			angle--;
-	    		} else if (angle < 91){
+    		if ((angle != 0)||(angle != 360)||(angle != -360)){
+	    		if (((angle > 180)&&(angle < 360))||((angle > -180)&&(angle < 0))){
 	    			angle++;
+	    		} else {
+	    			angle--;
 	    		}
     		}
     	}
