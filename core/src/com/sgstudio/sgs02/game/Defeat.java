@@ -45,56 +45,48 @@ public class Defeat implements Screen {
         key = new KeyManager();
         text = new Text();
         audio = new Audio();
-        bg = new Sprite(new Texture("atlas/g4.png"));
+        bg = new Sprite(new Texture("menu/result.png"));
         Language.getAllStrings();
         Audio.randomStart();
         Gdx.input.setInputProcessor(new InputProcessor() {
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public boolean touchDragged(int screenX, int screenY, int pointer) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public boolean scrolled(int amount) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public boolean keyUp(int keycode) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public boolean keyTyped(char character) {
-                // TODO Auto-generated method stub
                 return false;
             }
 
             @Override
             public boolean keyDown(int keycode) {
-                // TODO Auto-generated method stub
                 return false;
             }
         });
@@ -109,7 +101,7 @@ public class Defeat implements Screen {
 
         batch.setProjectionMatrix(staticCamera.combined);
         batch.begin();
-        bg.draw(batch);
+        batch.draw(bg, 0, 0, 1280, 720);
 
         if (key.getPressedAny() && (int)TimeUtils.millis() / 1000  - time > 2)
         {
@@ -119,33 +111,27 @@ public class Defeat implements Screen {
             main.setScreen(main.menu);
         }
 
-        text.writeUpperCenter(batch, "Вы набрали: " + main.mainLevel.lostTime + " очков");
+        text.writeUpperCenter(batch, "You got " + main.mainLevel.lostTime + " points","","Your hero used:",
+                "Fast Running: " + main.mainLevel.count_speed + " times",
+                "Inserting Scarecrow: " + main.mainLevel.count_scarecrow + " times",
+                "Adding Lifes: " + main.mainLevel.count_added_lifes + " times","","Count of sheep: " + main.mainLevel.count_sheep);
 
-        text.writeUpperleft(batch, "Ваш герой использовал:",
-                "Быстрый бег: " + main.mainLevel.count_speed + " раз",
-                "Установку пугал: " + main.mainLevel.count_scarecrow + " раз",
-                "Добавление жизней: " + main.mainLevel.count_added_lifes + " раз");
-
-        text.writeUpperRight(batch, "Общее количество овец: " + main.mainLevel.count_sheep);
 
         batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void resume() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -156,7 +142,6 @@ public class Defeat implements Screen {
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
 
     }
 

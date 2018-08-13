@@ -2,14 +2,10 @@ package com.sgstudio.sgs02.game.characters;
 
 import java.util.Map;
 
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-//import java.util.Calendar;
-
 import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Tiles;
@@ -146,7 +142,7 @@ public class Hero {
         img_life.draw(batch);
         img_scrow.draw(batch);
 
-        renderLife(10, 10);
+        renderLife(1280-10-health.get("tiles0_0").getRegionWidth(), 720-10-health.get("tiles0_0").getRegionHeight());
     }
     
     private void renderLife(int x, int y) {
