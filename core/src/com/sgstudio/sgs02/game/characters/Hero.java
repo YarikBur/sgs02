@@ -150,16 +150,16 @@ public class Hero {
         img_life.draw(batch);
         img_scrow.draw(batch);
 
-        renderLife();
+        renderLife(10, 10);
     }
     
-    private void renderLife() {
+    private void renderLife(int x, int y) {
     	if(this.getLifes() <= 0)
-    		batch.draw(health.get("tiles0_0"), 0, 0);
+    		batch.draw(health.get("tiles0_0"), x, y);
     	else if(this.getLifes() >= 10)
-    		batch.draw(health.get("tiles0_10"), 0, 0);
+    		batch.draw(health.get("tiles0_10"), x, y);
     	else
-    		batch.draw(health.get("tiles0_" + this.getLifes()), 0, 0);
+    		batch.draw(health.get("tiles0_" + this.getLifes()), x, y);
     }
 
     public void update() {
