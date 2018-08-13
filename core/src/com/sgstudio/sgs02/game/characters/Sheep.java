@@ -1,6 +1,8 @@
 package com.sgstudio.sgs02.game.characters;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Tiles;
+import com.sgstudio.sgs02.utils.audio.Audio;
 
 
 public class Sheep {
@@ -73,6 +76,27 @@ public class Sheep {
         Spawn(RANDOM_NUMBER);
         x = spawnX[RANDOM_NUMBER];
         y = spawnY[RANDOM_NUMBER];
+
+        this.batch = batch;
+        this.main = main;
+
+        /*
+        if(this.main.mainLevel.score % 10 == 0){
+            Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/2.mp3"));
+            long id = sound1.play(1.0f);
+            sound1.setVolume(id,0.05f);
+        }
+        if(this.main.mainLevel.score % 10 == 3){
+            Sound sound2 = Gdx.audio.newSound(Gdx.files.internal("audio/1/2.mp3"));
+            long id = sound2.play(1.0f);
+            sound2.setVolume(id,0.05f);
+        }
+        if(this.main.mainLevel.score % 10 == 6){
+            Sound sound3 = Gdx.audio.newSound(Gdx.files.internal("audio/1/3.mp3"));
+            long id = sound3.play(1.0f);
+            sound3.setVolume(id,0.05f);
+        }
+        */
  /*     x = 1500 * (float) Math.random();
         y = 1500 * (float) Math.random();
         if ((Math.pow(x - main.test.x_center - 10 , 2) + Math.pow(y - main.test.y_center - 10 , 2)) >= Math.pow(radius , 2)){
@@ -91,8 +115,6 @@ public class Sheep {
         		}
         	}
         }*/
-        this.batch = batch;
-        this.main = main;
 
         this.lostX = main.test.x_center;
         this.lostY = main.test.y_center;

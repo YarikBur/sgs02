@@ -2,6 +2,8 @@ package com.sgstudio.sgs02.game.characters;
 
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -54,6 +56,7 @@ public class Hero {
     private int dellta_angle = 3;
 
     public Hero(Main main, SpriteBatch batch) {
+
         tiles = new Tiles();
         tiles.createAtlas("icons/health_anim.png", 1, 11);
         health = tiles.getTextureRegion();
@@ -239,6 +242,9 @@ public class Hero {
             this.spend_points += 3;
         }
         if (keys.getJustPressed2() && points >= 4) {
+            Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/Pugalo.mp3"));
+            long id = sound1.play(1.0f);
+            sound1.setVolume(id,0.05f);
             main.mainLevel.count_scarecrow += 1;
             this.putScarecrow();
         }

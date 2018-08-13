@@ -3,6 +3,7 @@ package com.sgstudio.sgs02.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -291,6 +292,16 @@ public class MainLevel implements Screen {
          */
         for (Sheep sheep : list_sheep) {
             if (Math.sqrt(Math.pow(sheep.getCenter_x() - hero.getCenter_x(), 2) + Math.pow(sheep.getCenter_y() - hero.getCenter_y(), 2)) < 50) {
+                if(TimeUtils.millis() % 4 == 0){
+                    Sound sound2 = Gdx.audio.newSound(Gdx.files.internal("audio/1/2.mp3"));
+                    long id = sound2.play(1.0f);
+                    sound2.setVolume(id,0.05f);
+                }
+                if(TimeUtils.millis() % 4 == 2){
+                    Sound sound3 = Gdx.audio.newSound(Gdx.files.internal("audio/1/3.mp3"));
+                    long id = sound3.play(1.0f);
+                    sound3.setVolume(id,0.05f);
+                }
                 float coor_x = hero.GetX() - sheep.GetX();
                 float coor_y = hero.GetY() - sheep.GetY();
                 sheep.SetX((int) (sheep.GetX() - coor_x));
@@ -305,6 +316,11 @@ public class MainLevel implements Screen {
         for (Sheep sheep : list_sheep)
             for (Scarecrow scare : list_scarecrow) {
                 if (Math.sqrt(Math.pow(sheep.GetX() - scare.GetX(), 2) + Math.pow(sheep.GetY() - scare.GetY(), 2)) < 80) {
+                    if(TimeUtils.millis() % 4 == 2){
+                        Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/1.mp3"));
+                        long id = sound1.play(1.0f);
+                        sound1.setVolume(id,0.05f);
+                    }
                     float coor_x = scare.GetX() - sheep.GetX();
                     float coor_y = scare.GetY() - sheep.GetY();
                     sheep.SetX((int) (sheep.GetX() - coor_x));
@@ -316,6 +332,9 @@ public class MainLevel implements Screen {
     public void sheepHoly() {
         for (Sheep sheep : list_sheep) {
             if (Math.sqrt(Math.pow(sheep.getCenter_x() - x_center, 2) + Math.pow(sheep.getCenter_y() - y_center, 2)) < 50) {
+                Sound sound1 = Gdx.audio.newSound(Gdx.files.internal("audio/1/1.mp3"));
+                long id = sound1.play(1.0f);
+                sound1.setVolume(id,0.4f);
                 hero.minusLife(sheep.GetMass());
                 sheep.SetX(-1000);
                 sheep.SetY(-1000);
