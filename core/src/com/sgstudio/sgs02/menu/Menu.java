@@ -195,20 +195,19 @@ public class Menu implements Screen {
                 "|                   ","|                   ","|                   ","|___________________");
         float x = Gdx.input.getX();
         float y = Gdx.input.getY();
-        if (y > 359 && y < 452) {
-            if (x > 1012 && x < 1094) {
+            if (x > 1012 && x < 1094 && y > 359 && y < 452) {
                 text.writeLowerRight(batch,  "", "", "", "", "", "", "", "|___________________", "| Cost:  3  points  ",
                         "|                   ", "|   for 10 seconds  ", "|  Update MoveSpeed ","|                   ");
 
-            } else if (x > 1094 && x < 1176){
+            } else if (x > 1094 && x < 1176 && y > 359 && y < 452){
                 text.writeLowerRight(batch,  "", "", "", "", "|___________________", "| P.S. sheep's scare", "|___________________", "| Cost:  4  points  ",
                         "|                   ","| at  hero position ", "|   for 10 seconds  ", "|   Set  Scarecrow  ","|                   ");
-            } else if (x > 1176){
-                text.writeLowerRight(batch,  "", "", "", "", "", "", "", "|___________________", "| Cost:  10 points  ",
-                        "|                   ", "|                   ", "|   Add Extra Life  ","|                   ");
+            } else if (x > 1176 && y > 359 && y < 452) {
+                text.writeLowerRight(batch, "", "", "", "", "", "", "", "|___________________", "| Cost:  10 points  ",
+                        "|                   ", "|                   ", "|   Add Extra Life  ", "|                   ");
+            } else {
+                text.writeLowerRight(batch,  "Put cursor to skills for more info");
             }
-
-        }
         batch.end();
     }
 
