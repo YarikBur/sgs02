@@ -8,10 +8,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.main.Main;
 import com.sgstudio.sgs02.utils.Text;
-import com.sgstudio.sgs02.utils.Variables;
 import com.sgstudio.sgs02.utils.audio.Audio;
 
 public class Menu implements Screen {
@@ -24,6 +22,10 @@ public class Menu implements Screen {
     private SpriteBatch batch;
     
     private Sprite bg;
+
+    Sprite img_runOff;
+    Sprite img_life;
+    Sprite img_scrow;
 
     public Menu(final Main main) {
         this.main = main;
@@ -64,6 +66,19 @@ public class Menu implements Screen {
     	clic_released = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_released.mp3"));
     	
     	batch = new SpriteBatch();
+
+        img_scrow = new Sprite(new Texture("Spells/scrow.png"));
+        img_runOff = new Sprite(new Texture("Spells/run_on.png"));
+        img_life = new Sprite(new Texture("Spells/Life.png"));
+
+        img_runOff.setPosition(1012,720 - 452);
+        img_runOff.setSize(82,93);
+
+        img_scrow.setPosition(1094,720 - 452);
+        img_scrow.setSize(82, 93);
+
+        img_life.setSize(90,93);
+        img_life.setPosition(1173,720 - 452);
     	
         Gdx.input.setInputProcessor(new InputProcessor(){
         	private boolean slide = false;
@@ -105,6 +120,8 @@ public class Menu implements Screen {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
             	x0 = screenX;
             	y0 = screenY;
+
+            	System.out.println(Gdx.input.getX()+ " " + Gdx.input.getY());
 
             	if(screen(aboutX, aboutY)) {
             		clic_pressed.play(Audio.volume());
@@ -169,10 +186,31 @@ public class Menu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.draw(bg, 0, 0, 1280, 720);
+        img_runOff.draw(batch);
+        img_scrow.draw(batch);
+        img_life.draw(batch);
         text.writeUpperRight(batch,
                 "_______________","|               ","| Controls:     ","|_______________",
                 "|               ","| WASD or Arrows","|  for moving   ","|               ",
-                "|  Num  1, 2, 3 ","|   for skills  ","|_______________");
+                "|  Num  1, 2, 3 ","|   for skills  ","|_______________","","","___________________",
+                "|                   ", "|       Skills:     ","|___________________","|                   ",
+                "|                   ","|                   ","|                   ","|___________________");
+        float x = Gdx.input.getX();
+        float y = Gdx.input.getY();
+        if (y > 359 && y < 452) {
+            if (x > 1012 && x < 1094) {
+                text.writeLowerRight(batch,  "", "", "", "", "", "", "", "|___________________", "| Cost:  3  points  ",
+                        "|                   ", "|   for 10 seconds  ", "|  Update MoveSpeed ","|                   ");
+
+            } else if (x > 1094 && x < 1176){
+                text.writeLowerRight(batch,  "", "", "", "", "|___________________", "| P.S. sheep's scare", "|___________________", "| Cost:  4  points  ",
+                        "|                   ","| at  hero position ", "|   for 10 seconds  ", "|   Set  Scarecrow  ","|                   ");
+            } else if (x > 1176){
+                text.writeLowerRight(batch,  "", "", "", "", "", "", "", "|___________________", "| Cost:  10 points  ",
+                        "|                   ", "|                   ", "|   Add Extra Life  ","|                   ");
+            }
+
+        }
         batch.end();
     }
 

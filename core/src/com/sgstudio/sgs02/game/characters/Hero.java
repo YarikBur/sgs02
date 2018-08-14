@@ -46,9 +46,10 @@ public class Hero {
     Sprite img_runOn;
     Sprite img_runOff;
     Sprite img_life;
+    Sprite img_scrow;
 
     private Tiles tiles;
-    Sprite img_scrow;
+
 
     private int lifes;
 
