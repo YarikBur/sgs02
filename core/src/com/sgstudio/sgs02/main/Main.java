@@ -24,7 +24,9 @@ public class Main extends Game {
     @Override
     public void create() {
         audio = new Audio();
-
+        
+        Audio.getPlayedMusic().setVolume(20);
+        
         batch = new SpriteBatch();
         
         game = new MyGame(this);
