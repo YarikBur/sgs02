@@ -14,8 +14,8 @@ import com.sgstudio.sgs02.utils.audio.Audio;
 
 public class Menu implements Screen {
 
-	@SuppressWarnings("unused")
     Text text;
+	@SuppressWarnings("unused")
 	private Menu m;
     private final Main main;
 
