@@ -8,13 +8,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.sgstudio.sgs02.main.Main;
+import com.sgstudio.sgs02.utils.Text;
 import com.sgstudio.sgs02.utils.Variables;
 import com.sgstudio.sgs02.utils.audio.Audio;
 
 public class Menu implements Screen {
 
 	@SuppressWarnings("unused")
+    Text text;
 	private Menu m;
     private final Main main;
 
@@ -53,6 +56,8 @@ public class Menu implements Screen {
     	if(!Audio.isPlayedMusic())
     		Audio.Attenuation(3);
     	Audio.update();
+
+    	text = new Text();
     	
     	bg = new Sprite(new Texture("menu/menu.png"));
     	clic_pressed = Gdx.audio.newSound(Gdx.files.internal("audio/sound/clic_pressed.mp3"));
@@ -163,8 +168,11 @@ public class Menu implements Screen {
     	Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        
         batch.draw(bg, 0, 0, 1280, 720);
+        text.writeUpperRight(batch,
+                "_______________","|               ","| Controls:     ","|_______________",
+                "|               ","| WASD or Arrows","|  for moving   ","|               ",
+                "|  Num  1, 2, 3 ","|   for skills  ","|_______________");
         batch.end();
     }
 
