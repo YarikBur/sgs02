@@ -44,6 +44,10 @@ public class Audio {
 		return play;
 	}
 	
+	public static Music getPlayedMusic() {
+		return List.getPlayedMusic();
+	}
+	
 	/**
 	 * Включает новый трек, если предыдущая закончилась
 	 */
