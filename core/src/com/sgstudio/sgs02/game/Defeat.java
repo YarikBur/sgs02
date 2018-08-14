@@ -126,7 +126,7 @@ public class Defeat implements Screen {
         text.writeUpperCenter(batch, "You got " + main.mainLevel.lostTime + " points","","Your hero used:",
                 "Fast Running: " + main.mainLevel.count_speed + " times",
                 "Inserting Scarecrow: " + main.mainLevel.count_scarecrow + " times",
-                "Adding Lifes: " + main.mainLevel.count_added_lifes + " times","","Count of sheep: " + main.mainLevel.count_sheep);
+                "Adding Lives: " + main.mainLevel.count_added_lifes + " times","","Count of sheep: " + main.mainLevel.count_sheep);
 
 
         batch.end();

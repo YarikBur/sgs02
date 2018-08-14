@@ -104,7 +104,7 @@ public class MainLevel implements Screen {
         
         text.writeUpperleft(batch,
                 "Time: " + (TimeUtils.millis() / 1000 - this.time),
-                "Lifes: " + hero.getLifes());
+                "Lives: " + hero.getLifes());
         hero.static_render();
         batch.end();
     }

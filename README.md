@@ -1,4 +1,4 @@
-# sgs02
+# Holly Sheep
 
 Установка
 ---
@@ -23,9 +23,9 @@ For other settings or usages go to: https://libgdx.badlogicgames.com/documentati
 Участники
 ---
 _Разработка_
-* YarikBur
-* Smirnov48
 * Iokin
+* YarikBur
+* pasha5174
 
 _Графика_
 * YarikBur
