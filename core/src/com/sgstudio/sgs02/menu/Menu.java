@@ -121,8 +121,6 @@ public class Menu implements Screen {
             	x0 = screenX;
             	y0 = screenY;
 
-            	System.out.println(Gdx.input.getX()+ " " + Gdx.input.getY());
-
             	if(screen(aboutX, aboutY)) {
             		clic_pressed.play(Audio.volume());
             		slide = true;
