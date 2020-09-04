@@ -21,11 +21,11 @@ sgs02/core/src/ru/sgstudio/sgs01/                 | Код игры можно �
 For other settings or usages go to: https://libgdx.badlogicgames.com/documentation/
 
 Участники
-
+---
 _Разработка_
 * Iokin
 * YarikBur
-* pasha5174
+* pvshebarshin
 
 _Графика_
 * YarikBur
